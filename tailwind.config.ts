@@ -61,9 +61,10 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        walsheim: ["Walsheim-regular", "sans-serif"],
-        "walsheim-bold": ["Walsheim-bold", "sans-serif"],
-        "walsheim-medium": ["Walsheim-medium", "sans-serif"],
+        sans: ["var(--font-sans)", ...fontFamily.sans],
+        urban: ["var(--font-urban)", ...fontFamily.sans],
+        heading: ["var(--font-heading)", ...fontFamily.sans],
+        geist: ["var(--font-geist)", ...fontFamily.sans],
       },
       keyframes: {
         "accordion-down": {
