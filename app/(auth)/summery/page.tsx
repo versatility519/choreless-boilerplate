@@ -457,7 +457,7 @@ const SubscriptionPage: React.FC = () => {
                                                     value={expiry}
                                                     onChange={(e) => setExpiry(e.target.value)}
                                                     onFocus={() => setIsExpiryOpen(true)}
-                                                    className="w-24 bg-transparent text-right focus:outline-none"
+                                                    className="w-14 bg-transparent text-right focus:outline-none"
                                                 />
                                                 {isExpiryOpen && (
                                                     <div className="absolute right-0 top-full mt-1 w-48 rounded-md bg-white shadow-lg">
@@ -480,14 +480,14 @@ const SubscriptionPage: React.FC = () => {
                                                 placeholder="CSV"
                                                 value={csv}
                                                 onChange={(e) => setCsv(e.target.value)}
-                                                className="w-12 bg-transparent text-right focus:outline-none"
+                                                className="w-8 bg-transparent text-right focus:outline-none"
                                             />
                                             <input
                                                 type="text"
                                                 placeholder="ZIP"
                                                 value={zip}
                                                 onChange={(e) => setZip(e.target.value)}
-                                                className="w-12 bg-transparent text-right focus:outline-none"
+                                                className="w-8 bg-transparent text-right focus:outline-none"
                                             />
                                         </div>
                                     </div>
