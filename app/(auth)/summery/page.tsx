@@ -103,11 +103,11 @@ const Switch = ({ checked, onChange }: SwitchProps) => {
 
     return (
         <div
-            className={`flex h-4 w-9 cursor-pointer items-center rounded-full border border-white ${isChecked ? 'bg-gray-700' : 'bg-gray-300'}`}
+            className={`flex h-5 w-10 cursor-pointer items-center rounded-full border border-white ${isChecked ? 'bg-gray-700' : 'bg-gray-300'}`}
             onClick={handleClick}
         >
             <div
-                className={`size-4 rounded-full bg-white shadow-md duration-300 ease-in-out ${isChecked ? 'translate-x-5' : 'translate-x-0'}`}
+                className={`size-5 rounded-full bg-white shadow-md duration-300 ease-in-out ${isChecked ? 'translate-x-5' : 'translate-x-0'}`}
             ></div>
         </div>
     )
@@ -193,7 +193,7 @@ const SubscriptionPage: React.FC = () => {
                         <div className="hidden  w-full md:flex">
                             <main className='text-left'>
                                 <h2 className="mb-2 font-walsheimMedium text-3xl">Laundry Freedom at Your Fingertips</h2>
-                                <p className="mb-8 text-gray-600">Choose your time-saving plan below</p>
+                                <p className="mb-8 text-[#595959]">Choose your time-saving plan below</p>
 
                                 <div className="mb-8 space-y-2">
                                     <div className="flex items-center">
@@ -274,14 +274,14 @@ const SubscriptionPage: React.FC = () => {
                                 >
                                     <div className='flex flex-col gap-2'>
                                         <span className="font-walsheimBold text-xl">{selectedMembers.members} members</span>
-                                        <p className="text-gray-600">{selectedMembers.description}</p>
+                                        <p className="text-[#595959]">{selectedMembers.description}</p>
                                     </div>
                                     <div className="text-right">
                                         <span className="flex font-walsheimBold text-xl">
                                             <p className='text-black'>${(selectedMembers.members - 1) * 50 + perPerson} </p>
-                                            <p className='text-gray-600'>/ mo</p>
+                                            <p className='text-[#595959]'>/ mo</p>
                                         </span>
-                                        <p className="text-gray-600">{(selectedMembers.members - 1) * 40 + lbPerson} lb - ∞</p>
+                                        <p className="text-[#595959]">{(selectedMembers.members - 1) * 40 + lbPerson} lb - ∞</p>
                                     </div>
                                 </button>
                                     <ChevronDown className="ml-4 size-8 cursor-pointer text-black" />
@@ -322,7 +322,7 @@ const SubscriptionPage: React.FC = () => {
                         </div>
                         <div className='mt-4 flex items-center justify-between'>
                             <div className='flex flex-col gap-2'>
-                                <p className="text-sm text-gray-600">
+                                <p className="text-sm text-[#595959]">
                                     <strong>${(selectedMembers.members - 1) * 50 + perPerson}</strong> billed yearly for <strong>{selectedMembers.members} user</strong>
                                 </p>
                                 <p className='text-sm text-[#6F6F6F]'>
@@ -335,7 +335,7 @@ const SubscriptionPage: React.FC = () => {
                                     <div className="w-full max-w-xl rounded-lg bg-white p-6 shadow-xl">
                                         <div className='flex justify-between'>
                                             <h1 className='font-walsheimMedium text-xl'>Save with yearly billing</h1>
-                                            <button onClick={handleYearlyClose} className="rounded-full border text-gray-400 shadow-md hover:text-gray-600">
+                                            <button onClick={handleYearlyClose} className="rounded-full border text-gray-400 shadow-md hover:text-[#595959]">
                                                 <IoMdClose size={24} />
                                             </button>
                                         </div>
@@ -429,7 +429,7 @@ const SubscriptionPage: React.FC = () => {
                                 <div className="w-full max-w-md rounded-lg bg-white p-6">
                                     <div className='flex justify-between'>
                                         <h1 className='font-walsheimMedium text-xl'>Add payment information</h1>
-                                        <button onClick={handleAddPaymentClose} className="rounded-full border text-gray-400 shadow-md hover:text-gray-600">
+                                        <button onClick={handleAddPaymentClose} className="rounded-full border text-gray-400 shadow-md hover:text-[#595959]">
                                             <IoMdClose size={24} />
                                         </button>
                                     </div>
