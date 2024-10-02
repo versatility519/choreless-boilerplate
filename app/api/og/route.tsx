@@ -2,18 +2,16 @@ import { ImageResponse } from "@vercel/og"
 
 import { ogImageSchema } from "@/lib/validations/og"
 
-export const runtime = "edge"
-
 const interRegular = fetch(
-  new URL("../../../../assests/fonts/GT-Walsheim-Regular.ttf", import.meta.url)
+  new URL("../../../../assets/fonts/GT-Walsheim-Regular.ttf", import.meta.url)
 ).then((res) => res.arrayBuffer())
 
 const interBold = fetch(
-  new URL("../../../../assessts/fonts/GT-Walsheim-Bold.ttf", import.meta.url)
+  new URL("../../../../assets/fonts/GT-Walsheim-Bold.ttf", import.meta.url)
 ).then((res) => res.arrayBuffer())
 
 const interMedium = fetch(
-  new URL("../../../../assessts/fonts/GT-Walsheim-Medium.ttf", import.meta.url)
+  new URL("../../../../assets/fonts/GT-Walsheim-Medium.ttf", import.meta.url)
 ).then((res) => res.arrayBuffer())
 
 
@@ -22,7 +20,7 @@ export async function GET(req: Request) {
     const fontRegular = await interRegular
     const fontBold = await interBold
     const fontMedium = await interMedium
-    
+
     const url = new URL(req.url)
     const values = ogImageSchema.parse(Object.fromEntries(url.searchParams))
     const heading =
