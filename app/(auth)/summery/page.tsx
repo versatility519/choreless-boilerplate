@@ -447,7 +447,7 @@ const SubscriptionPage: React.FC = () => {
                                                     .slice(0, 19);
                                                 setCardNumber(formattedValue);
                                             }}
-                                            className="w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-transparent focus:ring-2 focus:ring-teal-500"
+                                            className="w-full rounded-lg border border-gray-300 bg-white p-3 outline-none focus:border-transparent focus:ring-2 focus:ring-teal-500"
                                         />
                                         <div className="absolute right-3 top-1/2 flex -translate-y-1/2 space-x-2 text-gray-400">
                                             <div className="relative">
@@ -457,7 +457,7 @@ const SubscriptionPage: React.FC = () => {
                                                     value={expiry}
                                                     onChange={(e) => setExpiry(e.target.value)}
                                                     onFocus={() => setIsExpiryOpen(true)}
-                                                    className="w-14 bg-transparent text-right focus:outline-none"
+                                                    className="w-14 bg-white text-right focus:outline-none"
                                                 />
                                                 {isExpiryOpen && (
                                                     <div className="absolute right-0 top-full mt-1 w-48 rounded-md bg-white shadow-lg">
@@ -480,14 +480,14 @@ const SubscriptionPage: React.FC = () => {
                                                 placeholder="CSV"
                                                 value={csv}
                                                 onChange={(e) => setCsv(e.target.value)}
-                                                className="w-8 bg-transparent text-right focus:outline-none"
+                                                className="w-8 bg-white text-right focus:outline-none"
                                             />
                                             <input
                                                 type="text"
                                                 placeholder="ZIP"
                                                 value={zip}
                                                 onChange={(e) => setZip(e.target.value)}
-                                                className="w-8 bg-transparent text-right focus:outline-none"
+                                                className="w-8 bg-white text-right focus:outline-none"
                                             />
                                         </div>
                                     </div>
