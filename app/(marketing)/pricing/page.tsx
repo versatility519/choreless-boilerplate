@@ -35,7 +35,6 @@ export default async function PricingPage() {
           >
             Dashboard
           </Link>
-          .
         </p>
       </div>
     );

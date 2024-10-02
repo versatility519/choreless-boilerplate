@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 
-import { fontGeist, fontHeading, fontSans, fontUrban, fontWalsheimBold, fontWalsheimMedium, fontWalsheimRegular } from "@/assets/fonts";
+import { fontWalsheimBold, fontWalsheimMedium, fontWalsheimRegular } from "@/assets/fonts";
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
 
