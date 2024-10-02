@@ -434,7 +434,7 @@ const SubscriptionPage: React.FC = () => {
                                         </button>
                                     </div>
                                     <p className="mb-4 text-[#595959]">Enter your card details</p>
-                                    <div className="relative">
+                                    <div className="relative bg-white">
                                         <input
                                             type="text"
                                             placeholder="Card Number"
