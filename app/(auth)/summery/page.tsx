@@ -470,7 +470,7 @@ const SubscriptionPage: React.FC = () => {
                                                                 setExpiry(`${month}/${year}`);
                                                                 setIsExpiryOpen(false);
                                                             }}
-                                                            className="w-full p-2"
+                                                            className="w-full bg-white  p-2"
                                                         />
                                                     </div>
                                                 )}
