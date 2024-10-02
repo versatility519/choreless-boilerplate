@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function ForgotPasswordPage() {
     return (
         <div className="flex h-screen w-full flex-col items-center justify-center px-4 sm:px-0">
-            <div className="absolute left-4 top-4 md:right-8 md:top-8">
+             <div className="absolute left-8 top-8 md:right-8 ">
                 <Link href="/" className="flex items-center space-x-1.5">
                     <Image src={Logo} alt="logo" className='w-40' />
                     {/* <Icons.logo />
