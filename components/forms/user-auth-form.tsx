@@ -4,6 +4,7 @@ import * as React from "react";
 import { useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
@@ -14,6 +15,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Icons } from "@/components/shared/icons";
+
+import { FcGoogle } from "react-icons/fc";
+import { FaApple } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
   type?: string;
@@ -31,6 +36,9 @@ export function UserAuthForm({ className, type, ...props }: UserAuthFormProps) {
   });
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [isGoogleLoading, setIsGoogleLoading] = React.useState<boolean>(false);
+  const [isFacebookLoading, setIsFacebookLoading] = React.useState<boolean>(false);
+  const [isAppleLoading, setIsAppleLoading] = React.useState<boolean>(false);
+
   const searchParams = useSearchParams();
 
   async function onSubmit(data: FormData) {
@@ -56,37 +64,89 @@ export function UserAuthForm({ className, type, ...props }: UserAuthFormProps) {
   }
 
   return (
-    <div className={cn("grid gap-6", className)} {...props}>
+    <div className={cn("flex w-full flex-col gap-6", className)} {...props}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-2">
-          <div className="grid gap-1">
-            <Label className="sr-only" htmlFor="email">
-              Email
-            </Label>
-            <Input
-              id="email"
-              placeholder="name@example.com"
-              type="email"
-              autoCapitalize="none"
-              autoComplete="email"
-              autoCorrect="off"
-              disabled={isLoading || isGoogleLoading}
-              {...register("email")}
-            />
-            {errors?.email && (
-              <p className="px-1 text-xs text-red-600">
-                {errors.email.message}
-              </p>
-            )}
-          </div>
+          {type != 'register' ?
+            <div className="flex flex-col gap-2">
+              <div className="grid gap-1">
+                {/* <input type="email" placeholder="Email or phone number" className="w-full rounded-md border border-gray-300 p-2" />
+            <input type="password" placeholder="Password" className="w-full rounded-md border border-gray-300 p-2" /> */}
+                <Label className="sr-only" htmlFor="email">
+                  Email
+                </Label>
+                <Input
+                  id="email"
+                  placeholder="Email or phone number"
+                  type="email"
+                  autoCapitalize="none"
+                  autoComplete="email"
+                  autoCorrect="off"
+                  disabled={isLoading || isGoogleLoading}
+                  {...register("email")}
+                />
+                {errors?.email && (
+                  <p className="px-1 text-xs text-red-600">
+                    {errors.email.message}
+                  </p>
+                )}
+              </div>
+              <div className="grid gap-1">
+                {/* <input type="email" placeholder="Email or phone number" className="w-full rounded-md border border-gray-300 p-2" />
+            <input type="password" placeholder="Password" className="w-full rounded-md border border-gray-300 p-2" /> */}
+                <Label className="sr-only" htmlFor="email">
+                  Password
+                </Label>
+                <Input
+                  id="email"
+                  placeholder="Password"
+                  type="password"
+                  autoCapitalize="none"
+                  autoComplete="password"
+                  autoCorrect="off"
+                  disabled={isLoading || isGoogleLoading}
+                  {...register("password")}
+                />
+                {errors?.password && (
+                  <p className="px-1 text-xs text-red-600">
+                    {errors.password.message}
+                  </p>
+                )}
+              </div>
+            </div>
+            :
+             ''
+          }
+
           <button className={cn(buttonVariants())} disabled={isLoading}>
             {isLoading && (
               <Icons.spinner className="mr-2 size-4 animate-spin" />
             )}
-            {type === "register" ? "Sign Up with Email" : "Sign In with Email"}
+            {type === "register" ? "Sign Up with Email" : "Sign In"}
           </button>
         </div>
       </form>
+
+      {type != 'register' && (
+        <div className="flex w-full flex-col items-center justify-center gap-2 px-8">
+          <div className="w-full  text-center">
+            <Link href="/forgot-password">
+              <p className="text-sm text-gray-600 underline">
+                Forgot password?
+              </p>
+            </Link>
+          </div>
+          <div className="flex justify-center gap-2 text-center text-sm text-gray-600">
+            <p> Don&apos;t have an account?</p>
+            <Link href="/signup">
+              <p className="font-semibold text-black hover:underline">
+                Sign up
+              </p>
+            </Link>
+          </div>
+        </div>
+      )}
+
       <div className="relative">
         <div className="absolute inset-0 flex items-center">
           <span className="w-full border-t" />
@@ -97,9 +157,9 @@ export function UserAuthForm({ className, type, ...props }: UserAuthFormProps) {
           </span>
         </div>
       </div>
-      <button
+
+      <button className="flex w-full cursor-pointer items-center gap-4 rounded-full border border-black  p-2 px-4 text-black"
         type="button"
-        className={cn(buttonVariants({ variant: "outline" }))}
         onClick={() => {
           setIsGoogleLoading(true);
           signIn("google");
@@ -109,9 +169,43 @@ export function UserAuthForm({ className, type, ...props }: UserAuthFormProps) {
         {isGoogleLoading ? (
           <Icons.spinner className="mr-2 size-4 animate-spin" />
         ) : (
-          <Icons.google className="mr-2 size-4" />
+          <FcGoogle size={28} />
+          // <Icons.google className="mr-2 size-4" />
         )}{" "}
-        Google
+        <p className="font-walsheimMedium text-sm ">Continue with Google</p>
+      </button>
+
+      <button className="flex w-full cursor-pointer items-center gap-4 rounded-full border border-black  p-2 px-4 text-black"
+        type="button"
+        onClick={() => {
+          setIsFacebookLoading(true);
+          signIn("facebook");
+        }}
+        disabled={isLoading || isFacebookLoading}
+      >
+        {isFacebookLoading ? (
+          <Icons.spinner className="mr-2 size-4 animate-spin" />
+        ) : (
+          <FaFacebook size={28} />
+          // <Icons.google className="mr-2 size-4" />
+        )}{" "}
+        <p className="font-walsheimMedium text-sm">Continue with Facebook</p>
+      </button>
+      <button className="flex w-full cursor-pointer items-center gap-4 rounded-full border border-black  p-2 px-4 text-black"
+        type="button"
+        onClick={() => {
+          setIsAppleLoading(true);
+          signIn("apple");
+        }}
+        disabled={isLoading || isAppleLoading}
+      >
+        {isGoogleLoading ? (
+          <Icons.spinner className="mr-2 size-4 animate-spin" />
+        ) : (
+          <FaApple size={28} />
+          // <Icons.google className="mr-2 size-4" />
+        )}{" "}
+        <p className="font-walsheimMedium text-sm">Continue with Apple</p>
       </button>
     </div>
   );
