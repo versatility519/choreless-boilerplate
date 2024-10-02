@@ -8,6 +8,8 @@ import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Modal } from "@/components/ui/modal"
+import { Button } from "@/components/ui/button"
 
 import Logo from "@/public/logo.png";
 import SummeryImg from '@/public/_static/summery.png'
@@ -125,6 +127,7 @@ const SubscriptionPage: React.FC = () => {
     const [isYearly, setIsYearly] = useState(false)
     const [isAddPayment, setIsAddPayment] = useState(false)
     const [selectedOption, setSelectedOption] = useState<string>(billingOptions[0].id)
+    const [showNotificationModal, setShowNotificationModal] = useState(false)
 
 
 
@@ -204,7 +207,7 @@ const SubscriptionPage: React.FC = () => {
         setExpiryMonth('');
         setExpiryYear('');
         setCvv('');
-        setZipCode(''); 
+        setZipCode('');
     }
 
     const handleAddPaymentOpen = () => {
@@ -225,8 +228,66 @@ const SubscriptionPage: React.FC = () => {
         if (checked) handleYearlyOpen()
     }
 
+    useEffect(() => {
+        setShowNotificationModal(true)
+    }, [])
+
+    const handleCloseNotificationModal = () => {
+        setShowNotificationModal(false)
+    }
+
     return (
-        <div className=" min-h-screen bg-gray-100 " >
+        <div className="min-h-screen bg-gray-100">
+            {/* Notification Modal */}
+            <Modal
+                showModal={showNotificationModal}
+                setShowModal={setShowNotificationModal}
+            >
+                    <div className=" mx-4 max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-lg bg-white">
+                        <div className="p-6">
+                            <div className="mb-4 flex items-start justify-between">
+                                <h2 className="text-2xl font-bold">Flex Pay: Simplify Your Yearly Subscription</h2>
+                                {/* <button onClick={onclose} className="text-gray-500 hover:text-gray-700" aria-label="Close modal">
+                                    <X size={24} />
+                                </button> */}
+                            </div>
+                            <p className="mb-6 text-gray-600">
+                                At Choreless, we believe in making laundry—and paying for it—as hassle-free as possible. That&apos;s why we offer Easy Pay for our yearly subscriptions. It's a flexible payment option that lets you enjoy a full year of laundry freedom without the upfront cost. Spread your payments over three months, keep your cash flow smooth, and still get all the benefits of our premium service right away. It's just another way we're taking the load off your shoulders.
+                            </p>
+                            <div className="mb-6">
+                                <img
+                                    src="/placeholder.svg?height=200&width=400"
+                                    alt="Laundry basket with 'Wash & Fold' bag"
+                                    className="h-48 w-full rounded-lg object-cover"
+                                />
+                            </div>
+                            <div className="mb-6">
+                                <h3 className="mb-2 text-xl font-semibold">How Flex Pay Works</h3>
+                                <ul className="list-inside list-disc space-y-2">
+                                    <li>Split your yearly subscription into 3 easy monthly installments at no extra charge.</li>
+                                    <li>First payment due at checkout, followed by 2 monthly payments.</li>
+                                    <li>Available for yearly subscriptions only.</li>
+                                    <li>Pay with your credit card or PayPal account.</li>
+                                </ul>
+                            </div>
+                            <div className="mb-6">
+                                <h3 className="mb-2 text-xl font-semibold">0% Interest</h3>
+                                <ul className="list-inside list-disc space-y-2">
+                                    <li>Choreless does not charge interest or fees for Easy Pay.</li>
+                                    <li>Credit card terms may apply; check with your card issuer.</li>
+                                </ul>
+                            </div>
+                            <p className="mb-4 text-sm text-gray-500">
+                                Easy Pay subject to approval. Prepaid cards not accepted for Easy Pay. Cannot be combined with other offers or applied to past purchases.
+                            </p>
+                            <p className="text-sm text-gray-500">
+                                Questions? Contact our Customer Care team at (823) 296-3986
+                            </p>
+                        </div>
+                </div>
+            </Modal>
+
+            {/* Existing content */}
             <div className="mx-auto flex flex-col md:flex-row" style={{ scrollbarWidth: 'none' }}>
                 <div className="flex w-full items-center justify-center text-center lg:justify-end">
                     <div className="w-full px-4 py-12 sm:px-16  md:min-h-screen md:p-8 lg:max-w-[580px]">
@@ -471,7 +532,7 @@ const SubscriptionPage: React.FC = () => {
                         {isAddPayment && (
 
                             <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4">
-                                <Card className="mx-auto w-full max-w-md">
+                                <Card className="mx-auto w-full max-w-md bg-white">
                                     <CardHeader>
                                         <div className='flex justify-between'>
                                             <CardTitle>Add payment information</CardTitle>
