@@ -123,7 +123,7 @@ export function UserAuthForm({ className, type, ...props }: UserAuthFormProps) {
               <Icons.spinner className="mr-2 size-4 animate-spin bg-black text-white" />
             )}
             {/* {type === "register" ? "Sign Up with Email" : "Sign In"} */}
-            {type === "register" ? <Link href="/summery" className="text-white">Sign In</Link>
+            {type === "register" ? <Link href="/signup/persona-info" className="text-white">Sign Up with Email</Link>
               : <Link href="/signup" className="text-white">Sign In</Link>
             }
           </button>
