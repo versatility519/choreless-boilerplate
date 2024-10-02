@@ -251,7 +251,9 @@ const SubscriptionPage: React.FC = () => {
                                  
                             </div>
                             <p className="mb-6 text-gray-600">
-                                At Choreless, we believe in making laundry—and paying for it—as hassle-free as possible. That&apos;s why we offer Easy Pay for our yearly subscriptions. It's a flexible payment option that lets you enjoy a full year of laundry freedom without the upfront cost. Spread your payments over three months, keep your cash flow smooth, and still get all the benefits of our premium service right away. It's just another way we're taking the load off your shoulders.
+                                At Choreless, we believe in making laundry—and paying for it—as hassle-free as possible. That&apos;s why we offer Easy Pay for our yearly subscriptions. 
+                                It&apos;s a flexible payment option that lets you enjoy a full year of laundry freedom without the upfront cost. Spread your payments over three months, keep your cash flow smooth, and still get all the benefits of our premium service right away. 
+                                It&apos;s just another way we&apos;re taking the load off your shoulders.
                             </p>
                             <div className="mb-6">
                                 <Image
