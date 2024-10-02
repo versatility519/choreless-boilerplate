@@ -3,15 +3,15 @@ import { ImageResponse } from "@vercel/og"
 import { ogImageSchema } from "@/lib/validations/og"
 
 const interRegular = fetch(
-  new URL("../../../../assets/fonts/GT-Walsheim-Regular.ttf", import.meta.url)
+  new URL("@/assets/fonts/GT-Walsheim-Regular.ttf", import.meta.url)
 ).then((res) => res.arrayBuffer())
 
 const interBold = fetch(
-  new URL("../../../../assets/fonts/GT-Walsheim-Bold.ttf", import.meta.url)
+  new URL("@/assets/fonts/GT-Walsheim-Bold.ttf", import.meta.url)
 ).then((res) => res.arrayBuffer())
 
 const interMedium = fetch(
-  new URL("../../../../assets/fonts/GT-Walsheim-Medium.ttf", import.meta.url)
+  new URL("@/assets/fonts/GT-Walsheim-Medium.ttf", import.meta.url)
 ).then((res) => res.arrayBuffer())
 
 

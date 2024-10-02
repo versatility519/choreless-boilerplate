@@ -43,7 +43,7 @@ export default function RegisterPage() {
         </div>
         
         <div className="mx-4 mb-8 flex max-w-lg flex-col items-center justify-center gap-3 rounded-3xl bg-white px-8 pt-16 shadow-xl lg:mx-auto lg:my-16">
-          <p className="mb-4 px-2 text-center text-3xl font-bold text-black sm:px-4 md:px-16">Ready to save 5+ hours every week?</p>
+          <p className="mb-4 px-2 text-center font-walsheimMedium text-3xl text-black sm:px-4 md:px-16">Ready to save 5+ hours every week?</p>
 
           <div className="flex w-full flex-col items-center justify-center gap-4 px-8">
             <Suspense>
@@ -53,7 +53,7 @@ export default function RegisterPage() {
 
           {/* <div className="flex gap-2 items-center text-center  text-gray-600"> */}
           <Link href="/signin">
-            <p className=" py-8 text-center text-sm text-blue-500 hover:underline">
+            <p className="py-8 text-center font-walsheimRegular text-sm text-blue-500 hover:underline">
               Already have an account? Log in
             </p>
           </Link>

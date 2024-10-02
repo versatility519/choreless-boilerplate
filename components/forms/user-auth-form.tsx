@@ -131,15 +131,15 @@ export function UserAuthForm({ className, type, ...props }: UserAuthFormProps) {
         <div className="flex w-full flex-col items-center justify-center gap-2 px-8">
           <div className="w-full  text-center">
             <Link href="/forgot-password">
-              <p className="text-sm text-gray-600 underline">
+              <p className="font-walsheimRegular text-sm text-gray-600 underline">
                 Forgot password?
               </p>
             </Link>
           </div>
           <div className="flex justify-center gap-2 text-center text-sm text-gray-600">
-            <p> Don&apos;t have an account?</p>
+            <p className="font-walsheimRegular"> Don&apos;t have an account?</p>
             <Link href="/signup">
-              <p className="font-semibold text-black hover:underline">
+              <p className="font-walsheimMedium text-black hover:underline">
                 Sign up
               </p>
             </Link>
@@ -151,8 +151,8 @@ export function UserAuthForm({ className, type, ...props }: UserAuthFormProps) {
         <div className="absolute inset-0 flex items-center">
           <span className="w-full border-t" />
         </div>
-        <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background px-2 text-muted-foreground">
+        <div className="relative flex justify-center">
+          <span className="bg-background px-2 font-walsheimMedium text-xs text-muted-foreground">
             Or continue with
           </span>
         </div>

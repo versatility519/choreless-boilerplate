@@ -25,8 +25,8 @@ export default function LoginPage() {
       </div>
       <div className="flex w-full max-w-lg flex-col items-center justify-center gap-3 rounded-3xl bg-white  py-8 shadow-xl md:my-16">
 
-        <h1 className="text-3xl font-bold text-black">Hello there!</h1>
-        <p className="text-center text-base text-gray-500">Enter your email to sign in to your account</p>
+        <h1 className="font-walsheimMedium text-3xl text-black">Hello there!</h1>
+        <p className="text-center font-walsheimRegular text-base text-gray-500">Enter your email to sign in to your account</p>
 
         <div className="flex w-full flex-col items-center justify-center gap-4 px-8">
           <Suspense>
