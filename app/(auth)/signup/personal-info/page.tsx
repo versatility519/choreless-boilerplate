@@ -25,7 +25,7 @@ export default function PersonalInfoPage() {
                 <div className=" flex flex-col gap-4">
                     <div className="flex w-full items-center py-4 text-start">
                         <Link href="/signup" className=""><LuChevronLeft size={40} className="text-black" /></Link>
-                        <p className="font-walsheim-medium px-4 text-center text-3xl text-black sm:px-8 md:px-16">Let&apos;s get to started</p>
+                        <p className="font-walsheim-medium mr-2 px-2 text-center text-3xl text-black sm:px-8 md:px-16">Let&apos;s get to started</p>
                     </div>
                     <div className="flex w-full gap-3">
                         <input type="text" placeholder="First Name" className="w-full rounded-md border border-gray-300 p-2" />

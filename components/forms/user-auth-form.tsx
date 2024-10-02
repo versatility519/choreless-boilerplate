@@ -171,10 +171,10 @@ export function UserAuthForm({ className, type, ...props }: UserAuthFormProps) {
         disabled={isLoading || isGoogleLoading}
       >
         {isGoogleLoading ? (
-          <Icons.spinner className="mr-2 size-4 animate-spin" />
+          <Icons.spinner className="mr-2 size-6 animate-spin" />
         ) : (
           <FcGoogle size={28} />
-          // <Icons.google className="mr-2 size-4" />
+          // <Icons.google className="mr-2 size-6" />
         )}{" "}
         <p className="font-walsheimMedium text-sm ">Continue with Google</p>
       </button>
@@ -188,10 +188,10 @@ export function UserAuthForm({ className, type, ...props }: UserAuthFormProps) {
         disabled={isLoading || isFacebookLoading}
       >
         {isFacebookLoading ? (
-          <Icons.spinner className="mr-2 size-4 animate-spin" />
+          <Icons.spinner className="mr-2 size-6 animate-spin" />
         ) : (
           <FaFacebook size={28} />
-          // <Icons.google className="mr-2 size-4" />
+          // <Icons.google className="mr-2 size-6" />
         )}{" "}
         <p className="font-walsheimMedium text-sm">Continue with Facebook</p>
       </button>
@@ -203,11 +203,11 @@ export function UserAuthForm({ className, type, ...props }: UserAuthFormProps) {
         }}
         disabled={isLoading || isAppleLoading}
       >
-        {isGoogleLoading ? (
-          <Icons.spinner className="mr-2 size-4 animate-spin" />
+        {isAppleLoading ? (
+          <Icons.spinner className="mr-2 size-6 animate-spin" />
         ) : (
           <FaApple size={28} />
-          // <Icons.google className="mr-2 size-4" />
+          // <Icons.google className="mr-2 size-6" />
         )}{" "}
         <p className="font-walsheimMedium text-sm">Continue with Apple</p>
       </button>
