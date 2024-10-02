@@ -58,13 +58,13 @@ export async function GET(req: Request) {
               color: 'transparent'
             }}
           >
-            SaaS Starter
+            SaaS Starterss
           </div>
 
           <div tw="flex flex-col flex-1 py-16">
             {/* Type : Blog or Doc */}
             <div
-              tw="flex text-xl uppercase font-bold tracking-tight"
+              tw="flex text-xl uppercase font-walsheimMedium font-bold tracking-tight"
               style={{ fontFamily: "Inter", fontWeight: "normal" }}
             >
               {values.type}
@@ -139,21 +139,15 @@ export async function GET(req: Request) {
         height: 630,
         fonts: [
           {
-            name: "Inter",
+            name: "GT Walsheim",
             data: fontRegular,
             weight: 400,
             style: "normal",
           },
           {
-            name: "Inter",
+            name: "GT Walsheim",
             data: fontMedium,
             weight: 500,
-            style: "normal",
-          },
-          {
-            name: "Cal Sans",
-            data: fontBold,
-            weight: 700,
             style: "normal",
           },
         ],
