@@ -12,6 +12,7 @@ import { Modal } from "@/components/ui/modal"
 import { Button } from "@/components/ui/button"
 
 import Logo from "@/public/logo.png";
+import ModalImg from '@/public/_static/modal.png'
 import SummeryImg from '@/public/_static/summery.png'
 
 import { IoBagHandleOutline } from "react-icons/io5";
@@ -247,16 +248,14 @@ const SubscriptionPage: React.FC = () => {
                         <div className="p-6">
                             <div className="mb-4 flex items-start justify-between">
                                 <h2 className="text-2xl font-bold">Flex Pay: Simplify Your Yearly Subscription</h2>
-                                {/* <button onClick={onclose} className="text-gray-500 hover:text-gray-700" aria-label="Close modal">
-                                    <X size={24} />
-                                </button> */}
+                                 
                             </div>
                             <p className="mb-6 text-gray-600">
                                 At Choreless, we believe in making laundry—and paying for it—as hassle-free as possible. That&apos;s why we offer Easy Pay for our yearly subscriptions. It's a flexible payment option that lets you enjoy a full year of laundry freedom without the upfront cost. Spread your payments over three months, keep your cash flow smooth, and still get all the benefits of our premium service right away. It's just another way we're taking the load off your shoulders.
                             </p>
                             <div className="mb-6">
-                                <img
-                                    src="/placeholder.svg?height=200&width=400"
+                                <Image
+                                    src={ModalImg}
                                     alt="Laundry basket with 'Wash & Fold' bag"
                                     className="h-48 w-full rounded-lg object-cover"
                                 />
