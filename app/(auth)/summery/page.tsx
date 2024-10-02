@@ -79,16 +79,16 @@ const memberOptions: MemberOption[] = [
 const billingOptions: BillingOption[] = [
     {
         id: 'yearly',
-        title: 'Get three months FREE with annual billing',
-        description: 'Yearly with flex pay',
-        price: 1750,
+        title: '3 FREE Months: Premium Annual',
+        description: 'Pay once, save more | Save $300 annually',
+        price: 1521,
     },
     {
         id: 'yearly-flex',
-        title: 'Get two months FREE with annual flex billing',
-        description: 'Yearly with flex pay',
-        price: 2000,
-        installment: 666.66,
+        title: '2 FREE Months: Premium Annual',
+        description: '4 easy installments | Save $100 annually',
+        price: 1690,
+        installment: 1690,
     },
 ]
 
@@ -168,8 +168,8 @@ const SubscriptionPage: React.FC = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-100" >
-            <div className="mx-auto flex flex-col md:flex-row">
+        <div className=" min-h-screen bg-gray-100 " >
+            <div className="mx-auto flex flex-col md:flex-row" style={{ scrollbarWidth: 'none' }}>
                 <div className="flex w-full items-center justify-center text-center lg:justify-end">
                     <div className="w-full px-4 py-12 sm:px-16  md:min-h-screen md:p-8 lg:max-w-[580px]">
                         <div className="absolute left-8 top-8 md:right-8 ">
@@ -220,7 +220,7 @@ const SubscriptionPage: React.FC = () => {
                     </div>
                 </div>
 
-                <div className='flex w-full flex-col gap-8 bg-gray-100 px-4 shadow-md sm:px-16 md:bg-white md:py-20' >
+                <div className='flex w-full flex-col gap-8 bg-gray-100 px-4 shadow-md sm:px-16 md:bg-white md:py-20 ' >
                     <div className='border-b pb-8'>
                         <h3 className="mb-4 font-walsheimMedium text-[32px]">Select your choreless plan</h3>
                         <p className="mb-4 font-walsheimMedium text-xl">Choose your plan</p>
@@ -278,7 +278,7 @@ const SubscriptionPage: React.FC = () => {
                                 <div className='fixed inset-0 z-10 flex size-full items-center justify-center bg-black bg-opacity-50 ' ref={ref}>
                                     <div className="hidden-scrollbar h-[72%] max-w-md overflow-y-auto rounded-[24px] border border-gray-300 bg-white p-6 shadow-lg" >
                                         <div className='flex w-full items-center justify-between'>
-                                            <p className='font-walsheimMedium text-xl'>Number of Member of your household</p>
+                                            <p className='font-walsheimMedium text-xl'>Choose Your Family Plan</p>
                                             <IoMdClose className='cursor-pointer rounded-full p-0.5 shadow-md' size={24} onClick={handleClose} />
                                         </div>
                                         <p className='my-2 text-xs'>Choose your family member</p>
@@ -348,14 +348,14 @@ const SubscriptionPage: React.FC = () => {
                                                         /> */}
                                                         <div className="flex flex-col">
                                                             <div className="font-walsheimBold text-xl">{option.title}</div>
-                                                            <div className="font-walsheimRegular text-xs text-gray-500">{option.description}</div>
+                                                            <div className="font-walsheimRegular text-xs text-[#595959]">{option.description}</div>
                                                         </div>
                                                     </div>
                                                     <div className="flex flex-col items-center gap-2 text-nowrap text-right">
                                                         <div className="font-walsheimBold text-xl">${option.price} / year</div>
-                                                        {option.installment && (
-                                                            <div className=" font-walsheimRegular text-sm text-gray-500">${option.installment.toFixed(2)} / today</div>
-                                                        )}
+                                                        {/* {option.installment && (
+                                                            <div className=" font-walsheimRegular text-sm text-[#595959]">${option.installment.toFixed(2)} / today</div>
+                                                        )} */}
                                                     </div>
                                                 </label>
                                             ))}
@@ -420,9 +420,9 @@ const SubscriptionPage: React.FC = () => {
                                         <p className='my-2 text-xs'>Enter your card details</p>
                                     </div>
                                     <div className='flex items-center justify-between rounded-lg border border-gray-300 p-2'>
-                                        <div className='flex items-center gap-2'>
-                                            <span className='font-walsheimMedium text-xs'>Card Number</span>
-                                            <input type="text" className='border-none bg-white p-2 outline-none' placeholder='' />
+                                        <div className='flex items-center gap-1'>
+                                            <span className='text-center font-walsheimMedium text-xs'>Card Number</span>
+                                            <input type="text" className='w-2/3 border-none bg-white p-2 outline-none sm:w-fit' placeholder='' />
                                         </div>
 
                                         <div className='flex items-center gap-2'>
