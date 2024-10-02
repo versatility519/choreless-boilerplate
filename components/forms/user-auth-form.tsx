@@ -118,15 +118,12 @@ export function UserAuthForm({ className, type, ...props }: UserAuthFormProps) {
             :
             ''
           }
-          <Link href={`/signin?type=${type}`}>
-            <button className={cn(buttonVariants())} disabled={isLoading}>
-              {isLoading && (
-                <Icons.spinner className="mr-2 size-4 animate-spin" />
-              )}
-              {type === "register" ? "Sign Up with Email" : "Sign In"}
-            </button>
-          </Link>
-          
+          <button className={cn(buttonVariants())} disabled={isLoading}>
+            {isLoading && (
+              <Icons.spinner className="mr-2 size-4 animate-spin" />
+            )}
+            {type === "register" ? "Sign Up with Email" : "Sign In"}
+          </button>
         </div>
       </form>
 

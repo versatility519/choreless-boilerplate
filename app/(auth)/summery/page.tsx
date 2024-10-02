@@ -276,7 +276,7 @@ const SubscriptionPage: React.FC = () => {
 
                             {isModalOpen && (
                                 <div className='fixed inset-0 z-10 flex size-full items-center justify-center bg-black bg-opacity-50 ' ref={ref}>
-                                    <div className="h-[79%] max-w-md overflow-y-auto rounded-[24px] border border-gray-300 bg-white p-6 shadow-lg" >
+                                    <div className="hidden-scrollbar h-[72%] max-w-md overflow-y-auto rounded-[24px] border border-gray-300 bg-white p-6 shadow-lg" >
                                         <div className='flex w-full items-center justify-between'>
                                             <p className='font-walsheimMedium text-xl'>Number of Member of your household</p>
                                             <IoMdClose className='cursor-pointer rounded-full p-0.5 shadow-md' size={24} onClick={handleClose} />
