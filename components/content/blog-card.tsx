@@ -51,7 +51,7 @@ export function BlogCard({
         )}
       >
         <div className="w-full">
-          <h2 className="my-1.5 line-clamp-2 font-heading text-2xl">
+          <h2 className="my-1.5 line-clamp-2 font-walsheimMedium text-2xl">
             {data.title}
           </h2>
           {data.description && (

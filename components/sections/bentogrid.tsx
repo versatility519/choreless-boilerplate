@@ -22,11 +22,11 @@ export default function BentoGrid() {
                     fill="currentColor"
                   />
                 </svg>
-                <span className="text-gradient_indigo-purple mx-auto block w-fit font-heading text-5xl">
+                <span className="text-gradient_indigo-purple mx-auto block w-fit font-walsheimMedium text-5xl">
                   100%
                 </span>
               </div>
-              <h2 className="mt-6 text-center font-heading text-3xl md:text-4xl lg:text-[40px]">
+              <h2 className="mt-6 text-center font-walsheimMedium text-3xl md:text-4xl lg:text-[40px]">
                 Customizable
               </h2>
             </div>
