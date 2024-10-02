@@ -129,14 +129,14 @@ const SubscriptionPage: React.FC = () => {
     const [isAddPayment, setIsAddPayment] = useState(false)
     const [selectedOption, setSelectedOption] = useState<string>(billingOptions[0].id)
     const [showNotificationModal, setShowNotificationModal] = useState(false)
-
-
+    const [showSimpleModal, setShowSimpleModal] = useState(false)
 
     const [cardNumber, setCardNumber] = useState('')
     const [expiryMonth, setExpiryMonth] = useState('')
     const [expiryYear, setExpiryYear] = useState('')
     const [cvv, setCvv] = useState('')
     const [zipCode, setZipCode] = useState('')
+
 
     const formatCardNumber = (value: string) => {
         const v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '')
@@ -243,48 +243,54 @@ const SubscriptionPage: React.FC = () => {
             <Modal
                 showModal={showNotificationModal}
                 setShowModal={setShowNotificationModal}
+                className=''
+                onClose={handleCloseNotificationModal}
             >
-                    <div className=" mx-4 max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-lg bg-white">
-                        <div className="p-6">
-                            <div className="mb-4 flex items-start justify-between">
-                                <h2 className="text-2xl font-bold">Flex Pay: Simplify Your Yearly Subscription</h2>
-                                 
-                            </div>
-                            <p className="mb-6 text-gray-600">
-                                At Choreless, we believe in making laundry—and paying for it—as hassle-free as possible. That&apos;s why we offer Easy Pay for our yearly subscriptions. 
-                                It&apos;s a flexible payment option that lets you enjoy a full year of laundry freedom without the upfront cost. Spread your payments over three months, keep your cash flow smooth, and still get all the benefits of our premium service right away. 
-                                It&apos;s just another way we&apos;re taking the load off your shoulders.
-                            </p>
-                            <div className="mb-6">
-                                <Image
-                                    src={ModalImg}
-                                    alt="Laundry basket with 'Wash & Fold' bag"
-                                    className="h-48 w-full rounded-lg object-cover"
-                                />
-                            </div>
-                            <div className="mb-6">
-                                <h3 className="mb-2 text-xl font-semibold">How Flex Pay Works</h3>
-                                <ul className="list-inside list-disc space-y-2">
-                                    <li>Split your yearly subscription into 3 easy monthly installments at no extra charge.</li>
-                                    <li>First payment due at checkout, followed by 2 monthly payments.</li>
-                                    <li>Available for yearly subscriptions only.</li>
-                                    <li>Pay with your credit card or PayPal account.</li>
-                                </ul>
-                            </div>
-                            <div className="mb-6">
-                                <h3 className="mb-2 text-xl font-semibold">0% Interest</h3>
-                                <ul className="list-inside list-disc space-y-2">
-                                    <li>Choreless does not charge interest or fees for Easy Pay.</li>
-                                    <li>Credit card terms may apply; check with your card issuer.</li>
-                                </ul>
-                            </div>
-                            <p className="mb-4 text-sm text-gray-500">
-                                Easy Pay subject to approval. Prepaid cards not accepted for Easy Pay. Cannot be combined with other offers or applied to past purchases.
-                            </p>
-                            <p className="text-sm text-gray-500">
-                                Questions? Contact our Customer Care team at (823) 296-3986
-                            </p>
-                        </div>
+                <div className="scrollbar-hide my-4 max-h-[90vh]  w-full overflow-y-auto rounded-lg  bg-white p-6" style={{ scrollbarWidth: 'none' }}>
+                    <div className="mb-4 flex items-start justify-between">
+                        <h2 className="font-walsheimMedium text-xl ">Flex Pay: Simplify Your Yearly Subscription</h2>
+                        {/* <button
+                            onClick={handleCloseNotificationModal}
+                            className="text-gray-500 hover:text-gray-700 focus:outline-none"
+                        >
+                            <IoMdClose size={24} />
+                        </button> */}
+                    </div>
+                    <div className="mb-6 font-walsheimRegular ">
+                        That&apos;s why we offer Easy Pay for our yearly subscriptions.
+                        It&apos;s a flexible payment option that lets you enjoy a full year of laundry freedom without the upfront cost.
+                        Spread your payments over three months, keep your cash flow smooth, and still get all the benefits of our premium service right away.
+                        It&apos;s just another way we&apos;re taking the load off your shoulders.
+                    </div>
+                    <div className="mb-6">
+                        <Image
+                            src={ModalImg}
+                            alt="Laundry basket with 'Wash & Fold' bag"
+                            className="h-48 w-full rounded-lg object-cover"
+                        />
+                    </div>
+                    <div className="mb-6">
+                        <h3 className="mb-2 font-walsheimMedium text-xl">How Flex Pay Works</h3>
+                        <ul className="list-inside list-disc space-y-2 font-walsheimRegular ">
+                            <li>Split your yearly subscription into 3 easy monthly installments at no extra charge.</li>
+                            <li>First payment due at checkout, followed by 2 monthly payments.</li>
+                            <li>Available for yearly subscriptions only.</li>
+                            <li>Pay with your credit card or PayPal account.</li>
+                        </ul>
+                    </div>
+                    <div className="mb-6">
+                        <h3 className="mb-2 font-walsheimMedium text-xl">0% Interest</h3>
+                        <ul className="list-inside list-disc space-y-2 font-walsheimRegular ">
+                            <li>Choreless does not charge interest or fees for Easy Pay.</li>
+                            <li>Credit card terms may apply; check with your card issuer.</li>
+                        </ul>
+                    </div>
+                    <p className="mb-4 font-walsheimRegular text-sm text-gray-500">
+                        Easy Pay subject to approval. Prepaid cards not accepted for Easy Pay. Cannot be combined with other offers or applied to past purchases.
+                    </p>
+                    <p className="text-sm text-gray-500">
+                        Questions? Contact our Customer Care team at (823) 296-3986
+                    </p>
                 </div>
             </Modal>
 
@@ -372,10 +378,10 @@ const SubscriptionPage: React.FC = () => {
                     </div>
 
                     <div>
-                        <h3 className="mb-4 font-walsheimMedium text-xl text-black">Number of Members in your household</h3>
+                        <h3 className="mb-4 font-walsheimMedium text-xl ">Number of Members in your household</h3>
                         <div>
                             <div className='flex w-full flex-row items-center justify-between rounded-xl border border-[#85C6C0] bg-white p-4'
-                                onClick={handleOpen}>
+                                onClick={() => setIsModalOpen(true)}>
                                 <button
                                     className="flex w-full items-center justify-between text-left"
                                 >
@@ -391,17 +397,35 @@ const SubscriptionPage: React.FC = () => {
                                         <p className="text-[#595959]">{(selectedMembers.members - 1) * 40 + lbPerson} lb - ∞</p>
                                     </div>
                                 </button>
-                                <ChevronDown className="ml-4 size-8 cursor-pointer text-black" />
+                                <ChevronDown className="ml-4 size-8 cursor-pointer " />
                             </div>
 
-                            {isModalOpen && (
-                                <div className='fixed inset-0 z-10 flex size-full items-center justify-center bg-black bg-opacity-50 ' ref={ref}>
-                                    <div className="hidden-scrollbar h-[72%] max-w-md overflow-y-auto rounded-[24px] border border-gray-300 bg-white p-6 shadow-lg" >
-                                        <div className='flex w-full items-center justify-between'>
-                                            <p className='font-walsheimMedium text-xl'>Choose Your Family Plan</p>
-                                            <IoMdClose className='cursor-pointer rounded-full p-0.5 shadow-md' size={24} onClick={handleClose} />
-                                        </div>
-                                        <p className='my-2 text-xs'>Choose your family member</p>
+                            {/* {isModalOpen && ( */}
+                            {/* <Modal
+                                showModal={isModalOpen}
+                                setShowModal={setIsModalOpen}
+                            >
+                                <div className="w-full max-w-md rounded-lg bg-white p-6 text-center">
+                                    <h2 className="mb-4 text-2xl font-bold">Simple Modal</h2>
+                                    <p>This is a simple modal without a close button.</p>
+                                </div>
+                            </Modal> */}
+
+                            <Modal
+                                showModal={isModalOpen}
+                                setShowModal={setIsModalOpen}
+                                className=''
+                                onClose={handleClose}
+                            >
+                                <div className="scrollbar-hide my-4 max-h-[90vh]  w-full overflow-y-auto rounded-lg  bg-white p-6" style={{ scrollbarWidth: 'none' }}>
+                                    {/* <div className='fixed inset-0 z-10 flex size-full items-center justify-center bg-black bg-opacity-50 ' ref={ref}> */}
+                                    {/* <div className="hidden-scrollbar fixed  max-h-[70vh] max-w-md overflow-y-auto rounded-[24px] border border-gray-300 bg-white p-6 shadow-lg" > */}
+                                    <div className='flex w-full items-center justify-between'>
+                                        <p className='font-walsheimMedium text-xl'>Choose Your Family Plan</p>
+                                        <IoMdClose className='cursor-pointer rounded-full p-0.5 shadow-md' size={24} onClick={handleClose} />
+                                    </div>
+                                    <p className='mt-2 text-xs'>Choose your family member</p>
+                                    <div className='my-2  max-h-[60vh] overflow-y-auto' style={{ scrollbarWidth: 'none' }}>
                                         {memberOptions.map((option) => (
                                             <button
                                                 key={option.members}
@@ -409,7 +433,7 @@ const SubscriptionPage: React.FC = () => {
                                                     setSelectedMembers(option)
                                                     handleClose();
                                                 }}
-                                                className="mt-4 w-full rounded-xl border-2 border-teal-500 p-4 text-left hover:bg-gray-100"
+                                                className="hide-scrollbar my-2 w-full rounded-xl border-2 border-teal-500 p-4 text-left hover:bg-gray-100"
                                             >
                                                 <div className="flex items-center justify-between">
                                                     <div>
@@ -423,9 +447,13 @@ const SubscriptionPage: React.FC = () => {
                                                 </div>
                                             </button>
                                         ))}
+                                        {/* </div>
+                                    </div> */}
                                     </div>
                                 </div>
-                            )}
+                                {/* )} */}
+
+                            </Modal>
                         </div>
                         <div className='mt-4 flex items-center justify-between'>
                             <div className='flex flex-col gap-2'>
@@ -523,16 +551,22 @@ const SubscriptionPage: React.FC = () => {
                             </div>
                             <div className="flex items-center justify-between py-4">
                                 <span className='text-[#595959]'>Total due today</span>
-                                <span className='font-walsheimBold text-black'>${(selectedMembers.members - 1) * 50 + perPerson - 50}</span>
+                                <span className='font-walsheimBold '>${(selectedMembers.members - 1) * 50 + perPerson - 50}</span>
                             </div>
                         </div>
                     </div>
 
                     <div className='w-full rounded-md border border-gray-300 p-6'>
-                        <p className='cursor-pointer font-walsheimMedium text-xl' onClick={handleAddPaymentOpen}>Add your payment information</p>
-                        {isAddPayment && (
-
-                            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4">
+                        <p className='cursor-pointer font-walsheimMedium text-xl' onClick={()=>setIsAddPayment(true)}>Add your payment information</p>
+                        {/* <p className='cursor-pointer font-walsheimMedium text-xl' onClick={()=>handleAddPaymentOpen}>Add your payment information</p> */}
+                        {/* {isAddPayment && ( */}
+                        <Modal
+                            showModal={isAddPayment}
+                            setShowModal={setIsAddPayment}
+                            className=''
+                            onClose={handleAddPaymentClose}
+                        >
+                            {/* <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4"> */}
                                 <Card className="mx-auto w-full max-w-md bg-white">
                                     <CardHeader>
                                         <div className='flex justify-between'>
@@ -600,12 +634,13 @@ const SubscriptionPage: React.FC = () => {
                                         </form>
                                     </CardContent>
                                 </Card>
-                            </div>
-                        )}
+                            {/* </div> */}
+                        </Modal>
+                        {/* )} */}
                     </div>
 
                     <div className="mb-8 flex flex-col gap-4 py-4 text-center font-walsheimMedium">
-                        <p className="w-full cursor-pointer rounded-full bg-black py-3 text-white" >
+                        <p className="w-full cursor-pointer rounded-full bg-black py-3 text-white" onClick={handleOpen}>
                             Pay and start subscription
                         </p>
                         <p className="mt-2 text-center text-xs text-[#595959]">
@@ -613,7 +648,7 @@ const SubscriptionPage: React.FC = () => {
                         </p>
                     </div>
                 </div>
-            </div>
+            </div >
         </div >
     )
 }
