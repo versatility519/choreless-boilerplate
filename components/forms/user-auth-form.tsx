@@ -151,14 +151,15 @@ export function UserAuthForm({ className, type, ...props }: UserAuthFormProps) {
       )}
 
       <div className="relative">
-        <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t" />
-        </div>
+        {/* <div className="absolute inset-0 flex items-center ">
+          <span className=" border-t border-black" />
+        </div> */}
         <div className="relative flex justify-center">
-          <span className="bg-background px-2 font-walsheimMedium text-xs text-muted-foreground">
+          <span className="px-2 font-walsheimMedium text-xs text-muted-foreground">
             Or continue with
           </span>
         </div>
+        
       </div>
 
       <button className="flex w-full cursor-pointer items-center gap-4 rounded-full border border-black  p-2 px-4 text-black"

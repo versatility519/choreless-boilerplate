@@ -5,11 +5,14 @@ import { ChevronDown, Check } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+
 import Logo from "@/public/logo.png";
 import SummeryImg from '@/public/_static/summery.png'
 
 import { IoBagHandleOutline } from "react-icons/io5";
-import { IoMdCheckmarkCircle } from "react-icons/io";
 import { CiSearch } from "react-icons/ci";
 
 import { IoMdInformationCircle, IoMdClose } from "react-icons/io";
@@ -123,14 +126,55 @@ const SubscriptionPage: React.FC = () => {
     const [isAddPayment, setIsAddPayment] = useState(false)
     const [selectedOption, setSelectedOption] = useState<string>(billingOptions[0].id)
 
-    const [isExpiryOpen, setIsExpiryOpen] = useState(false);
 
 
     const [cardNumber, setCardNumber] = useState('')
-    const [expiry, setExpiry] = useState('')
-    const [csv, setCsv] = useState('')
-    const [zip, setZip] = useState('')
+    const [expiryMonth, setExpiryMonth] = useState('')
+    const [expiryYear, setExpiryYear] = useState('')
+    const [cvv, setCvv] = useState('')
+    const [zipCode, setZipCode] = useState('')
 
+    const formatCardNumber = (value: string) => {
+        const v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '')
+        const matches = v.match(/\d{4,16}/g)
+        const match = matches && matches[0] || ''
+        const parts: string[] = []
+
+        for (let i = 0, len = match.length; i < len; i += 4) {
+            parts.push(match.substring(i, i + 4))
+        }
+
+        if (parts.length) {
+            return parts.join(' ')
+        } else {
+            return value
+        }
+    }
+
+    const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const formattedValue = formatCardNumber(e.target.value)
+        setCardNumber(formattedValue)
+    }
+
+    const handleExpiryMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value.replace(/[^0-9]/g, '').slice(0, 2)
+        setExpiryMonth(value)
+    }
+
+    const handleExpiryYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value.replace(/[^0-9]/g, '').slice(0, 2)
+        setExpiryYear(value)
+    }
+
+    const handleCvvChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value.replace(/[^0-9]/g, '').slice(0, 3)
+        setCvv(value)
+    }
+
+    const handleZipCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value.replace(/[^0-9]/g, '').slice(0, 5)
+        setZipCode(value)
+    }
 
     const ref = useRef<HTMLDivElement | null>(null)
 
@@ -284,7 +328,7 @@ const SubscriptionPage: React.FC = () => {
                                         <p className="text-[#595959]">{(selectedMembers.members - 1) * 40 + lbPerson} lb - ∞</p>
                                     </div>
                                 </button>
-                                    <ChevronDown className="ml-4 size-8 cursor-pointer text-black" />
+                                <ChevronDown className="ml-4 size-8 cursor-pointer text-black" />
                             </div>
 
                             {isModalOpen && (
@@ -426,72 +470,73 @@ const SubscriptionPage: React.FC = () => {
                         {isAddPayment && (
 
                             <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4">
-                                <div className="w-full max-w-md rounded-lg bg-white p-6">
-                                    <div className='flex justify-between'>
-                                        <h1 className='font-walsheimMedium text-xl'>Add payment information</h1>
-                                        <button onClick={handleAddPaymentClose} className="rounded-full border text-gray-400 shadow-md hover:text-[#595959]">
-                                            <IoMdClose size={24} />
-                                        </button>
-                                    </div>
-                                    <p className="mb-4 text-[#595959]">Enter your card details</p>
-                                    <div className="relative bg-white">
-                                        <input
-                                            type="text"
-                                            placeholder="Card Number"
-                                            value={cardNumber}
-                                            onChange={(e) => {
-                                                const formattedValue = e.target.value
-                                                    .replace(/\D/g, '')
-                                                    .replace(/(\d{4})(?=\d)/g, '$1 ')
-                                                    .trim()
-                                                    .slice(0, 19);
-                                                setCardNumber(formattedValue);
-                                            }}
-                                            className="w-full rounded-lg border border-gray-300 bg-white p-3 outline-none focus:border-transparent focus:ring-2 focus:ring-teal-500"
-                                        />
-                                        <div className="absolute right-3 top-1/2 flex -translate-y-1/2 space-x-2 text-gray-400">
-                                            <div className="relative">
-                                                <input
-                                                    type="text"
-                                                    placeholder="MM/YY"
-                                                    value={expiry}
-                                                    onChange={(e) => setExpiry(e.target.value)}
-                                                    onFocus={() => setIsExpiryOpen(true)}
-                                                    className="w-14 bg-white text-right focus:outline-none"
-                                                />
-                                                {isExpiryOpen && (
-                                                    <div className="absolute right-0 top-full mt-1 w-48 rounded-md bg-white shadow-lg">
-                                                        <input
-                                                            type="month"
-                                                            onChange={(e) => {
-                                                                const date = new Date(e.target.value);
-                                                                const month = (date.getMonth() + 1).toString().padStart(2, '0');
-                                                                const year = date.getFullYear().toString().slice(-2);
-                                                                setExpiry(`${month}/${year}`);
-                                                                setIsExpiryOpen(false);
-                                                            }}
-                                                            className="w-full bg-white  p-2"
-                                                        />
-                                                    </div>
-                                                )}
-                                            </div>
-                                            <input
-                                                type="text"
-                                                placeholder="CSV"
-                                                value={csv}
-                                                onChange={(e) => setCsv(e.target.value)}
-                                                className="w-8 bg-white text-right focus:outline-none"
-                                            />
-                                            <input
-                                                type="text"
-                                                placeholder="ZIP"
-                                                value={zip}
-                                                onChange={(e) => setZip(e.target.value)}
-                                                className="w-8 bg-white text-right focus:outline-none"
-                                            />
+                                <Card className="mx-auto w-full max-w-md">
+                                    <CardHeader>
+                                        <div className='flex justify-between'>
+                                            <CardTitle>Add payment information</CardTitle>
+                                            <button onClick={handleAddPaymentClose} className="rounded-full border text-gray-400 shadow-md hover:text-[#595959]">
+                                                <IoMdClose size={24} />
+                                            </button>
                                         </div>
-                                    </div>
-                                </div>
+                                        <CardDescription>Enter your Card details</CardDescription>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <form className="space-y-4">
+                                            <div className="space-y-2">
+                                                <Label htmlFor="cardNumber">Card Number</Label>
+                                                <Input
+                                                    id="cardNumber"
+                                                    placeholder="1234 5678 9012 3456"
+                                                    value={cardNumber}
+                                                    onChange={handleCardNumberChange}
+                                                    maxLength={19}
+                                                />
+                                            </div>
+                                            <div className="grid grid-cols-3 gap-4">
+                                                <div className="space-y-2">
+                                                    <Label htmlFor="expiryMonth">Month</Label>
+                                                    <Input
+                                                        id="expiryMonth"
+                                                        placeholder="MM"
+                                                        value={expiryMonth}
+                                                        onChange={handleExpiryMonthChange}
+                                                        maxLength={2}
+                                                    />
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <Label htmlFor="expiryYear">Year</Label>
+                                                    <Input
+                                                        id="expiryYear"
+                                                        placeholder="YY"
+                                                        value={expiryYear}
+                                                        onChange={handleExpiryYearChange}
+                                                        maxLength={2}
+                                                    />
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <Label htmlFor="cvv">CVV</Label>
+                                                    <Input
+                                                        id="cvv"
+                                                        placeholder="123"
+                                                        value={cvv}
+                                                        onChange={handleCvvChange}
+                                                        maxLength={3}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="space-y-2">
+                                                <Label htmlFor="zipCode">ZIP Code</Label>
+                                                <Input
+                                                    id="zipCode"
+                                                    placeholder="12345"
+                                                    value={zipCode}
+                                                    onChange={handleZipCodeChange}
+                                                    maxLength={5}
+                                                />
+                                            </div>
+                                        </form>
+                                    </CardContent>
+                                </Card>
                             </div>
                         )}
                     </div>
