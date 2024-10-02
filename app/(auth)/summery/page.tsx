@@ -9,6 +9,7 @@ import Logo from "@/public/logo.png";
 import SummeryImg from '@/public/_static/summery.png'
 
 import { IoBagHandleOutline } from "react-icons/io5";
+import { IoMdCheckmarkCircle } from "react-icons/io";
 import { CiSearch } from "react-icons/ci";
 
 import { IoMdInformationCircle, IoMdClose } from "react-icons/io";
@@ -122,15 +123,23 @@ const SubscriptionPage: React.FC = () => {
     const [isAddPayment, setIsAddPayment] = useState(false)
     const [selectedOption, setSelectedOption] = useState<string>(billingOptions[0].id)
 
+    const [isExpiryOpen, setIsExpiryOpen] = useState(false);
+
+
+    const [cardNumber, setCardNumber] = useState('')
+    const [expiry, setExpiry] = useState('')
+    const [csv, setCsv] = useState('')
+    const [zip, setZip] = useState('')
+
+
     const ref = useRef<HTMLDivElement | null>(null)
 
+    const handleClickOutside = (event: MouseEvent) => {
+        if (ref.current && !ref.current.contains(event.target as Node)) {
+            setIsModalOpen(false);
+        }
+    };
     useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (ref.current && !ref.current.contains(event.target as Node)) {
-                setIsModalOpen(false);
-            }
-        };
-
         document.addEventListener('mousedown', handleClickOutside);
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
@@ -147,6 +156,10 @@ const SubscriptionPage: React.FC = () => {
 
     const handleAddPaymentClose = () => {
         setIsAddPayment(false);
+        setCardNumber('');
+        setExpiry('');
+        setCsv('');
+        setZip('');
     }
 
     const handleAddPaymentOpen = () => {
@@ -242,10 +255,10 @@ const SubscriptionPage: React.FC = () => {
                         <ul className="space-y-3">
                             {selectedPlan.features.map((feature, index) => (
                                 <li key={index} className="flex items-center">
-                                    <div className='mr-2 rounded-full bg-teal-500 p-0.5'>
-                                        <Check className="size-4 text-white" />
-                                    </div>
-                                    <span className="font-walsheimMedium text-[#595959]">{feature}</span>
+                                    {/* <div className='mr-2 rounded-full bg-teal-500 p-0.5'> */}
+                                    <Check className="m-1 size-5 rounded-full bg-teal-500 text-white" />
+                                    {/* </div> */}
+                                    <span className="ml-1 font-walsheimMedium text-[#595959]">{feature}</span>
                                 </li>
                             ))}
                         </ul>
@@ -271,7 +284,7 @@ const SubscriptionPage: React.FC = () => {
                                         <p className="text-gray-600">{(selectedMembers.members - 1) * 40 + lbPerson} lb - ∞</p>
                                     </div>
                                 </button>
-                                <ChevronDown className="ml-4 size-5 cursor-pointer text-gray-400" />
+                                    <ChevronDown className="ml-4 size-8 cursor-pointer text-black" />
                             </div>
 
                             {isModalOpen && (
@@ -289,7 +302,7 @@ const SubscriptionPage: React.FC = () => {
                                                     setSelectedMembers(option)
                                                     handleClose();
                                                 }}
-                                                className="mt-4 w-full rounded-xl border-2 border-[#64c2e7] p-4 text-left hover:bg-gray-100"
+                                                className="mt-4 w-full rounded-xl border-2 border-teal-500 p-4 text-left hover:bg-gray-100"
                                             >
                                                 <div className="flex items-center justify-between">
                                                     <div>
@@ -312,7 +325,7 @@ const SubscriptionPage: React.FC = () => {
                                 <p className="text-sm text-gray-600">
                                     <strong>${(selectedMembers.members - 1) * 50 + perPerson}</strong> billed yearly for <strong>{selectedMembers.members} user</strong>
                                 </p>
-                                <p className='text-xs text-[#6F6F6F]'>
+                                <p className='text-sm text-[#6F6F6F]'>
                                     Pay in 4 installment of $3000 with Flex pay.
                                 </p>
                             </div>
@@ -320,15 +333,13 @@ const SubscriptionPage: React.FC = () => {
                             {isYearlyModalOpen && (
                                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4">
                                     <div className="w-full max-w-xl rounded-lg bg-white p-6 shadow-xl">
-                                        <div className="flex flex-col">
-                                            <div className='flex justify-between'>
-                                                <h1 className='font-walsheimMedium text-xl'>Save with yearly billing</h1>
-                                                <button onClick={handleYearlyClose} className="rounded-full border text-gray-400 shadow-md hover:text-gray-600">
-                                                    <IoMdClose size={24} />
-                                                </button>
-                                            </div>
-                                            <p className='my-2 text-xs'>Choose one suitable for you</p>
+                                        <div className='flex justify-between'>
+                                            <h1 className='font-walsheimMedium text-xl'>Save with yearly billing</h1>
+                                            <button onClick={handleYearlyClose} className="rounded-full border text-gray-400 shadow-md hover:text-gray-600">
+                                                <IoMdClose size={24} />
+                                            </button>
                                         </div>
+                                        <p className='my-2 font-walsheimRegular text-sm'>Choose one suitable for you</p>
                                         <div className='flex flex-col gap-2'>
                                             {billingOptions.map((option) => (
                                                 <label
@@ -367,14 +378,19 @@ const SubscriptionPage: React.FC = () => {
 
                         <div className="flex flex-col  gap-2 rounded-lg py-3">
                             <div className="flex items-center">
-                                <IoBagHandleOutline color='#85C6C0' className='size-8 md:size-6' />
+                                <div className=' pr-1 '>
+                                    <IoBagHandleOutline color='#85C6C0' size={26} />
+                                </div>
                                 <p className="ml-2 font-walsheimRegular text-xs md:text-base">
                                     Exceeded 250 lbs? Relax! Enjoy guaranteed multi-bag weekly service. We handle the loads, you focus on what matters most.
                                 </p>
                             </div>
                             <div className="flex items-center">
-                                <CiSearch color='#85C6C0' className='size-10 md:size-8' />
-                                <p className="ml-2  font-walsheimRegular text-xs md:text-base">
+                                <div className=' pr-1 '>
+                                    <CiSearch color='#85C6C0' size={30} />
+                                </div>
+
+                                <p className="ml-2 font-walsheimRegular text-xs md:text-base">
                                     Track your laundry progress in the app. We’ll deliver your laundry back to you in 2 business days. Laundry & linens are eligible for next-day delivery!
                                 </p>
                             </div>
@@ -408,27 +424,71 @@ const SubscriptionPage: React.FC = () => {
                     <div className='w-full rounded-md border border-gray-300 p-6'>
                         <p className='cursor-pointer font-walsheimMedium text-xl' onClick={handleAddPaymentOpen}>Add your payment information</p>
                         {isAddPayment && (
-                            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4">
-                                <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-xl">
-                                    <div className="flex flex-col">
-                                        <div className='flex justify-between'>
-                                            <h1 className='font-walsheimMedium text-xl'>Add payment information</h1>
-                                            <button onClick={handleAddPaymentClose} className="rounded-full border text-gray-400 shadow-md hover:text-gray-600">
-                                                <IoMdClose size={24} />
-                                            </button>
-                                        </div>
-                                        <p className='my-2 text-xs'>Enter your card details</p>
-                                    </div>
-                                    <div className='flex items-center justify-between rounded-lg border border-gray-300 p-2'>
-                                        <div className='flex items-center gap-1'>
-                                            <span className='text-center font-walsheimMedium text-xs'>Card Number</span>
-                                            <input type="text" className='w-2/3 border-none bg-white p-2 outline-none sm:w-fit' placeholder='' />
-                                        </div>
 
-                                        <div className='flex items-center gap-2'>
-                                            <span className='font-walsheimMedium text-xs'> MM/YY </span>
-                                            <span className='font-walsheimMedium text-xs'> CVV </span>
-                                            <span className='font-walsheimMedium text-xs'> ZIP </span>
+                            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4">
+                                <div className="w-full max-w-md rounded-lg bg-white p-6">
+                                    <div className='flex justify-between'>
+                                        <h1 className='font-walsheimMedium text-xl'>Add payment information</h1>
+                                        <button onClick={handleAddPaymentClose} className="rounded-full border text-gray-400 shadow-md hover:text-gray-600">
+                                            <IoMdClose size={24} />
+                                        </button>
+                                    </div>
+                                    <p className="mb-4 text-[#595959]">Enter your card details</p>
+                                    <div className="relative">
+                                        <input
+                                            type="text"
+                                            placeholder="Card Number"
+                                            value={cardNumber}
+                                            onChange={(e) => {
+                                                const formattedValue = e.target.value
+                                                    .replace(/\D/g, '')
+                                                    .replace(/(\d{4})(?=\d)/g, '$1 ')
+                                                    .trim()
+                                                    .slice(0, 19);
+                                                setCardNumber(formattedValue);
+                                            }}
+                                            className="w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-transparent focus:ring-2 focus:ring-teal-500"
+                                        />
+                                        <div className="absolute right-3 top-1/2 flex -translate-y-1/2 space-x-2 text-gray-400">
+                                            <div className="relative">
+                                                <input
+                                                    type="text"
+                                                    placeholder="MM/YY"
+                                                    value={expiry}
+                                                    onChange={(e) => setExpiry(e.target.value)}
+                                                    onFocus={() => setIsExpiryOpen(true)}
+                                                    className="w-24 bg-transparent text-right focus:outline-none"
+                                                />
+                                                {isExpiryOpen && (
+                                                    <div className="absolute right-0 top-full mt-1 w-48 rounded-md bg-white shadow-lg">
+                                                        <input
+                                                            type="month"
+                                                            onChange={(e) => {
+                                                                const date = new Date(e.target.value);
+                                                                const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                                                                const year = date.getFullYear().toString().slice(-2);
+                                                                setExpiry(`${month}/${year}`);
+                                                                setIsExpiryOpen(false);
+                                                            }}
+                                                            className="w-full p-2"
+                                                        />
+                                                    </div>
+                                                )}
+                                            </div>
+                                            <input
+                                                type="text"
+                                                placeholder="CSV"
+                                                value={csv}
+                                                onChange={(e) => setCsv(e.target.value)}
+                                                className="w-12 bg-transparent text-right focus:outline-none"
+                                            />
+                                            <input
+                                                type="text"
+                                                placeholder="ZIP"
+                                                value={zip}
+                                                onChange={(e) => setZip(e.target.value)}
+                                                className="w-12 bg-transparent text-right focus:outline-none"
+                                            />
                                         </div>
                                     </div>
                                 </div>
@@ -440,13 +500,13 @@ const SubscriptionPage: React.FC = () => {
                         <p className="w-full cursor-pointer rounded-full bg-black py-3 text-white" >
                             Pay and start subscription
                         </p>
-                        <p className="mt-2 text-center text-xs text-gray-600">
+                        <p className="mt-2 text-center text-xs text-[#595959]">
                             Change, pause or cancel anytime
                         </p>
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 
