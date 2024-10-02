@@ -118,7 +118,7 @@ export function NavBar({ scroll = false }: NavBarProps) {
               </Button>
             </Link>
           ) : status === "unauthenticated" ? (
-            <Link href="/login" className='flex items-center gap-2 text-nowrap rounded-lg border border-black p-2 font-walsheimMedium text-sm text-black hover:border-slate-300 hover:bg-slate-300'>
+            <Link href="/signin" className='flex items-center gap-2 text-nowrap rounded-lg border border-black p-2 font-walsheimMedium text-sm text-black hover:border-slate-300 hover:bg-slate-300'>
               <span>Sign in</span>
               <Icons.arrowRight className="size-4" />
             </Link>

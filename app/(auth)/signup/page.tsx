@@ -29,10 +29,10 @@ export default function RegisterPage() {
   }, [])
 
   return (
-    <div className=" flex  w-full flex-col justify-center gap-4 lg:flex-row">
-      <div className="flex  w-full flex-col items-center lg:w-1/2 lg:items-start">
+    <div className=" flex  w-full flex-col justify-center lg:flex-row">
+      <div className="flex h-screen w-full flex-col items-center justify-center lg:w-1/2 lg:items-start">
 
-        <div className="absolute left-4 top-4 md:right-8 md:top-8">
+        <div className="absolute left-8 top-8 md:right-8 ">
           <Link href="/" className="flex items-center space-x-1.5">
             <Image src={Logo} alt="logo" className='w-40' />
             {/* <Icons.logo />
@@ -41,6 +41,7 @@ export default function RegisterPage() {
             </span> */}
           </Link>
         </div>
+        
         <div className="mx-4 mb-8 flex max-w-lg flex-col items-center justify-center gap-3 rounded-3xl bg-white px-8 pt-16 shadow-xl lg:mx-auto lg:my-16">
           <p className="mb-4 px-2 text-center text-3xl font-bold text-black sm:px-4 md:px-16">Ready to save 5+ hours every week?</p>
 
@@ -65,9 +66,9 @@ export default function RegisterPage() {
         <Image src={Landing} alt="logo" className="h-72 w-full rounded-[2rem] object-cover px-4 lg:h-full lg:rounded-none  lg:px-0  " />
 
         <div className="absolute inset-0 flex justify-center  ">
-          <p className=" font-walsheim-bold fixed bottom-48 px-16 text-center text-5xl text-white transition-opacity duration-500">
+          {/* <p className=" font-walsheim-bold fixed bottom-48 px-16 text-center text-5xl text-white transition-opacity duration-500">
             {carouselTexts[currentTextIndex]}
-          </p>
+          </p> */}
         </div>
       </div>
     </div>
