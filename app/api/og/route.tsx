@@ -5,11 +5,15 @@ import { ogImageSchema } from "@/lib/validations/og"
 export const runtime = "edge"
 
 const interRegular = fetch(
-  new URL("../../../assets/fonts/walsheim-regular.ttf", import.meta.url)
+  new URL("../../../../assests/fonts/GT-Walsheim-Regular.ttf", import.meta.url)
 ).then((res) => res.arrayBuffer())
 
 const interBold = fetch(
-  new URL("../../../assets/fonts/walsheim-medium.ttf", import.meta.url)
+  new URL("../../../../assessts/fonts/GT-Walsheim-Bold.ttf", import.meta.url)
+).then((res) => res.arrayBuffer())
+
+const interMedium = fetch(
+  new URL("../../../../assessts/fonts/GT-Walsheim-Medium.ttf", import.meta.url)
 ).then((res) => res.arrayBuffer())
 
 
@@ -17,7 +21,8 @@ export async function GET(req: Request) {
   try {
     const fontRegular = await interRegular
     const fontBold = await interBold
-
+    const fontMedium = await interMedium
+    
     const url = new URL(req.url)
     const values = ogImageSchema.parse(Object.fromEntries(url.searchParams))
     const heading =
@@ -139,6 +144,12 @@ export async function GET(req: Request) {
             name: "Inter",
             data: fontRegular,
             weight: 400,
+            style: "normal",
+          },
+          {
+            name: "Inter",
+            data: fontMedium,
+            weight: 500,
             style: "normal",
           },
           {
