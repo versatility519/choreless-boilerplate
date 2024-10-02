@@ -201,9 +201,10 @@ const SubscriptionPage: React.FC = () => {
     const handleAddPaymentClose = () => {
         setIsAddPayment(false);
         setCardNumber('');
-        setExpiry('');
-        setCsv('');
-        setZip('');
+        setExpiryMonth('');
+        setExpiryYear('');
+        setCvv('');
+        setZipCode(''); 
     }
 
     const handleAddPaymentOpen = () => {
