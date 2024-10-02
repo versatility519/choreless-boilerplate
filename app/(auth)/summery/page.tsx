@@ -168,7 +168,7 @@ const SubscriptionPage: React.FC = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-100">
+        <div className="min-h-screen bg-gray-100" >
             <div className="mx-auto flex flex-col md:flex-row">
                 <div className="flex w-full items-center justify-center text-center lg:justify-end">
                     <div className="w-full px-4 py-12 sm:px-16  md:min-h-screen md:p-8 lg:max-w-[580px]">
@@ -220,7 +220,7 @@ const SubscriptionPage: React.FC = () => {
                     </div>
                 </div>
 
-                <div className='flex w-full flex-col gap-8 bg-gray-100 px-4 shadow-md sm:px-16 md:bg-white md:py-20'>
+                <div className='flex w-full flex-col gap-8 bg-gray-100 px-4 shadow-md sm:px-16 md:bg-white md:py-20' >
                     <div className='border-b pb-8'>
                         <h3 className="mb-4 font-walsheimMedium text-[32px]">Select your choreless plan</h3>
                         <p className="mb-4 font-walsheimMedium text-xl">Choose your plan</p>
@@ -242,10 +242,10 @@ const SubscriptionPage: React.FC = () => {
                         <ul className="space-y-3">
                             {selectedPlan.features.map((feature, index) => (
                                 <li key={index} className="flex items-center">
-                                    <div className='mr-2 rounded-full bg-teal-500 p-1'>
+                                    <div className='mr-2 rounded-full bg-teal-500 p-0.5'>
                                         <Check className="size-4 text-white" />
                                     </div>
-                                    <span className="font-walsheimMedium text-gray-400">{feature}</span>
+                                    <span className="font-walsheimMedium text-[#595959]">{feature}</span>
                                 </li>
                             ))}
                         </ul>
@@ -422,7 +422,7 @@ const SubscriptionPage: React.FC = () => {
                                     <div className='flex items-center justify-between rounded-lg border border-gray-300 p-2'>
                                         <div className='flex items-center gap-2'>
                                             <span className='font-walsheimMedium text-xs'>Card Number</span>
-                                            <input type="text" className='border-none p-2 outline-none' placeholder='' />
+                                            <input type="text" className='border-none bg-white p-2 outline-none' placeholder='' />
                                         </div>
 
                                         <div className='flex items-center gap-2'>

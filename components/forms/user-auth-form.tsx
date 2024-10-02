@@ -67,6 +67,7 @@ export function UserAuthForm({ className, type, ...props }: UserAuthFormProps) {
     <div className={cn("flex w-full flex-col gap-6", className)} {...props}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-2">
+
           {type != 'register' ?
             <div className="flex flex-col gap-2">
               <div className="grid gap-1">
@@ -115,15 +116,17 @@ export function UserAuthForm({ className, type, ...props }: UserAuthFormProps) {
               </div>
             </div>
             :
-             ''
+            ''
           }
-
-          <button className={cn(buttonVariants())} disabled={isLoading}>
-            {isLoading && (
-              <Icons.spinner className="mr-2 size-4 animate-spin" />
-            )}
-            {type === "register" ? "Sign Up with Email" : "Sign In"}
-          </button>
+          <Link href={`/signin?type=${type}`}>
+            <button className={cn(buttonVariants())} disabled={isLoading}>
+              {isLoading && (
+                <Icons.spinner className="mr-2 size-4 animate-spin" />
+              )}
+              {type === "register" ? "Sign Up with Email" : "Sign In"}
+            </button>
+          </Link>
+          
         </div>
       </form>
 

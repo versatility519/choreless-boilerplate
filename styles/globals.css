@@ -1,6 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+ 
+@layer utilities {  
+    .hidden-scrollbar {  
+        scrollbar-width: none; /* Firefox */  
+    }  
+  
+    .hidden-scrollbar::-webkit-scrollbar {  
+        display: none; /* Chrome, Safari and Opera */  
+    }  
+}  
 
 @layer base {
   :root {
