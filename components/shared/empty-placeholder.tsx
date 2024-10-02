@@ -61,7 +61,7 @@ EmptyPlaceholder.Title = function EmptyPlaceholderTitle({
 }: EmptyPlaceholderTitleProps) {
   return (
     <h3
-      className={cn("mt-5 font-heading text-2xl font-bold", className)}
+      className={cn("mt-5 font-walsheimMedium text-2xl font-bold", className)}
       {...props}
     />
   );
@@ -77,7 +77,7 @@ EmptyPlaceholder.Description = function EmptyPlaceholderDescription({
   return (
     <p
       className={cn(
-        "mb-5 mt-1.5 text-center text-sm font-normal leading-6 text-muted-foreground",
+        "mb-5 mt-1.5 text-center font-walsheimRegular text-sm font-normal leading-6 text-muted-foreground",
         className,
       )}
       {...props}

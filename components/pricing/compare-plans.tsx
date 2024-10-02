@@ -34,7 +34,7 @@ export function ComparePlans() {
               {plansColumns.map((col) => (
                 <th
                   key={col}
-                  className="sticky z-10 w-40 bg-accent p-5 font-heading text-xl capitalize tracking-wide md:w-auto lg:top-14 lg:text-2xl"
+                  className="sticky z-10 w-40 bg-accent p-5 font-walsheimMedium text-xl capitalize tracking-wide md:w-auto lg:top-14 lg:text-2xl"
                 >
                   {col}
                 </th>
