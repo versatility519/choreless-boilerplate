@@ -422,7 +422,7 @@ const SubscriptionPage: React.FC = () => {
                                     {/* <div className="hidden-scrollbar fixed  max-h-[70vh] max-w-md overflow-y-auto rounded-[24px] border border-gray-300 bg-white p-6 shadow-lg" > */}
                                     <div className='flex w-full items-center justify-between'>
                                         <p className='font-walsheimMedium text-xl'>Choose Your Family Plan</p>
-                                        <IoMdClose className='cursor-pointer rounded-full p-0.5 shadow-md' size={24} onClick={handleClose} />
+                                        {/* <IoMdClose className='cursor-pointer rounded-full p-0.5 shadow-md' size={24} onClick={handleClose} /> */}
                                     </div>
                                     <p className='mt-2 text-xs'>Choose your family member</p>
                                     <div className='my-2  max-h-[60vh] overflow-y-auto' style={{ scrollbarWidth: 'none' }}>
@@ -556,91 +556,85 @@ const SubscriptionPage: React.FC = () => {
                         </div>
                     </div>
 
-                    <div className='w-full rounded-md border border-gray-300 p-6'>
-                        <p className='cursor-pointer font-walsheimMedium text-xl' onClick={()=>setIsAddPayment(true)}>Add your payment information</p>
-                        {/* <p className='cursor-pointer font-walsheimMedium text-xl' onClick={()=>handleAddPaymentOpen}>Add your payment information</p> */}
-                        {/* {isAddPayment && ( */}
-                        <Modal
-                            showModal={isAddPayment}
-                            setShowModal={setIsAddPayment}
-                            className=''
-                            onClose={handleAddPaymentClose}
-                        >
-                            {/* <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4"> */}
-                                <Card className="mx-auto w-full max-w-md bg-white">
-                                    <CardHeader>
-                                        <div className='flex justify-between'>
-                                            <CardTitle>Add payment information</CardTitle>
-                                            <button onClick={handleAddPaymentClose} className="rounded-full border text-gray-400 shadow-md hover:text-[#595959]">
+                    {/* <div className='w-full rounded-xl'> */}
+                    <p className='w-full cursor-pointer rounded-lg border p-4 font-walsheimMedium text-xl text-black' onClick={() => setIsAddPayment(true)}>
+                        Add your payment information
+                    </p>
+                    {/* <p className='cursor-pointer font-walsheimMedium text-xl' onClick={()=>handleAddPaymentOpen}>Add your payment information</p> */}
+                    {/* {isAddPayment && ( */}
+                    {/* </div> */}
+                    <Modal
+                        showModal={isAddPayment}
+                        setShowModal={setIsAddPayment}
+                        className='w-full'
+                        onClose={handleAddPaymentClose}
+                    >
+                        {/* <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4"> */}
+                        <Card className="mx-auto w-full max-w-md border-none bg-white text-black">
+                            <CardHeader>
+                                <div className='flex justify-between'>
+                                    <CardTitle>Add payment information</CardTitle>
+                                    {/* <button onClick={handleAddPaymentClose} className="rounded-full border text-gray-400 shadow-md hover:text-[#595959]">
                                                 <IoMdClose size={24} />
-                                            </button>
+                                            </button> */}
+                                </div>
+                                <CardDescription>Enter your Card details</CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <form className="space-y-4">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="cardNumber">Card Number</Label>
+                                        <Input
+                                            id="cardNumber"
+                                            placeholder="1234 5678 9012 3456"
+                                            value={cardNumber}
+                                            onChange={handleCardNumberChange}
+                                            maxLength={19}
+                                        />
+                                    </div>
+                                    <div className="grid grid-cols-3 gap-4">
+                                        <div className="space-y-2">
+                                            <Label htmlFor="expiryMonth">Month</Label>
+                                            <Input
+                                                id="expiryMonth"
+                                                placeholder="MM"
+                                                value={expiryMonth}
+                                                onChange={handleExpiryMonthChange}
+                                                maxLength={2}
+                                            />
                                         </div>
-                                        <CardDescription>Enter your Card details</CardDescription>
-                                    </CardHeader>
-                                    <CardContent>
-                                        <form className="space-y-4">
-                                            <div className="space-y-2">
-                                                <Label htmlFor="cardNumber">Card Number</Label>
-                                                <Input
-                                                    id="cardNumber"
-                                                    placeholder="1234 5678 9012 3456"
-                                                    value={cardNumber}
-                                                    onChange={handleCardNumberChange}
-                                                    maxLength={19}
-                                                />
-                                            </div>
-                                            <div className="grid grid-cols-3 gap-4">
-                                                <div className="space-y-2">
-                                                    <Label htmlFor="expiryMonth">Month</Label>
-                                                    <Input
-                                                        id="expiryMonth"
-                                                        placeholder="MM"
-                                                        value={expiryMonth}
-                                                        onChange={handleExpiryMonthChange}
-                                                        maxLength={2}
-                                                    />
-                                                </div>
-                                                <div className="space-y-2">
-                                                    <Label htmlFor="expiryYear">Year</Label>
-                                                    <Input
-                                                        id="expiryYear"
-                                                        placeholder="YY"
-                                                        value={expiryYear}
-                                                        onChange={handleExpiryYearChange}
-                                                        maxLength={2}
-                                                    />
-                                                </div>
-                                                <div className="space-y-2">
-                                                    <Label htmlFor="cvv">CVV</Label>
-                                                    <Input
-                                                        id="cvv"
-                                                        placeholder="123"
-                                                        value={cvv}
-                                                        onChange={handleCvvChange}
-                                                        maxLength={3}
-                                                    />
-                                                </div>
-                                            </div>
-                                            <div className="space-y-2">
-                                                <Label htmlFor="zipCode">ZIP Code</Label>
-                                                <Input
-                                                    id="zipCode"
-                                                    placeholder="12345"
-                                                    value={zipCode}
-                                                    onChange={handleZipCodeChange}
-                                                    maxLength={5}
-                                                />
-                                            </div>
-                                        </form>
-                                    </CardContent>
-                                </Card>
-                            {/* </div> */}
-                        </Modal>
-                        {/* )} */}
-                    </div>
+                                        <div className="space-y-2">
+                                            <Label htmlFor="expiryYear">Year</Label>
+                                            <Input
+                                                id="expiryYear"
+                                                placeholder="YY"
+                                                value={expiryYear}
+                                                onChange={handleExpiryYearChange}
+                                                maxLength={2}
+                                            />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <Label htmlFor="cvv">CVV</Label>
+                                            <Input
+                                                id="cvv"
+                                                placeholder="123"
+                                                value={cvv}
+                                                onChange={handleCvvChange}
+                                                maxLength={3}
+                                            />
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </CardContent>
+                        </Card>
+                        {/* </div> */}
+                    </Modal>
+                    {/* )} */}
+
 
                     <div className="mb-8 flex flex-col gap-4 py-4 text-center font-walsheimMedium">
-                        <p className="w-full cursor-pointer rounded-full bg-black py-3 text-white" onClick={handleOpen}>
+                        <p className="w-full cursor-pointer rounded-full bg-black py-3 text-white">
                             Pay and start subscription
                         </p>
                         <p className="mt-2 text-center text-xs text-[#595959]">
