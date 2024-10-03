@@ -8,8 +8,6 @@ import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Modal } from "@/components/ui/modal"
-import { Button } from "@/components/ui/button"
 
 import Logo from "@/public/logo.png";
 import ModalImg from '@/public/_static/modal.png'
@@ -231,13 +229,9 @@ const SubscriptionPage: React.FC = () => {
                         <div className="scrollbar-hide my-4 max-h-[90vh] w-full overflow-y-auto rounded-lg  bg-white p-6" style={{ scrollbarWidth: 'none' }}>
                             <div className="mb-4 flex items-start justify-between">
                                 <h2 className="font-walsheimMedium text-xl ">Flex Pay: Simplify Your Yearly Subscription</h2>
-                                <button
-                                    onClick={() => setShowNotificationModal(false)}
-                                    className="text-gray-500 hover:text-gray-700 focus:outline-none"
-                                >
-                                    <IoMdClose size={24} />
-                                </button>
+                                <IoMdClose size={24} onClick={handleCloseNotificationModal} className="cursor-pointer rounded-full border text-gray-400 shadow-md hover:text-[#595959]" />
                             </div>
+
                             <div className="mb-6 font-walsheimRegular ">
                                 That&apos;s why we offer Easy Pay for our yearly subscriptions.
                                 It&apos;s a flexible payment option that lets you enjoy a full year of laundry freedom without the upfront cost.
@@ -279,16 +273,16 @@ const SubscriptionPage: React.FC = () => {
             )}
 
 
-            <div className="mx-auto flex flex-col md:flex-row" style={{ scrollbarWidth: 'none' }}>
-                <div className="flex w-full items-center justify-center text-center lg:justify-end">
-                    <div className="w-full px-4 py-12 sm:px-16  md:min-h-screen md:p-8 lg:max-w-[580px]">
+            <div className="mx-auto flex flex-col md:flex-row">
+                <div className="sticky top-0 flex w-full items-center justify-center text-center lg:justify-end">
+                    <div className="w-full flex-col px-4 py-12 sm:px-16 md:min-h-screen md:p-8 lg:max-w-[580px]">
                         <div className="absolute left-8 top-8 md:right-8 ">
                             <Link href="/" className="flex items-center space-x-1.5">
                                 <Image src={Logo} alt="logo" className='w-40' />
                             </Link>
                         </div>
-                        <div className="hidden  w-full md:flex">
-                            <main className='text-left'>
+                        <div className="absolute top-44 hidden  max-w-[480px] px-4 md:flex">
+                            <main className='w-full text-left'>
                                 <h2 className="mb-2 font-walsheimMedium text-3xl">Laundry Freedom at Your Fingertips</h2>
                                 <p className="mb-8 text-[#595959]">Choose your time-saving plan below</p>
 
@@ -307,32 +301,28 @@ const SubscriptionPage: React.FC = () => {
                                     </div>
                                 </div>
 
-                                <div className=" mb-8">
-                                    <Image
-                                        src={SummeryImg}
-                                        alt="Laundry and Choreless bag"
-                                        className="h-[200px] w-full rounded-lg object-cover"
-                                    ></Image>
-                                </div>
+                                <Image
+                                    src={SummeryImg}
+                                    alt="Laundry and Choreless bag"
+                                    className="h-[200px] w-full rounded-lg object-cover"
+                                />
 
-                                <div className="rounded-lg bg-[#d8e4e4] py-3 pr-3">
-                                    <div className="flex items-center">
-                                        <div className='px-3  '>
-                                            <IoMdInformationCircle size={32} />
-                                        </div>
-                                        <p className="font-walsheimMedium text-base">
-                                            Transform your to-do list into quality time – let Choreless handle the laundry while you focus on what matters most.
-                                        </p>
+                                <div className="mt-8 flex items-center rounded-lg bg-[#d8e4e4] py-3 pr-3">
+                                    <div className='px-3'>
+                                        <IoMdInformationCircle size={32} />
                                     </div>
+                                    <p className="font-walsheimMedium text-base">
+                                        Transform your to-do list into quality time – let Choreless handle the laundry while you focus on what matters most.
+                                    </p>
                                 </div>
                             </main>
                         </div>
                     </div>
                 </div>
 
-                <div className='flex w-full flex-col gap-8 bg-gray-100 px-4 shadow-md sm:px-16 md:bg-white md:py-20 ' >
+                <div className='flex w-full flex-col gap-8 overflow-y-auto bg-gray-100 px-4 shadow-md sm:px-16 md:bg-white md:py-20' style={{ maxHeight: '100vh', overflowY: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                     <div className='border-b pb-8'>
-                        <h3 className="mb-4 font-walsheimMedium text-[32px]">Select your choreless plan</h3>
+                        <h3 className="mb-4 font-walsheimMedium text-2xl sm:text-3xl">Select your choreless plan</h3>
                         <p className="mb-4 font-walsheimMedium text-xl">Choose your plan</p>
                         <div className="mb-6 flex w-full flex-col gap-4 sm:flex-row xl:w-[70%]">
                             {plans.map((plan) => {
@@ -352,9 +342,7 @@ const SubscriptionPage: React.FC = () => {
                         <ul className="space-y-3">
                             {selectedPlan.features.map((feature, index) => (
                                 <li key={index} className="flex items-center">
-                                    {/* <div className='mr-2 rounded-full bg-teal-500 p-0.5'> */}
                                     <Check className="m-1 size-5 rounded-full bg-teal-500 text-white" />
-                                    {/* </div> */}
                                     <span className="ml-1 font-walsheimMedium text-[#595959]">{feature}</span>
                                 </li>
                             ))}
@@ -364,36 +352,37 @@ const SubscriptionPage: React.FC = () => {
                     <div>
                         <h3 className="mb-4 font-walsheimMedium text-xl ">Number of Members in your household</h3>
                         <div>
-                            <div className='flex w-full flex-row items-center justify-between rounded-xl border border-[#85C6C0] bg-white p-4'
+                            <div className='flex flex-row items-center justify-between rounded-xl border border-[#85C6C0] bg-white p-4'
                                 onClick={handleOpen}>
                                 <button
-                                    className="flex w-full items-center justify-between text-left"
+                                    className="flex flex-col items-center justify-between text-left"
                                 >
-                                    <div className='flex flex-col gap-2'>
-                                        <span className="font-walsheimBold text-xl">{selectedMembers.members} members</span>
-                                        <p className="text-[#595959]">{selectedMembers.description}</p>
+                                    <div className='flex w-full justify-between'>
+                                        <div className='flex flex-col gap-2'>
+                                            <span className="font-walsheimBold text-xl">{selectedMembers.members} members</span>
+                                            <p className="text-[#595959]">{selectedMembers.description}</p>
+                                        </div>
+                                        <div className="text-right">
+                                            <span className="flex font-walsheimBold text-xl">
+                                                <p className='text-black'>${(selectedMembers.members - 1) * 50 + perPerson} </p>
+                                                <p className='text-[#595959]'>/ mo</p>
+                                            </span>
+                                            <p className="text-[#595959]">{(selectedMembers.members - 1) * 40 + lbPerson} lb - ∞</p>
+                                        </div>
                                     </div>
-                                    <div className="text-right">
-                                        <span className="flex font-walsheimBold text-xl">
-                                            <p className='text-black'>${(selectedMembers.members - 1) * 50 + perPerson} </p>
-                                            <p className='text-[#595959]'>/ mo</p>
-                                        </span>
-                                        <p className="text-[#595959]">{(selectedMembers.members - 1) * 40 + lbPerson} lb - ∞</p>
-                                    </div>
+                                    <p className="font-walsheimRegular text-sm text-[#595959]">
+                                        Exceeded {(selectedMembers.members - 1) * 40 + lbPerson} lbs? Relax! Enjoy {selectedMembers.members} bags/week guaranteed service.
+                                    </p>
                                 </button>
                                 <ChevronDown className="ml-4 size-8 cursor-pointer " />
                             </div>
 
-
                             {isModalOpen && (
                                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4">
                                     <div className="w-full max-w-xl rounded-lg bg-white p-6 shadow-xl">
-                                        {/* <div className="scrollbar-hide my-4 max-h-[90vh]  w-full overflow-y-auto rounded-lg  bg-white p-6" style={{ scrollbarWidth: 'none' }}> */}
-                                        {/* <div className='fixed inset-0 z-10 flex size-full items-center justify-center bg-black bg-opacity-50 ' > */}
-                                        {/* <div className="hidden-scrollbar    max-h-[70vh] max-w-md overflow-y-auto rounded-[24px] border border-gray-300 bg-white p-6 shadow-lg" > */}
                                         <div className='flex w-full items-center justify-between'>
                                             <p className='font-walsheimMedium text-xl'>Choose Your Family Plan</p>
-                                            <IoMdClose className='cursor-pointer rounded-full p-0.5 shadow-md' size={24} onClick={handleClose} />
+                                            <IoMdClose size={24} onClick={handleClose} className="cursor-pointer rounded-full border text-gray-400 shadow-md hover:text-[#595959]" />
                                         </div>
                                         <p className='mt-2 text-xs'>Choose your family member</p>
                                         <div className='my-2  max-h-[60vh] overflow-y-auto' style={{ scrollbarWidth: 'none' }}>
@@ -409,11 +398,11 @@ const SubscriptionPage: React.FC = () => {
                                                     <div className="flex items-center justify-between">
                                                         <div>
                                                             <span className="font-walsheimBold text-xl">{option.members} members</span>
-                                                            <p className="mt-2 text-[#595959]">{option.description}</p>
+                                                            <p className="mt-2 font-walsheimRegular text-base text-[#595959]">{option.description}</p>
                                                         </div>
                                                         <div className="text-right ">
-                                                            <span className="text-lg"><b className='font-extrabold'>${(option.members - 1) * 50 + perPerson}</b> / mo</span>
-                                                            <p className="mt-2 text-[#595959]">{(option.members - 1) * 40 + lbPerson} lb / mo</p>
+                                                            <span className=" "><b className='font-walsheimBold text-xl'>${(option.members - 1) * 50 + perPerson}</b> / mo</span>
+                                                            <p className="mt-2 font-walsheimRegular text-base text-[#595959]">{(option.members - 1) * 40 + lbPerson} lb / mo</p>
                                                         </div>
                                                     </div>
                                                 </button>
@@ -422,7 +411,6 @@ const SubscriptionPage: React.FC = () => {
                                     </div>
                                 </div>
                             )}
-
                         </div>
                         <div className='mt-4 flex items-center justify-between'>
                             <div className='flex flex-col gap-2'>
@@ -439,9 +427,7 @@ const SubscriptionPage: React.FC = () => {
                                     <div className="w-full max-w-xl rounded-lg bg-white p-6 shadow-xl">
                                         <div className='flex justify-between'>
                                             <h1 className='font-walsheimMedium text-xl'>Save with yearly billing</h1>
-                                            <button onClick={handleYearlyClose} className="rounded-full border text-gray-400 shadow-md hover:text-[#595959]">
-                                                <IoMdClose size={24} />
-                                            </button>
+                                            <IoMdClose size={24} onClick={handleYearlyClose} className="cursor-pointer rounded-full border text-gray-400 shadow-md hover:text-[#595959]" />
                                         </div>
                                         <p className='my-2 font-walsheimRegular text-sm'>Choose one suitable for you</p>
                                         <div className='flex flex-col gap-2'>
@@ -453,14 +439,6 @@ const SubscriptionPage: React.FC = () => {
                                                     onClick={handleYearlyClose}
                                                 >
                                                     <div className="flex items-center">
-                                                        {/* <input
-                                                            type="radio"
-                                                            name="billing-option"
-                                                            value={option.id}
-                                                            checked={selectedOption === option.id}
-                                                            onChange={() => setSelectedOption(option.id)}
-                                                            className="form-radio size-5 text-blue-600"
-                                                        /> */}
                                                         <div className="flex flex-col">
                                                             <div className="font-walsheimBold text-xl">{option.title}</div>
                                                             <div className="font-walsheimRegular text-xs text-[#595959]">{option.description}</div>
@@ -468,9 +446,6 @@ const SubscriptionPage: React.FC = () => {
                                                     </div>
                                                     <div className="flex flex-col items-center gap-2 text-nowrap text-right">
                                                         <div className="font-walsheimBold text-xl">${option.price} / year</div>
-                                                        {/* {option.installment && (
-                                                            <div className=" font-walsheimRegular text-sm text-[#595959]">${option.installment.toFixed(2)} / today</div>
-                                                        )} */}
                                                     </div>
                                                 </label>
                                             ))}
@@ -495,7 +470,7 @@ const SubscriptionPage: React.FC = () => {
                                 </div>
 
                                 <p className="ml-2 font-walsheimRegular text-xs md:text-base">
-                                    Track your laundry progress in the app. We’ll deliver your laundry back to you in 2 business days. Laundry & linens are eligible for next-day delivery!
+                                    Track your laundry progress in the app. We'll deliver your laundry back to you in 2 business days. Laundry & linens are eligible for next-day delivery!
                                 </p>
                             </div>
                         </div>
@@ -525,20 +500,16 @@ const SubscriptionPage: React.FC = () => {
                         </div>
                     </div>
 
-                    {/* <div className='w-full rounded-xl'> */}
                     <p className='w-full cursor-pointer rounded-lg border p-4 font-walsheimMedium text-xl text-black' onClick={() => setIsAddPayment(true)}>
                         Add your payment information
                     </p>
                     {isAddPayment && (
                         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4 ">
-                            {/* <div className="w-full max-w-xl rounded-lg bg-white shadow-xl"> */}
                             <Card className="mx-auto w-full max-w-md border-none bg-white text-black shadow-xl">
                                 <CardHeader>
                                     <div className='flex justify-between'>
                                         <CardTitle>Add payment information</CardTitle>
-                                        <button onClick={handleAddPaymentClose} className="rounded-full border text-gray-400 shadow-md hover:text-[#595959]">
-                                            <IoMdClose size={24} />
-                                        </button>
+                                        <IoMdClose size={24} onClick={handleAddPaymentClose} className="cursor-pointer rounded-full border text-gray-400 shadow-md hover:text-[#595959]" />
                                     </div>
                                     <CardDescription>Enter your Card details</CardDescription>
                                 </CardHeader>
@@ -591,7 +562,6 @@ const SubscriptionPage: React.FC = () => {
                                 </CardContent>
                             </Card>
                         </div>
-                        // </div>
                     )}
 
                     <div className="mb-8 flex flex-col gap-4 py-4 text-center font-walsheimMedium">
@@ -604,7 +574,8 @@ const SubscriptionPage: React.FC = () => {
                     </div>
                 </div>
             </div >
-        </div >
+        </div>
+
     )
 }
 

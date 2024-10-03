@@ -17,10 +17,6 @@ export default function LoginPage() {
       <div className="absolute left-8 top-8 md:right-8 ">
         <Link href="/" className="flex items-center space-x-1.5">
           <Image src={Logo} alt="logo" className='w-40' />
-          {/* <Icons.logo />
-            <span className="font-urban text-xl font-bold">
-              {siteConfig.name}
-            </span> */}
         </Link>
       </div>
       <div className="z-40 flex w-full max-w-lg flex-col items-center justify-center gap-3 rounded-3xl bg-white  py-8 shadow-xl md:my-16">

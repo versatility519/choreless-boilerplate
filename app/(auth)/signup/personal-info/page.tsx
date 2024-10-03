@@ -16,7 +16,6 @@ export default function PersonalInfoPage() {
                 </Link>
             </div>
 
-
             <div className="z-40 mx-4 flex w-full max-w-lg flex-col gap-3 rounded-3xl bg-white p-8 shadow-xl sm:mx-auto lg:my-16">
                 <div className=" flex flex-col gap-4">
                     <div className="flex w-full items-center py-4 text-start">
@@ -40,7 +39,6 @@ export default function PersonalInfoPage() {
                         Continue
                     </Link>
                 </div>
-
             </div>
 
             <footer className="absolute bottom-4">
