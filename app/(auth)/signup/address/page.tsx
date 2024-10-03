@@ -11,7 +11,7 @@ export default function AddressPage() {
             <div className="absolute left-8 top-8 md:right-8 ">
                 <Link href="/" className="flex items-center space-x-1.5">
                     <Image src={Logo} alt="logo" className='w-40' />
-                   
+
                 </Link>
             </div>
             <div className="z-40 mx-4 flex w-full max-w-lg flex-col gap-3 rounded-3xl bg-white p-8 shadow-xl sm:mx-auto lg:my-16">
@@ -24,11 +24,13 @@ export default function AddressPage() {
                         <p className="text-center text-base text-gray-500">Where we should pick up your clothes</p>
                     </div>
 
-                    <input type="email" placeholder="Address" className="w-full rounded-md border border-gray-300 p-2" />
+                    <input type="email" placeholder="Address" className="w-full rounded-md border border-gray-300 bg-black p-2" />
                     <p className="font-walsheim text-sm uppercase">Add more address details</p>
-                    <input type="text" placeholder="Apt # (Optional)" className="w-full rounded-md border border-gray-300 p-2" />
+                    <input type="text" placeholder="Apt # (Optional)" className="w-full rounded-md border border-gray-300 bg-black p-2" />
 
-                    <textarea style={{ scrollbarWidth: 'none' }} cols={10} rows={5} placeholder="Pickup & delivery instructions" className="w-full rounded-md border border-gray-300 p-2"></textarea>
+                    <textarea style={{ scrollbarWidth: 'none' }} cols={10} rows={5} placeholder="Pickup & delivery instructions"
+                        className="w-full rounded-md border border-gray-300 bg-black p-2">
+                    </textarea>
 
                     <Link href="/summery" className="w-full rounded-full  bg-black p-3 text-center text-lg text-white">
                         Continue
