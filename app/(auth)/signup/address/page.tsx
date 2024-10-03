@@ -24,12 +24,12 @@ export default function AddressPage() {
                         <p className="text-center text-base text-gray-500">Where we should pick up your clothes</p>
                     </div>
 
-                    <input type="email" placeholder="Address" className="w-full rounded-md border border-gray-300 bg-black p-2" />
+                    <input type="email" placeholder="Address" className="w-full rounded-md border border-gray-300 bg-white p-2" />
                     <p className="font-walsheim text-sm uppercase">Add more address details</p>
-                    <input type="text" placeholder="Apt # (Optional)" className="w-full rounded-md border border-gray-300 bg-black p-2" />
+                    <input type="text" placeholder="Apt # (Optional)" className="w-full rounded-md border border-gray-300 bg-white p-2" />
 
                     <textarea style={{ scrollbarWidth: 'none' }} cols={10} rows={5} placeholder="Pickup & delivery instructions"
-                        className="w-full rounded-md border border-gray-300 bg-black p-2">
+                        className="w-full rounded-md border border-gray-300 bg-white p-2">
                     </textarea>
 
                     <Link href="/summery" className="w-full rounded-full  bg-black p-3 text-center text-lg text-white">

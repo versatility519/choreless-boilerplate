@@ -24,12 +24,12 @@ export default function PersonalInfoPage() {
                         <p className="font-walsheim-medium mr-2 px-2 text-center text-3xl text-black sm:px-8 md:px-16">Let&apos;s get to started</p>
                     </div>
                     <div className="flex w-full gap-3">
-                        <input type="text" placeholder="First Name" className="w-full rounded-md border border-gray-300  bg-black p-2" />
-                        <input type="text" placeholder="Last Name" className="w-full rounded-md border border-gray-300 bg-black  p-2" />
+                        <input type="text" placeholder="First Name" className="w-full rounded-md border border-gray-300  bg-white p-2" />
+                        <input type="text" placeholder="Last Name" className="w-full rounded-md border border-gray-300 bg-white  p-2" />
                     </div>
-                    <input type="number" placeholder="Phone Number" className="w-full rounded-md border border-gray-300  bg-black  p-2" />
-                    <input type="email" placeholder="Email" className="w-full rounded-md border border-gray-300  bg-black p-2" />
-                    <input type="password" placeholder="Create password" className="w-full rounded-md border border-gray-300  bg-black p-2" />
+                    <input type="number" placeholder="Phone Number" className="w-full rounded-md border border-gray-300  bg-white  p-2" />
+                    <input type="email" placeholder="Email" className="w-full rounded-md border border-gray-300  bg-white p-2" />
+                    <input type="password" placeholder="Create password" className="w-full rounded-md border border-gray-300  bg-white p-2" />
 
 
                     <p className="px-2 py-4 text-center text-sm text-gray-600">
