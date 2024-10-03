@@ -91,7 +91,7 @@ const billingOptions: BillingOption[] = [
     {
         id: 'yearly-flex',
         title: '2 FREE Months: Flex Annual',
-        description: '4 easy installments | Save $100 annually',
+        description: 'Pay once, save more | Save $200 annually',
         price: 1690,
         installment: 1690,
     },
@@ -131,7 +131,6 @@ const SubscriptionPage: React.FC = () => {
     const [expiryMonth, setExpiryMonth] = useState('')
     const [expiryYear, setExpiryYear] = useState('')
     const [cvv, setCvv] = useState('')
-    const [zipCode, setZipCode] = useState('')
 
     const [showTooltip, setShowTooltip] = useState(false)
 
@@ -186,7 +185,6 @@ const SubscriptionPage: React.FC = () => {
         setExpiryMonth('');
         setExpiryYear('');
         setCvv('');
-        setZipCode('');
     }
 
     const handleAddPaymentOpen = () => {
@@ -210,10 +208,6 @@ const SubscriptionPage: React.FC = () => {
         setShowNotificationModal(true)
     }, [])
 
-    const handleCloseNotificationModal = () => {
-        setShowNotificationModal(false)
-    }
-
     return (
         <div className="min-h-screen bg-gray-100">
             {showNotificationModal && (
@@ -222,7 +216,7 @@ const SubscriptionPage: React.FC = () => {
                         <div className="scrollbar-hide my-4 max-h-[90vh] w-full overflow-y-auto rounded-lg  bg-white p-6" style={{ scrollbarWidth: 'none' }}>
                             <div className="mb-4 flex items-start justify-between">
                                 <h2 className="font-walsheimMedium text-xl ">Flex Pay: Simplify Your Yearly Subscription</h2>
-                                <IoMdClose size={24} onClick={handleCloseNotificationModal} className="cursor-pointer rounded-full border text-gray-400 shadow-sm hover:text-[#595959]" />
+                                <IoMdClose size={24} onClick={() => setShowNotificationModal(false)} className="cursor-pointer rounded-full border text-gray-400 shadow-sm hover:text-[#595959]" />
                             </div>
 
                             <div className="mb-6 font-walsheimRegular ">
@@ -268,7 +262,7 @@ const SubscriptionPage: React.FC = () => {
             <div className="mx-auto flex flex-col md:flex-row">
                 <div className="sticky top-0 flex w-full items-center justify-center text-center lg:justify-end">
                     <div className=" w-full flex-col p-4 sm:px-16 md:min-h-screen md:p-8 md:py-12 lg:max-w-[580px]">
-                        <div className="sticky left-8 top-8 md:absolute md:right-8 ">
+                        <div className="sticky left-8  top-8 md:absolute md:right-8 ">
                             <Link href="/" className="flex items-center space-x-1.5">
                                 <Image src={Logo} alt="logo" className='w-40' />
                             </Link>
@@ -412,13 +406,24 @@ const SubscriptionPage: React.FC = () => {
                             <div className='mt-4 flex items-center justify-between'>
                                 <div className='flex flex-col gap-2'>
                                     <p className="text-sm text-[#595959]">
-                                        <strong>${(selectedMembers.members - 1) * 50 + perPerson}</strong> billed yearly for <strong>{selectedMembers.members} user</strong>
+
+                                        {isYearly ? (
+                                            selectedBudget === 'yearly'
+                                                ? `${billingOptions.find(option => option.id === selectedBudget)?.title}`
+                                                : `${billingOptions.find(option => option.id === selectedBudget)?.title}`
+                                        ) : 'Get up to three months FREE with yearly'}
                                     </p>
                                     <p className='text-sm text-[#6F6F6F]' onClick={() => setShowNotificationModal(true)}>
-                                        Pay in 4 installments of $3000 with Flex pay.
+                                        {isYearly ? (
+                                            selectedBudget === 'yearly'
+                                                ? `${billingOptions.find(option => option.id === selectedBudget)?.description}`
+                                                : `${billingOptions.find(option => option.id === selectedBudget)?.description}`
+                                        ) : 'Pay in 4 installments with Flex pay'}
                                     </p>
                                 </div>
-                                <Switch checked={isYearly} onChange={handlePlanChange} />
+                                <div className='flex items-center gap-2'>
+                                    <Switch checked={isYearly} onChange={handlePlanChange} />
+                                </div>
                                 {isYearlyModalOpen && (
                                     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
                                         <div className="w-full max-w-xl rounded-lg bg-white px-6 py-4 shadow-xl">
@@ -432,8 +437,10 @@ const SubscriptionPage: React.FC = () => {
                                                         key={option.id}
                                                         className={`flex cursor-pointer items-center justify-between gap-2 rounded-lg border px-2 py-4 ${selectedBudget === option.id ? 'border-blue-500' : 'border-gray-200'
                                                             }`}
-                                                        // onClick={() => setSelectedBudget(option.title)}
-                                                        onClick={handleYearlyClose}
+                                                        onClick={() => {
+                                                            setSelectedBudget(option.id);
+                                                            handleYearlyClose();
+                                                        }}
                                                     >
                                                         <div className="flex flex-col">
                                                             <p className="font-walsheimBold text-xl">{option.title}</p>
