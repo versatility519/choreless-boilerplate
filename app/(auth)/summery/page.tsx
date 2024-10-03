@@ -65,8 +65,7 @@ const plans: Plan[] = [
     }
 ]
 
-const lbPerson = 90;
-const perPerson = 169;
+
 
 const memberOptions: MemberOption[] = [
     { members: 1, description: 'Perfect for individuals' },
@@ -86,13 +85,13 @@ const billingOptions: BillingOption[] = [
         id: 'yearly',
         title: '3 FREE Months: Premium Annual',
         description: 'Pay once, save more | Save $300 annually',
-        price: 1521,
+        price: 1750,
     },
     {
         id: 'yearly-flex',
         title: '2 FREE Months: Flex Annual',
         description: 'Pay once, save more | Save $200 annually',
-        price: 1690,
+        price: 2000,
         installment: 1690,
     },
 ]
@@ -118,13 +117,17 @@ const Switch: React.FC<SwitchProps> = ({ checked, onChange }) => {
 }
 
 const SubscriptionPage: React.FC = () => {
+    const [lbPerson, setLbPerson] = useState(90);
+    const [perPerson, setPerPerson] = useState(169);
+    const [stepPerPerson, setStepPerPerson] = useState(50);
+    const [basePerPerson, setBasePerPerson] = useState(0);
     const [selectedPlan, setSelectedPlan] = useState<Plan>(plans[0])
     const [selectedMembers, setSelectedMembers] = useState<MemberOption>(memberOptions[0])
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isYearlyModalOpen, setIsYearlyModalOpen] = useState(false)
     const [isYearly, setIsYearly] = useState(false)
     const [isAddPayment, setIsAddPayment] = useState(false)
-    const [selectedBudget, setSelectedBudget] = useState<string>(billingOptions[0].id)
+    const [selectedBudget, setSelectedBudget] = useState<string>('')
     const [showNotificationModal, setShowNotificationModal] = useState(false)
 
     const [cardNumber, setCardNumber] = useState('')
@@ -202,6 +205,18 @@ const SubscriptionPage: React.FC = () => {
     const handlePlanChange = (checked: boolean) => {
         setIsYearly(checked)
         if (checked) handleYearlyOpen()
+        else {
+            setBasePerPerson(0);
+            setPerPerson(169);
+            setStepPerPerson(50);
+        }
+    }
+    const handleYearlyClicked = (option: any) => {
+        setBasePerPerson(2028);
+        setPerPerson(0);
+        setStepPerPerson(600);
+        setSelectedBudget(option.id);
+        handleYearlyClose();
     }
 
     useEffect(() => {
@@ -353,7 +368,7 @@ const SubscriptionPage: React.FC = () => {
                                             <div className='flex items-center'>
                                                 <div className="flex flex-col gap-1 text-right">
                                                     <span className="flex font-walsheimBold text-xl">
-                                                        <p className='text-black'>${(selectedMembers.members - 1) * 50 + perPerson}</p>
+                                                        <p className='text-black'>${(selectedMembers.members - 1) * stepPerPerson + perPerson + basePerPerson}</p>
                                                         <p className='text-[#595959]'>/ mo</p>
                                                     </span>
                                                     <p className="text-[#595959]">{(selectedMembers.members - 1) * 40 + lbPerson} lb - ∞</p>
@@ -392,7 +407,7 @@ const SubscriptionPage: React.FC = () => {
                                                                 <p className="mt-2 font-walsheimRegular text-base text-[#595959]">{option.description}</p>
                                                             </div>
                                                             <div className="text-right ">
-                                                                <span className=" "><b className='font-walsheimBold text-xl'>${(option.members - 1) * 50 + perPerson}</b> / mo</span>
+                                                                <span className=" "><b className='font-walsheimBold text-xl'>${(option.members - 1) * stepPerPerson + perPerson + basePerPerson}</b> / mo</span>
                                                                 <p className="mt-2 font-walsheimRegular text-base text-[#595959]">{(option.members - 1) * 40 + lbPerson} lb / mo</p>
                                                             </div>
                                                         </div>
@@ -406,19 +421,14 @@ const SubscriptionPage: React.FC = () => {
                             <div className='mt-4 flex items-center justify-between'>
                                 <div className='flex flex-col gap-2'>
                                     <p className="text-sm text-[#595959]">
-
-                                        {isYearly ? (
-                                            selectedBudget === 'yearly'
-                                                ? `${billingOptions.find(option => option.id === selectedBudget)?.title}`
-                                                : `${billingOptions.find(option => option.id === selectedBudget)?.title}`
-                                        ) : 'Get up to three months FREE with yearly'}
+                                        {
+                                            selectedBudget !== '' ? billingOptions.find(option => option.id === selectedBudget)?.title : 'Get up to three months FREE with yearly'
+                                        }
                                     </p>
                                     <p className='text-sm text-[#6F6F6F]' onClick={() => setShowNotificationModal(true)}>
-                                        {isYearly ? (
-                                            selectedBudget === 'yearly'
-                                                ? `${billingOptions.find(option => option.id === selectedBudget)?.description}`
-                                                : `${billingOptions.find(option => option.id === selectedBudget)?.description}`
-                                        ) : 'Pay in 4 installments with Flex pay'}
+                                        {
+                                            selectedBudget !== '' ? billingOptions.find(option => option.id === selectedBudget)?.description : 'Pay in 4 installments with Flex pay'
+                                        }
                                     </p>
                                 </div>
                                 <div className='flex items-center gap-2'>
@@ -438,8 +448,7 @@ const SubscriptionPage: React.FC = () => {
                                                         className={`flex cursor-pointer items-center justify-between gap-2 rounded-lg border px-2 py-4 ${selectedBudget === option.id ? 'border-blue-500' : 'border-gray-200'
                                                             }`}
                                                         onClick={() => {
-                                                            setSelectedBudget(option.id);
-                                                            handleYearlyClose();
+                                                            handleYearlyClicked(option);
                                                         }}
                                                     >
                                                         <div className="flex flex-col">
@@ -506,7 +515,7 @@ const SubscriptionPage: React.FC = () => {
 
                                         </div>
                                         <div className='flex flex-col gap-2 text-end font-walsheimRegular text-[#595959]'>
-                                            <span className=' '>${(selectedMembers.members - 1) * 50 + perPerson} / mo</span>
+                                            <span className=' '>${(selectedMembers.members - 1) * stepPerPerson + perPerson + basePerPerson} / mo</span>
                                             <span className=' '>{selectedMembers.members} bags / wk</span>
                                         </div>
                                     </div>
