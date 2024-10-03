@@ -13,8 +13,8 @@ import Logo from "@/public/logo.png";
 import ModalImg from '@/public/_static/modal.png'
 import SummeryImg from '@/public/_static/summery.png'
 
-import { IoBagHandleOutline } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
+import { FaInfoCircle } from "react-icons/fa";
 
 import { IoMdInformationCircle, IoMdClose } from "react-icons/io";
 
@@ -71,14 +71,14 @@ const perPerson = 169;
 const memberOptions: MemberOption[] = [
     { members: 1, description: 'Perfect for individuals' },
     { members: 2, description: 'Perfect for couples' },
-    { members: 3, description: 'Perfect families' },
-    { members: 4, description: 'Perfect families' },
-    { members: 5, description: 'Perfect families' },
-    { members: 6, description: 'Perfect families' },
-    { members: 7, description: 'Perfect families' },
-    { members: 8, description: 'Perfect families' },
-    { members: 9, description: 'Perfect families' },
-    { members: 10, description: 'Perfect families' },
+    { members: 3, description: 'Perfect for families' },
+    { members: 4, description: 'Perfect for families' },
+    { members: 5, description: 'Perfect for families' },
+    { members: 6, description: 'Perfect for families' },
+    { members: 7, description: 'Perfect for families' },
+    { members: 8, description: 'Perfect for families' },
+    { members: 9, description: 'Perfect for families' },
+    { members: 10, description: 'Perfect for families' },
 ]
 
 const billingOptions: BillingOption[] = [
@@ -90,14 +90,14 @@ const billingOptions: BillingOption[] = [
     },
     {
         id: 'yearly-flex',
-        title: '2 FREE Months: Premium Annual',
+        title: '2 FREE Months: Flex Annual',
         description: '4 easy installments | Save $100 annually',
         price: 1690,
         installment: 1690,
     },
 ]
 
-const Switch = ({ checked, onChange }: SwitchProps) => {
+const Switch: React.FC<SwitchProps> = ({ checked, onChange }) => {
     const [isChecked, setIsChecked] = useState(checked)
 
     const handleClick = () => {
@@ -107,16 +107,15 @@ const Switch = ({ checked, onChange }: SwitchProps) => {
 
     return (
         <div
-            className={`flex h-5 w-10 cursor-pointer items-center rounded-full border border-white ${isChecked ? 'bg-gray-700' : 'bg-gray-300'}`}
+            className={` flex h-5 w-10 cursor-pointer items-center rounded-full border border-white ${isChecked ? 'bg-gray-700' : 'bg-gray-300'}`}
             onClick={handleClick}
         >
             <div
-                className={`size-5 rounded-full bg-white shadow-md duration-300 ease-in-out ${isChecked ? 'translate-x-5' : 'translate-x-0'}`}
+                className={`-z-0 size-5 rounded-full bg-white shadow-md duration-300 ease-in-out ${isChecked ? 'translate-x-5' : 'translate-x-0'}`}
             ></div>
         </div>
     )
 }
-
 
 const SubscriptionPage: React.FC = () => {
     const [selectedPlan, setSelectedPlan] = useState<Plan>(plans[0])
@@ -125,7 +124,7 @@ const SubscriptionPage: React.FC = () => {
     const [isYearlyModalOpen, setIsYearlyModalOpen] = useState(false)
     const [isYearly, setIsYearly] = useState(false)
     const [isAddPayment, setIsAddPayment] = useState(false)
-    const [selectedOption, setSelectedOption] = useState<string>(billingOptions[0].id)
+    const [selectedBudget, setSelectedBudget] = useState<string>(billingOptions[0].id)
     const [showNotificationModal, setShowNotificationModal] = useState(false)
 
     const [cardNumber, setCardNumber] = useState('')
@@ -134,6 +133,7 @@ const SubscriptionPage: React.FC = () => {
     const [cvv, setCvv] = useState('')
     const [zipCode, setZipCode] = useState('')
 
+    const [showTooltip, setShowTooltip] = useState(false)
 
     const formatCardNumber = (value: string) => {
         const v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '')
@@ -172,12 +172,6 @@ const SubscriptionPage: React.FC = () => {
         setCvv(value)
     }
 
-    // const handleZipCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     const value = e.target.value.replace(/[^0-9]/g, '').slice(0, 5)
-    //     setZipCode(value)
-    // }
-
-
     const handleClose = () => {
         setIsModalOpen(false);
     }
@@ -198,7 +192,6 @@ const SubscriptionPage: React.FC = () => {
     const handleAddPaymentOpen = () => {
         setIsAddPayment(true);
     }
-
 
     const handleYearlyClose = () => {
         setIsYearlyModalOpen(false);
@@ -223,13 +216,13 @@ const SubscriptionPage: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-gray-100">
-            {showNotificationModal == true && (
+            {showNotificationModal && (
                 <div className="fixed inset-0 z-40 flex items-center justify-center bg-black bg-opacity-50 p-4 ">
                     <div className="w-full max-w-xl rounded-lg bg-white shadow-xl">
                         <div className="scrollbar-hide my-4 max-h-[90vh] w-full overflow-y-auto rounded-lg  bg-white p-6" style={{ scrollbarWidth: 'none' }}>
                             <div className="mb-4 flex items-start justify-between">
                                 <h2 className="font-walsheimMedium text-xl ">Flex Pay: Simplify Your Yearly Subscription</h2>
-                                <IoMdClose size={24} onClick={handleCloseNotificationModal} className="cursor-pointer rounded-full border text-gray-400 shadow-md hover:text-[#595959]" />
+                                <IoMdClose size={24} onClick={handleCloseNotificationModal} className="cursor-pointer rounded-full border text-gray-400 shadow-sm hover:text-[#595959]" />
                             </div>
 
                             <div className="mb-6 font-walsheimRegular ">
@@ -272,11 +265,10 @@ const SubscriptionPage: React.FC = () => {
                 </div>
             )}
 
-
             <div className="mx-auto flex flex-col md:flex-row">
                 <div className="sticky top-0 flex w-full items-center justify-center text-center lg:justify-end">
-                    <div className="w-full flex-col px-4 py-12 sm:px-16 md:min-h-screen md:p-8 lg:max-w-[580px]">
-                        <div className="absolute left-8 top-8 md:right-8 ">
+                    <div className=" w-full flex-col p-4 sm:px-16 md:min-h-screen md:p-8 md:py-12 lg:max-w-[580px]">
+                        <div className="sticky left-8 top-8 md:absolute md:right-8 ">
                             <Link href="/" className="flex items-center space-x-1.5">
                                 <Image src={Logo} alt="logo" className='w-40' />
                             </Link>
@@ -320,13 +312,13 @@ const SubscriptionPage: React.FC = () => {
                     </div>
                 </div>
 
-                <div className='flex w-full flex-col gap-8 overflow-y-auto bg-gray-100 px-4 shadow-md sm:px-16 md:bg-white md:py-20' style={{ maxHeight: '100vh', overflowY: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-                    <div className='border-b pb-8'>
-                        <h3 className="mb-4 font-walsheimMedium text-2xl sm:text-3xl">Select your choreless plan</h3>
-                        <p className="mb-4 font-walsheimMedium text-xl">Choose your plan</p>
-                        <div className="mb-6 flex w-full flex-col gap-4 sm:flex-row xl:w-[70%]">
-                            {plans.map((plan) => {
-                                return (
+                <div className='flex w-full flex-col gap-8 overflow-y-auto bg-gray-100 shadow-md sm:px-12 md:bg-white md:py-20 lg:justify-start' style={{ maxHeight: '100vh', overflowY: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                    <div className="w-full flex-col px-4 py-12 md:min-h-screen lg:max-w-[580px]  lg:px-4">
+                        <div className='border-b pb-8'>
+                            <h3 className="mb-4 font-walsheimMedium text-2xl sm:text-3xl">Select your choreless plan</h3>
+                            <p className="mb-4 font-walsheimMedium text-xl">Choose your plan</p>
+                            <div className="mb-6 flex w-full flex-col gap-4 sm:flex-row xl:w-[70%]">
+                                {plans.map((plan) => (
                                     <button
                                         key={plan.name}
                                         onClick={() => setSelectedPlan(plan)}
@@ -336,245 +328,270 @@ const SubscriptionPage: React.FC = () => {
                                     >
                                         {plan.name}
                                     </button>
-                                );
-                            })}
-                        </div>
-                        <ul className="space-y-3">
-                            {selectedPlan.features.map((feature, index) => (
-                                <li key={index} className="flex items-center">
-                                    <Check className="m-1 size-5 rounded-full bg-teal-500 text-white" />
-                                    <span className="ml-1 font-walsheimMedium text-[#595959]">{feature}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h3 className="mb-4 font-walsheimMedium text-xl ">Number of Members in your household</h3>
-                        <div>
-                            <div className='flex flex-row items-center justify-between rounded-xl border border-[#85C6C0] bg-white p-4'
-                                onClick={handleOpen}>
-                                <button
-                                    className="flex flex-col items-center justify-between text-left"
-                                >
-                                    <div className='flex w-full justify-between'>
-                                        <div className='flex flex-col gap-2'>
-                                            <span className="font-walsheimBold text-xl">{selectedMembers.members} members</span>
-                                            <p className="text-[#595959]">{selectedMembers.description}</p>
+                                ))}
+                            </div>
+                            <ul className="space-y-3">
+                                {selectedPlan.features.map((feature, index) => (
+                                    <li key={index} className="flex items-start">
+                                        <div>
+                                            <Check className="m-1 size-5 rounded-full bg-teal-500 text-white" />
                                         </div>
-                                        <div className="text-right">
-                                            <span className="flex font-walsheimBold text-xl">
-                                                <p className='text-black'>${(selectedMembers.members - 1) * 50 + perPerson} </p>
-                                                <p className='text-[#595959]'>/ mo</p>
-                                            </span>
-                                            <p className="text-[#595959]">{(selectedMembers.members - 1) * 40 + lbPerson} lb - ∞</p>
+                                        <span className="ml-1 font-walsheimMedium text-[#595959]">{feature}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        <div className='border-b py-8'>
+                            <h3 className="mb-4 font-walsheimMedium text-xl ">Select your family size</h3>
+                            <div className=''>
+                                <div className='flex flex-row items-center justify-between gap-1 rounded-xl border border-[#85C6C0] bg-white p-4'
+                                    onClick={handleOpen}>
+                                    <button
+                                        className="flex w-full flex-col items-center justify-between text-left"
+                                    >
+                                        <div className='flex w-full justify-between'>
+                                            <div className='flex flex-col gap-1'>
+                                                <span className="font-walsheimBold text-xl">{selectedMembers.members} members</span>
+                                                <p className="text-[#595959]">{selectedMembers.description}</p>
+                                            </div>
+
+                                            <div className='flex items-center'>
+                                                <div className="flex flex-col gap-1 text-right">
+                                                    <span className="flex font-walsheimBold text-xl">
+                                                        <p className='text-black'>${(selectedMembers.members - 1) * 50 + perPerson}</p>
+                                                        <p className='text-[#595959]'>/ mo</p>
+                                                    </span>
+                                                    <p className="text-[#595959]">{(selectedMembers.members - 1) * 40 + lbPerson} lb - ∞</p>
+                                                </div>
+                                                <div className='items-center'>
+                                                    <ChevronDown className="size-10 cursor-pointer " />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p className="w-full font-walsheimRegular text-sm text-[#595959]">
+                                            Exceeded {(selectedMembers.members - 1) * 40 + lbPerson} lbs? Relax! Enjoy {selectedMembers.members} bags/week guaranteed service.
+                                        </p>
+                                    </button>
+                                </div>
+                                {isModalOpen && (
+                                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+                                        <div className="w-full max-w-xl rounded-lg bg-white p-6 shadow-xl">
+                                            <div className='flex w-full items-center justify-between'>
+                                                <p className='font-walsheimMedium text-xl'>Choose Your Family Plan</p>
+                                                <IoMdClose size={24} onClick={handleClose} className="cursor-pointer rounded-full border text-gray-400 shadow-sm hover:text-[#595959]" />
+                                            </div>
+                                            <p className='mt-2 text-xs'>Unlimited Laundry, Tailored to Your Household</p>
+                                            <div className='my-2  max-h-[60vh] overflow-y-auto' style={{ scrollbarWidth: 'none' }}>
+                                                {memberOptions.map((option) => (
+                                                    <button
+                                                        key={option.members}
+                                                        onClick={() => {
+                                                            setSelectedMembers(option)
+                                                            handleClose();
+                                                        }}
+                                                        className="hide-scrollbar my-2 w-full rounded-xl border-2 border-teal-500 p-4 text-left hover:bg-gray-100"
+                                                    >
+                                                        <div className="flex items-center justify-between">
+                                                            <div>
+                                                                <span className="font-walsheimBold text-xl">{option.members} members</span>
+                                                                <p className="mt-2 font-walsheimRegular text-base text-[#595959]">{option.description}</p>
+                                                            </div>
+                                                            <div className="text-right ">
+                                                                <span className=" "><b className='font-walsheimBold text-xl'>${(option.members - 1) * 50 + perPerson}</b> / mo</span>
+                                                                <p className="mt-2 font-walsheimRegular text-base text-[#595959]">{(option.members - 1) * 40 + lbPerson} lb / mo</p>
+                                                            </div>
+                                                        </div>
+                                                    </button>
+                                                ))}
+                                            </div>
                                         </div>
                                     </div>
-                                    <p className="font-walsheimRegular text-sm text-[#595959]">
-                                        Exceeded {(selectedMembers.members - 1) * 40 + lbPerson} lbs? Relax! Enjoy {selectedMembers.members} bags/week guaranteed service.
-                                    </p>
-                                </button>
-                                <ChevronDown className="ml-4 size-8 cursor-pointer " />
+                                )}
                             </div>
-
-                            {isModalOpen && (
-                                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4">
-                                    <div className="w-full max-w-xl rounded-lg bg-white p-6 shadow-xl">
-                                        <div className='flex w-full items-center justify-between'>
-                                            <p className='font-walsheimMedium text-xl'>Choose Your Family Plan</p>
-                                            <IoMdClose size={24} onClick={handleClose} className="cursor-pointer rounded-full border text-gray-400 shadow-md hover:text-[#595959]" />
-                                        </div>
-                                        <p className='mt-2 text-xs'>Choose your family member</p>
-                                        <div className='my-2  max-h-[60vh] overflow-y-auto' style={{ scrollbarWidth: 'none' }}>
-                                            {memberOptions.map((option) => (
-                                                <button
-                                                    key={option.members}
-                                                    onClick={() => {
-                                                        setSelectedMembers(option)
-                                                        handleClose();
-                                                    }}
-                                                    className="hide-scrollbar my-2 w-full rounded-xl border-2 border-teal-500 p-4 text-left hover:bg-gray-100"
-                                                >
-                                                    <div className="flex items-center justify-between">
-                                                        <div>
-                                                            <span className="font-walsheimBold text-xl">{option.members} members</span>
-                                                            <p className="mt-2 font-walsheimRegular text-base text-[#595959]">{option.description}</p>
-                                                        </div>
-                                                        <div className="text-right ">
-                                                            <span className=" "><b className='font-walsheimBold text-xl'>${(option.members - 1) * 50 + perPerson}</b> / mo</span>
-                                                            <p className="mt-2 font-walsheimRegular text-base text-[#595959]">{(option.members - 1) * 40 + lbPerson} lb / mo</p>
-                                                        </div>
-                                                    </div>
-                                                </button>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-                        <div className='mt-4 flex items-center justify-between'>
-                            <div className='flex flex-col gap-2'>
-                                <p className="text-sm text-[#595959]">
-                                    <strong>${(selectedMembers.members - 1) * 50 + perPerson}</strong> billed yearly for <strong>{selectedMembers.members} user</strong>
-                                </p>
-                                <p className='text-sm text-[#6F6F6F]'>
-                                    Pay in 4 installment of $3000 with Flex pay.
-                                </p>
-                            </div>
-                            <Switch checked={isYearly} onChange={handlePlanChange}></Switch>
-                            {isYearlyModalOpen && (
-                                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4">
-                                    <div className="w-full max-w-xl rounded-lg bg-white p-6 shadow-xl">
-                                        <div className='flex justify-between'>
-                                            <h1 className='font-walsheimMedium text-xl'>Save with yearly billing</h1>
-                                            <IoMdClose size={24} onClick={handleYearlyClose} className="cursor-pointer rounded-full border text-gray-400 shadow-md hover:text-[#595959]" />
-                                        </div>
-                                        <p className='my-2 font-walsheimRegular text-sm'>Choose one suitable for you</p>
-                                        <div className='flex flex-col gap-2'>
-                                            {billingOptions.map((option) => (
-                                                <label
-                                                    key={option.id}
-                                                    className={`flex cursor-pointer items-center justify-between gap-2 rounded-lg border px-2 py-4 ${selectedOption === option.id ? 'border-blue-500' : 'border-gray-200'
-                                                        }`}
-                                                    onClick={handleYearlyClose}
-                                                >
-                                                    <div className="flex items-center">
-                                                        <div className="flex flex-col">
-                                                            <div className="font-walsheimBold text-xl">{option.title}</div>
-                                                            <div className="font-walsheimRegular text-xs text-[#595959]">{option.description}</div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="flex flex-col items-center gap-2 text-nowrap text-right">
-                                                        <div className="font-walsheimBold text-xl">${option.price} / year</div>
-                                                    </div>
-                                                </label>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-
-                        <div className="flex flex-col  gap-2 rounded-lg py-3">
-                            <div className="flex items-center">
-                                <div className=' pr-1 '>
-                                    <IoBagHandleOutline color='#85C6C0' size={26} />
-                                </div>
-                                <p className="ml-2 font-walsheimRegular text-xs md:text-base">
-                                    Exceeded 250 lbs? Relax! Enjoy guaranteed multi-bag weekly service. We handle the loads, you focus on what matters most.
-                                </p>
-                            </div>
-                            <div className="flex items-center">
-                                <div className=' pr-1 '>
-                                    <CiSearch color='#85C6C0' size={30} />
-                                </div>
-
-                                <p className="ml-2 font-walsheimRegular text-xs md:text-base">
-                                    Track your laundry progress in the app. We&apos;ll deliver your laundry back to you in 2 business days. Laundry & linens are eligible for next-day delivery!
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h3 className="mb-4 font-walsheimMedium text-xl">Payment method</h3>
-                        <div className='w-full rounded-md border border-gray-300 px-4'>
-                            <div className="flex items-center justify-between border-b py-4">
+                            <div className='mt-4 flex items-center justify-between'>
                                 <div className='flex flex-col gap-2'>
-                                    <span className='font-walsheimMedium text-xl'>Choreless Unlimited+</span>
-                                    <span className='text-[#595959]'>{selectedMembers.members} user / month</span>
+                                    <p className="text-sm text-[#595959]">
+                                        <strong>${(selectedMembers.members - 1) * 50 + perPerson}</strong> billed yearly for <strong>{selectedMembers.members} user</strong>
+                                    </p>
+                                    <p className='text-sm text-[#6F6F6F]' onClick={() => setShowNotificationModal(true)}>
+                                        Pay in 4 installments of $3000 with Flex pay.
+                                    </p>
                                 </div>
-                                <div className='flex flex-col gap-2 text-end'>
-                                    <span className='text-[#595959]'>${(selectedMembers.members - 1) * 50 + perPerson} / month</span>
-                                    <span className='text-[#595959]'>${selectedMembers.members} mbr / month</span>
-                                </div>
-                            </div>
-                            <div className="flex items-center justify-between border-b py-4">
-                                <span className='text-[#595959]'>Welcome discount</span>
-                                <span className="text-teal-500">-$50</span>
-                            </div>
-                            <div className="flex items-center justify-between py-4">
-                                <span className='text-[#595959]'>Total due today</span>
-                                <span className='font-walsheimBold '>${(selectedMembers.members - 1) * 50 + perPerson - 50}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <p className='w-full cursor-pointer rounded-lg border p-4 font-walsheimMedium text-xl text-black' onClick={() => setIsAddPayment(true)}>
-                        Add your payment information
-                    </p>
-                    {isAddPayment && (
-                        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4 ">
-                            <Card className="mx-auto w-full max-w-md border-none bg-white text-black shadow-xl">
-                                <CardHeader>
-                                    <div className='flex justify-between'>
-                                        <CardTitle>Add payment information</CardTitle>
-                                        <IoMdClose size={24} onClick={handleAddPaymentClose} className="cursor-pointer rounded-full border text-gray-400 shadow-md hover:text-[#595959]" />
+                                <Switch checked={isYearly} onChange={handlePlanChange} />
+                                {isYearlyModalOpen && (
+                                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+                                        <div className="w-full max-w-xl rounded-lg bg-white px-6 py-4 shadow-xl">
+                                            <div className='flex items-center justify-between py-2'>
+                                                <p className='my-2 font-walsheimRegular text-sm'>Choose the plan that fits your budget</p>
+                                                <IoMdClose size={24} onClick={handleYearlyClose} className="cursor-pointer rounded-full border text-gray-400 shadow-sm hover:text-[#595959]" />
+                                            </div>
+                                            <div className='flex flex-col gap-2'>
+                                                {billingOptions.map((option) => (
+                                                    <label
+                                                        key={option.id}
+                                                        className={`flex cursor-pointer items-center justify-between gap-2 rounded-lg border px-2 py-4 ${selectedBudget === option.id ? 'border-blue-500' : 'border-gray-200'
+                                                            }`}
+                                                        // onClick={() => setSelectedBudget(option.title)}
+                                                        onClick={handleYearlyClose}
+                                                    >
+                                                        <div className="flex flex-col">
+                                                            <p className="font-walsheimBold text-xl">{option.title}</p>
+                                                            <p className="font-walsheimRegular text-xs text-[#595959]">{option.description}</p>
+                                                        </div>
+                                                        <div className="flex flex-col items-center gap-2 text-nowrap text-right">
+                                                            <p className="font-walsheimBold text-xl">${option.price} / year</p>
+                                                        </div>
+                                                    </label>
+                                                ))}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <CardDescription>Enter your Card details</CardDescription>
-                                </CardHeader>
-                                <CardContent>
-                                    <form className="space-y-4">
-                                        <div className="space-y-2">
-                                            <Label htmlFor="cardNumber">Card Number</Label>
-                                            <Input
-                                                id="cardNumber"
-                                                placeholder="1234 5678 9012 3456"
-                                                value={cardNumber}
-                                                onChange={handleCardNumberChange}
-                                                maxLength={19}
-                                            />
-                                        </div>
-                                        <div className="grid grid-cols-3 gap-4">
-                                            <div className="space-y-2">
-                                                <Label htmlFor="expiryMonth">Month</Label>
-                                                <Input
-                                                    id="expiryMonth"
-                                                    placeholder="MM"
-                                                    value={expiryMonth}
-                                                    onChange={handleExpiryMonthChange}
-                                                    maxLength={2}
-                                                />
-                                            </div>
-                                            <div className="space-y-2">
-                                                <Label htmlFor="expiryYear">Year</Label>
-                                                <Input
-                                                    id="expiryYear"
-                                                    placeholder="YY"
-                                                    value={expiryYear}
-                                                    onChange={handleExpiryYearChange}
-                                                    maxLength={2}
-                                                />
-                                            </div>
-                                            <div className="space-y-2">
-                                                <Label htmlFor="cvv">CVV</Label>
-                                                <Input
-                                                    id="cvv"
-                                                    placeholder="123"
-                                                    value={cvv}
-                                                    onChange={handleCvvChange}
-                                                    maxLength={3}
-                                                />
-                                            </div>
-                                        </div>
+                                )}
+                            </div>
 
-                                    </form>
-                                </CardContent>
-                            </Card>
+                            <div className="flex flex-col  gap-2 rounded-lg py-3">
+                                <div className="flex items-center">
+                                    <div className=' pr-1 '>
+                                        <CiSearch color='#85C6C0' size={30} />
+                                    </div>
+
+                                    <p className="ml-2 font-walsheimRegular text-xs md:text-base">
+                                        Track your laundry progress in the app. We&apos;ll deliver your laundry back to you in 2 business days. Laundry & linens are eligible for next-day delivery!
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                    )}
 
-                    <div className="mb-8 flex flex-col gap-4 py-4 text-center font-walsheimMedium">
-                        <p className="w-full cursor-pointer rounded-full bg-black py-3 text-white">
-                            Pay and start subscription
-                        </p>
-                        <p className="mt-2 text-center text-xs text-[#595959]">
-                            Change, pause or cancel anytime
-                        </p>
+                        <div className='py-8'>
+                            <h3 className="mb-4 font-walsheimMedium text-xl">Payment method</h3>
+                            <div className='w-full rounded-md border border-gray-300 px-4'>
+                                <div className="flex flex-col items-center justify-between border-b py-4">
+                                    <p className='w-full py-1 font-walsheimMedium text-xl'>Choreless Unlimited+</p>
+                                    <div className='flex w-full items-center justify-between'>
+                                        <div className='flex flex-col gap-2 text-start font-walsheimRegular text-[#595959]'>
+                                            <span className=''>{selectedMembers.members} mbr / mo</span>
+
+                                            <div className="relative flex w-full items-center">
+                                                <span className=''>Unlimited guarantee</span>
+                                                <span
+                                                    className="relative ml-1 cursor-pointer underline decoration-dotted"
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        setShowTooltip(!showTooltip);
+                                                    }}
+                                                >
+                                                    <FaInfoCircle color='#85C6C0' />
+                                                    {showTooltip && (
+                                                        <div
+                                                            className="absolute bottom-full left-1/2 z-10 mb-2 w-64 -translate-x-1/2 rounded-lg bg-white p-2  text-black shadow-lg"
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                setShowTooltip(false);
+                                                            }}
+                                                        >
+                                                            <p className='font-walsheimMedium'>Exceed Allotment</p>
+                                                            <p className=" w-full text-justify font-walsheimMedium text-xs">Exceeded 250 lbs? Relax! Enjoy guaranteed multi-bag weekly service. We handle the loads, you focus on what matters most.</p>
+                                                        </div>
+                                                    )}
+                                                </span>
+                                            </div>
+
+                                        </div>
+                                        <div className='flex flex-col gap-2 text-end font-walsheimRegular text-[#595959]'>
+                                            <span className=' '>${(selectedMembers.members - 1) * 50 + perPerson} / mo</span>
+                                            <span className=' '>{selectedMembers.members} bags / wk</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="flex items-center justify-between border-b py-4">
+                                    <span className='font-walsheimRegular text-[#595959]'>Welcome discount</span>
+                                    <span className="font-walsheimBold text-teal-500">-$50</span>
+                                </div>
+                                <div className="flex items-center justify-between py-4">
+                                    <span className='font-walsheimRegular text-[#595959]'>Total due today</span>
+                                    <span className='font-walsheimBold text-black'>${(selectedMembers.members - 1) * 50 + perPerson - 50}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className=''>
+                            <p className='w-full cursor-pointer rounded-lg border p-4 font-walsheimMedium text-xl text-black'
+                                onClick={handleAddPaymentOpen}>
+                                Add your payment information
+                            </p>
+                            {isAddPayment && (
+                                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50  ">
+                                    <Card className="mx-auto w-full max-w-md border-none bg-white text-black shadow-xl">
+                                        <CardHeader>
+                                            <div className='flex justify-between'>
+                                                <CardTitle>Add payment information</CardTitle>
+                                                <IoMdClose size={24} onClick={handleAddPaymentClose} className="cursor-pointer rounded-full border text-gray-400 shadow-sm hover:text-[#595959]" />
+                                            </div>
+                                            <CardDescription>Enter your Card details</CardDescription>
+                                        </CardHeader>
+                                        <CardContent>
+                                            <form className="space-y-2">
+                                                <div className="space-y-2">
+                                                    <Label htmlFor="cardNumber">Card Number</Label>
+                                                    <Input
+                                                        id="cardNumber"
+                                                        placeholder="1234 5678 9012 3456"
+                                                        value={cardNumber}
+                                                        onChange={handleCardNumberChange}
+                                                        maxLength={19}
+                                                    />
+                                                </div>
+                                                <div className="grid grid-cols-3 gap-4">
+                                                    <div className="space-y-2">
+                                                        <Label htmlFor="expiryMonth">Month</Label>
+                                                        <Input
+                                                            id="expiryMonth"
+                                                            placeholder="MM"
+                                                            value={expiryMonth}
+                                                            onChange={handleExpiryMonthChange}
+                                                            maxLength={2}
+                                                        />
+                                                    </div>
+                                                    <div className="space-y-2">
+                                                        <Label htmlFor="expiryYear">Year</Label>
+                                                        <Input
+                                                            id="expiryYear"
+                                                            placeholder="YY"
+                                                            value={expiryYear}
+                                                            onChange={handleExpiryYearChange}
+                                                            maxLength={2}
+                                                        />
+                                                    </div>
+                                                    <div className="space-y-2">
+                                                        <Label htmlFor="cvv">CVV</Label>
+                                                        <Input
+                                                            id="cvv"
+                                                            placeholder="123"
+                                                            value={cvv}
+                                                            onChange={handleCvvChange}
+                                                            maxLength={3}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </CardContent>
+                                    </Card>
+                                </div>
+                            )}
+                        </div>
+                        <div className="mb-8 flex flex-col gap-4 py-4 text-center font-walsheimMedium">
+                            <p className="w-full cursor-pointer rounded-full bg-black py-3 text-white">
+                                Pay and start subscription
+                            </p>
+                            <p className="mt-2 text-center text-xs text-[#595959]">
+                                Change, pause or cancel anytime
+                            </p>
+                        </div>
                     </div>
-                </div>
-            </div >
-        </div>
+                </div >
+            </div>
+        </div >
 
     )
 }
