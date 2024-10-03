@@ -99,17 +99,17 @@ export function NavMobile() {
             <>
               <li className="py-3">
                 <Link
-                  href="/login"
+                  href="/signin"
                   onClick={() => setOpen(false)}
                   className="flex w-full font-medium capitalize"
                 >
-                  Login
+                  Sign In
                 </Link>
               </li>
 
               <li className="py-3">
                 <Link
-                  href="/register"
+                  href="/signup"
                   onClick={() => setOpen(false)}
                   className="flex w-full font-medium capitalize"
                 >

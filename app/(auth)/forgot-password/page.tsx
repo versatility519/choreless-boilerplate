@@ -24,11 +24,11 @@ export default function ForgotPasswordPage() {
 
                 <div className=" my-36 flex w-full max-w-lg  flex-col items-center justify-center gap-3 rounded-3xl bg-white py-8 shadow-xl">
                     <h1 className="font-walsheim-medium text-3xl text-black">Forgot Password</h1>
-                    <p className="px-8 text-center text-base text-gray-500">
+                    <p className=" px-8 text-center text-base text-gray-500">
                         Enter your email and we&apos;ll send you instructions for creating a new password.
                     </p>
                     <div className="flex w-full flex-col items-center justify-center gap-4 px-8">
-                        <input type="email" placeholder="Email or phone number" className="w-full rounded-md border border-gray-300 p-2" />
+                        <input type="email" placeholder="Email or phone number" className="w-full rounded-md border border-gray-300 bg-white p-2" />
                         <Link href="/summery" className="w-full rounded-full bg-black p-3 text-center text-lg text-white">
                             <p>Reset Password</p>
                         </Link>

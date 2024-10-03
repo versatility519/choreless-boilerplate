@@ -123,8 +123,8 @@ export function UserAuthForm({ className, type, ...props }: UserAuthFormProps) {
               <Icons.spinner className="mr-2 size-4 animate-spin bg-black text-white" />
             )}
             {/* {type === "register" ? "Sign Up with Email" : "Sign In"} */}
-            {type === "register" ? <Link href="/signup/personal-info" className="text-white">Sign Up with Email</Link>
-              : <Link href="/signup" className="text-white">Sign In</Link>
+            {type === "register" ? <Link href="/signup/personal-info" className="bg-black text-white">Sign Up with Email</Link>
+              : <Link href="/signup" className="bg-black text-white">Sign In</Link>
             }
           </button>
         </div>
@@ -139,7 +139,7 @@ export function UserAuthForm({ className, type, ...props }: UserAuthFormProps) {
               </p>
             </Link>
           </div>
-          <div className="flex justify-center gap-2 text-center text-sm text-gray-600">
+          <div className="flex justify-between gap-2 text-center text-sm text-gray-600 sm:justify-center">
             <p className="font-walsheimRegular"> Don&apos;t have an account?</p>
             <Link href="/signup">
               <p className="font-walsheimMedium text-black hover:underline">

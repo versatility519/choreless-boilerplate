@@ -129,7 +129,6 @@ const SubscriptionPage: React.FC = () => {
     const [isAddPayment, setIsAddPayment] = useState(false)
     const [selectedOption, setSelectedOption] = useState<string>(billingOptions[0].id)
     const [showNotificationModal, setShowNotificationModal] = useState(false)
-    const [showSimpleModal, setShowSimpleModal] = useState(false)
 
     const [cardNumber, setCardNumber] = useState('')
     const [expiryMonth, setExpiryMonth] = useState('')
@@ -175,24 +174,11 @@ const SubscriptionPage: React.FC = () => {
         setCvv(value)
     }
 
-    const handleZipCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value.replace(/[^0-9]/g, '').slice(0, 5)
-        setZipCode(value)
-    }
+    // const handleZipCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     const value = e.target.value.replace(/[^0-9]/g, '').slice(0, 5)
+    //     setZipCode(value)
+    // }
 
-    const ref = useRef<HTMLDivElement | null>(null)
-
-    const handleClickOutside = (event: MouseEvent) => {
-        if (ref.current && !ref.current.contains(event.target as Node)) {
-            setIsModalOpen(false);
-        }
-    };
-    useEffect(() => {
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, []);
 
     const handleClose = () => {
         setIsModalOpen(false);
@@ -240,61 +226,68 @@ const SubscriptionPage: React.FC = () => {
     return (
         <div className="min-h-screen bg-gray-100">
             {/* Notification Modal */}
-            <Modal
+            {/* <Modal
                 showModal={showNotificationModal}
                 setShowModal={setShowNotificationModal}
                 className=''
                 onClose={handleCloseNotificationModal}
-            >
-                <div className="scrollbar-hide my-4 max-h-[90vh]  w-full overflow-y-auto rounded-lg  bg-white p-6" style={{ scrollbarWidth: 'none' }}>
-                    <div className="mb-4 flex items-start justify-between">
-                        <h2 className="font-walsheimMedium text-xl ">Flex Pay: Simplify Your Yearly Subscription</h2>
-                        {/* <button
-                            onClick={handleCloseNotificationModal}
-                            className="text-gray-500 hover:text-gray-700 focus:outline-none"
-                        >
-                            <IoMdClose size={24} />
-                        </button> */}
-                    </div>
-                    <div className="mb-6 font-walsheimRegular ">
-                        That&apos;s why we offer Easy Pay for our yearly subscriptions.
-                        It&apos;s a flexible payment option that lets you enjoy a full year of laundry freedom without the upfront cost.
-                        Spread your payments over three months, keep your cash flow smooth, and still get all the benefits of our premium service right away.
-                        It&apos;s just another way we&apos;re taking the load off your shoulders.
-                    </div>
-                    <div className="mb-6">
-                        <Image
-                            src={ModalImg}
-                            alt="Laundry basket with 'Wash & Fold' bag"
-                            className="h-48 w-full rounded-lg object-cover"
-                        />
-                    </div>
-                    <div className="mb-6">
-                        <h3 className="mb-2 font-walsheimMedium text-xl">How Flex Pay Works</h3>
-                        <ul className="list-inside list-disc space-y-2 font-walsheimRegular ">
-                            <li>Split your yearly subscription into 3 easy monthly installments at no extra charge.</li>
-                            <li>First payment due at checkout, followed by 2 monthly payments.</li>
-                            <li>Available for yearly subscriptions only.</li>
-                            <li>Pay with your credit card or PayPal account.</li>
-                        </ul>
-                    </div>
-                    <div className="mb-6">
-                        <h3 className="mb-2 font-walsheimMedium text-xl">0% Interest</h3>
-                        <ul className="list-inside list-disc space-y-2 font-walsheimRegular ">
-                            <li>Choreless does not charge interest or fees for Easy Pay.</li>
-                            <li>Credit card terms may apply; check with your card issuer.</li>
-                        </ul>
-                    </div>
-                    <p className="mb-4 font-walsheimRegular text-sm text-gray-500">
-                        Easy Pay subject to approval. Prepaid cards not accepted for Easy Pay. Cannot be combined with other offers or applied to past purchases.
-                    </p>
-                    <p className="text-sm text-gray-500">
-                        Questions? Contact our Customer Care team at (823) 296-3986
-                    </p>
-                </div>
-            </Modal>
+            > */}
+            {/* </Modal> */}
 
-            {/* Existing content */}
+            {showNotificationModal == true && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4 ">
+                    <div className="w-full max-w-xl rounded-lg bg-white shadow-xl">
+                        <div className="scrollbar-hide my-4 max-h-[90vh] w-full overflow-y-auto rounded-lg  bg-white p-6" style={{ scrollbarWidth: 'none' }}>
+                            <div className="mb-4 flex items-start justify-between">
+                                <h2 className="font-walsheimMedium text-xl ">Flex Pay: Simplify Your Yearly Subscription</h2>
+                                <button
+                                    onClick={() => setShowNotificationModal(false)}
+                                    className="text-gray-500 hover:text-gray-700 focus:outline-none"
+                                >
+                                    <IoMdClose size={24} />
+                                </button>
+                            </div>
+                            <div className="mb-6 font-walsheimRegular ">
+                                That&apos;s why we offer Easy Pay for our yearly subscriptions.
+                                It&apos;s a flexible payment option that lets you enjoy a full year of laundry freedom without the upfront cost.
+                                Spread your payments over three months, keep your cash flow smooth, and still get all the benefits of our premium service right away.
+                                It&apos;s just another way we&apos;re taking the load off your shoulders.
+                            </div>
+                            <div className="mb-6">
+                                <Image
+                                    src={ModalImg}
+                                    alt="Laundry basket with 'Wash & Fold' bag"
+                                    className="h-48 w-full rounded-lg object-cover"
+                                />
+                            </div>
+                            <div className="mb-6">
+                                <h3 className="mb-2 font-walsheimMedium text-xl">How Flex Pay Works</h3>
+                                <ul className="list-inside list-disc space-y-2 font-walsheimRegular ">
+                                    <li>Split your yearly subscription into 3 easy monthly installments at no extra charge.</li>
+                                    <li>First payment due at checkout, followed by 2 monthly payments.</li>
+                                    <li>Available for yearly subscriptions only.</li>
+                                    <li>Pay with your credit card or PayPal account.</li>
+                                </ul>
+                            </div>
+                            <div className="mb-6">
+                                <h3 className="mb-2 font-walsheimMedium text-xl">0% Interest</h3>
+                                <ul className="list-inside list-disc space-y-2 font-walsheimRegular ">
+                                    <li>Choreless does not charge interest or fees for Easy Pay.</li>
+                                    <li>Credit card terms may apply; check with your card issuer.</li>
+                                </ul>
+                            </div>
+                            <p className="mb-4 font-walsheimRegular text-sm text-gray-500">
+                                Easy Pay subject to approval. Prepaid cards not accepted for Easy Pay. Cannot be combined with other offers or applied to past purchases.
+                            </p>
+                            <p className="text-sm text-gray-500">
+                                Questions? Contact our Customer Care team at (823) 296-3986
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+
             <div className="mx-auto flex flex-col md:flex-row" style={{ scrollbarWidth: 'none' }}>
                 <div className="flex w-full items-center justify-center text-center lg:justify-end">
                     <div className="w-full px-4 py-12 sm:px-16  md:min-h-screen md:p-8 lg:max-w-[580px]">
@@ -381,7 +374,7 @@ const SubscriptionPage: React.FC = () => {
                         <h3 className="mb-4 font-walsheimMedium text-xl ">Number of Members in your household</h3>
                         <div>
                             <div className='flex w-full flex-row items-center justify-between rounded-xl border border-[#85C6C0] bg-white p-4'
-                                onClick={() => setIsModalOpen(true)}>
+                                onClick={handleOpen}>
                                 <button
                                     className="flex w-full items-center justify-between text-left"
                                 >
@@ -400,60 +393,45 @@ const SubscriptionPage: React.FC = () => {
                                 <ChevronDown className="ml-4 size-8 cursor-pointer " />
                             </div>
 
-                            {/* {isModalOpen && ( */}
-                            {/* <Modal
-                                showModal={isModalOpen}
-                                setShowModal={setIsModalOpen}
-                            >
-                                <div className="w-full max-w-md rounded-lg bg-white p-6 text-center">
-                                    <h2 className="mb-4 text-2xl font-bold">Simple Modal</h2>
-                                    <p>This is a simple modal without a close button.</p>
-                                </div>
-                            </Modal> */}
 
-                            <Modal
-                                showModal={isModalOpen}
-                                setShowModal={setIsModalOpen}
-                                className=''
-                                onClose={handleClose}
-                            >
-                                <div className="scrollbar-hide my-4 max-h-[90vh]  w-full overflow-y-auto rounded-lg  bg-white p-6" style={{ scrollbarWidth: 'none' }}>
-                                    {/* <div className='fixed inset-0 z-10 flex size-full items-center justify-center bg-black bg-opacity-50 ' ref={ref}> */}
-                                    {/* <div className="hidden-scrollbar fixed  max-h-[70vh] max-w-md overflow-y-auto rounded-[24px] border border-gray-300 bg-white p-6 shadow-lg" > */}
-                                    <div className='flex w-full items-center justify-between'>
-                                        <p className='font-walsheimMedium text-xl'>Choose Your Family Plan</p>
-                                        {/* <IoMdClose className='cursor-pointer rounded-full p-0.5 shadow-md' size={24} onClick={handleClose} /> */}
-                                    </div>
-                                    <p className='mt-2 text-xs'>Choose your family member</p>
-                                    <div className='my-2  max-h-[60vh] overflow-y-auto' style={{ scrollbarWidth: 'none' }}>
-                                        {memberOptions.map((option) => (
-                                            <button
-                                                key={option.members}
-                                                onClick={() => {
-                                                    setSelectedMembers(option)
-                                                    handleClose();
-                                                }}
-                                                className="hide-scrollbar my-2 w-full rounded-xl border-2 border-teal-500 p-4 text-left hover:bg-gray-100"
-                                            >
-                                                <div className="flex items-center justify-between">
-                                                    <div>
-                                                        <span className="font-walsheimBold text-xl">{option.members} members</span>
-                                                        <p className="mt-2 text-[#595959]">{option.description}</p>
+                            {isModalOpen && (
+                                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4">
+                                    <div className="w-full max-w-xl rounded-lg bg-white p-6 shadow-xl">
+                                        {/* <div className="scrollbar-hide my-4 max-h-[90vh]  w-full overflow-y-auto rounded-lg  bg-white p-6" style={{ scrollbarWidth: 'none' }}> */}
+                                        {/* <div className='fixed inset-0 z-10 flex size-full items-center justify-center bg-black bg-opacity-50 ' > */}
+                                        {/* <div className="hidden-scrollbar    max-h-[70vh] max-w-md overflow-y-auto rounded-[24px] border border-gray-300 bg-white p-6 shadow-lg" > */}
+                                        <div className='flex w-full items-center justify-between'>
+                                            <p className='font-walsheimMedium text-xl'>Choose Your Family Plan</p>
+                                            <IoMdClose className='cursor-pointer rounded-full p-0.5 shadow-md' size={24} onClick={handleClose} />
+                                        </div>
+                                        <p className='mt-2 text-xs'>Choose your family member</p>
+                                        <div className='my-2  max-h-[60vh] overflow-y-auto' style={{ scrollbarWidth: 'none' }}>
+                                            {memberOptions.map((option) => (
+                                                <button
+                                                    key={option.members}
+                                                    onClick={() => {
+                                                        setSelectedMembers(option)
+                                                        handleClose();
+                                                    }}
+                                                    className="hide-scrollbar my-2 w-full rounded-xl border-2 border-teal-500 p-4 text-left hover:bg-gray-100"
+                                                >
+                                                    <div className="flex items-center justify-between">
+                                                        <div>
+                                                            <span className="font-walsheimBold text-xl">{option.members} members</span>
+                                                            <p className="mt-2 text-[#595959]">{option.description}</p>
+                                                        </div>
+                                                        <div className="text-right ">
+                                                            <span className="text-lg"><b className='font-extrabold'>${(option.members - 1) * 50 + perPerson}</b> / mo</span>
+                                                            <p className="mt-2 text-[#595959]">{(option.members - 1) * 40 + lbPerson} lb / mo</p>
+                                                        </div>
                                                     </div>
-                                                    <div className="text-right ">
-                                                        <span className="text-lg"><b className='font-extrabold'>${(option.members - 1) * 50 + perPerson}</b> / mo</span>
-                                                        <p className="mt-2 text-[#595959]">{(option.members - 1) * 40 + lbPerson} lb / mo</p>
-                                                    </div>
-                                                </div>
-                                            </button>
-                                        ))}
-                                        {/* </div>
-                                    </div> */}
+                                                </button>
+                                            ))}
+                                        </div>
                                     </div>
                                 </div>
-                                {/* )} */}
+                            )}
 
-                            </Modal>
                         </div>
                         <div className='mt-4 flex items-center justify-between'>
                             <div className='flex flex-col gap-2'>
@@ -560,78 +538,70 @@ const SubscriptionPage: React.FC = () => {
                     <p className='w-full cursor-pointer rounded-lg border p-4 font-walsheimMedium text-xl text-black' onClick={() => setIsAddPayment(true)}>
                         Add your payment information
                     </p>
-                    {/* <p className='cursor-pointer font-walsheimMedium text-xl' onClick={()=>handleAddPaymentOpen}>Add your payment information</p> */}
-                    {/* {isAddPayment && ( */}
-                    {/* </div> */}
-                    <Modal
-                        showModal={isAddPayment}
-                        setShowModal={setIsAddPayment}
-                        className='w-full'
-                        onClose={handleAddPaymentClose}
-                    >
-                        {/* <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4"> */}
-                        <Card className="mx-auto w-full max-w-md border-none bg-white text-black">
-                            <CardHeader>
-                                <div className='flex justify-between'>
-                                    <CardTitle>Add payment information</CardTitle>
-                                    {/* <button onClick={handleAddPaymentClose} className="rounded-full border text-gray-400 shadow-md hover:text-[#595959]">
-                                                <IoMdClose size={24} />
-                                            </button> */}
-                                </div>
-                                <CardDescription>Enter your Card details</CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                <form className="space-y-4">
-                                    <div className="space-y-2">
-                                        <Label htmlFor="cardNumber">Card Number</Label>
-                                        <Input
-                                            id="cardNumber"
-                                            placeholder="1234 5678 9012 3456"
-                                            value={cardNumber}
-                                            onChange={handleCardNumberChange}
-                                            maxLength={19}
-                                        />
+                    {isAddPayment && (
+                        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4 ">
+                            {/* <div className="w-full max-w-xl rounded-lg bg-white shadow-xl"> */}
+                            <Card className="mx-auto w-full max-w-md border-none bg-white text-black shadow-xl">
+                                <CardHeader>
+                                    <div className='flex justify-between'>
+                                        <CardTitle>Add payment information</CardTitle>
+                                        <button onClick={handleAddPaymentClose} className="rounded-full border text-gray-400 shadow-md hover:text-[#595959]">
+                                            <IoMdClose size={24} />
+                                        </button>
                                     </div>
-                                    <div className="grid grid-cols-3 gap-4">
+                                    <CardDescription>Enter your Card details</CardDescription>
+                                </CardHeader>
+                                <CardContent>
+                                    <form className="space-y-4">
                                         <div className="space-y-2">
-                                            <Label htmlFor="expiryMonth">Month</Label>
+                                            <Label htmlFor="cardNumber">Card Number</Label>
                                             <Input
-                                                id="expiryMonth"
-                                                placeholder="MM"
-                                                value={expiryMonth}
-                                                onChange={handleExpiryMonthChange}
-                                                maxLength={2}
+                                                id="cardNumber"
+                                                placeholder="1234 5678 9012 3456"
+                                                value={cardNumber}
+                                                onChange={handleCardNumberChange}
+                                                maxLength={19}
                                             />
                                         </div>
-                                        <div className="space-y-2">
-                                            <Label htmlFor="expiryYear">Year</Label>
-                                            <Input
-                                                id="expiryYear"
-                                                placeholder="YY"
-                                                value={expiryYear}
-                                                onChange={handleExpiryYearChange}
-                                                maxLength={2}
-                                            />
+                                        <div className="grid grid-cols-3 gap-4">
+                                            <div className="space-y-2">
+                                                <Label htmlFor="expiryMonth">Month</Label>
+                                                <Input
+                                                    id="expiryMonth"
+                                                    placeholder="MM"
+                                                    value={expiryMonth}
+                                                    onChange={handleExpiryMonthChange}
+                                                    maxLength={2}
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <Label htmlFor="expiryYear">Year</Label>
+                                                <Input
+                                                    id="expiryYear"
+                                                    placeholder="YY"
+                                                    value={expiryYear}
+                                                    onChange={handleExpiryYearChange}
+                                                    maxLength={2}
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <Label htmlFor="cvv">CVV</Label>
+                                                <Input
+                                                    id="cvv"
+                                                    placeholder="123"
+                                                    value={cvv}
+                                                    onChange={handleCvvChange}
+                                                    maxLength={3}
+                                                />
+                                            </div>
                                         </div>
-                                        <div className="space-y-2">
-                                            <Label htmlFor="cvv">CVV</Label>
-                                            <Input
-                                                id="cvv"
-                                                placeholder="123"
-                                                value={cvv}
-                                                onChange={handleCvvChange}
-                                                maxLength={3}
-                                            />
-                                        </div>
-                                    </div>
 
-                                </form>
-                            </CardContent>
-                        </Card>
-                        {/* </div> */}
-                    </Modal>
-                    {/* )} */}
-
+                                    </form>
+                                </CardContent>
+                            </Card>
+                        </div>
+                        // </div>
+                    )}
 
                     <div className="mb-8 flex flex-col gap-4 py-4 text-center font-walsheimMedium">
                         <p className="w-full cursor-pointer rounded-full bg-black py-3 text-white">
