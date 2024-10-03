@@ -225,17 +225,8 @@ const SubscriptionPage: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-gray-100">
-            {/* Notification Modal */}
-            {/* <Modal
-                showModal={showNotificationModal}
-                setShowModal={setShowNotificationModal}
-                className=''
-                onClose={handleCloseNotificationModal}
-            > */}
-            {/* </Modal> */}
-
             {showNotificationModal == true && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 p-4 ">
+                <div className="fixed inset-0 z-40 flex items-center justify-center bg-black bg-opacity-50 p-4 ">
                     <div className="w-full max-w-xl rounded-lg bg-white shadow-xl">
                         <div className="scrollbar-hide my-4 max-h-[90vh] w-full overflow-y-auto rounded-lg  bg-white p-6" style={{ scrollbarWidth: 'none' }}>
                             <div className="mb-4 flex items-start justify-between">
