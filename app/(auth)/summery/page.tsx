@@ -35,6 +35,7 @@ interface SwitchProps {
 
 interface BillingOption {
     id: string
+    typeName: string
     title: string
     description: string
     price: number
@@ -84,12 +85,14 @@ const billingOptions: BillingOption[] = [
     {
         id: 'yearly',
         title: '3 FREE Months: Premium Annual',
+        typeName:'Premum Annual',
         description: 'Pay once, save more | Save $300 annually',
         price: 1750,
     },
     {
         id: 'yearly-flex',
         title: '2 FREE Months: Flex Annual',
+        typeName:'Flex Annual',
         description: 'Pay once, save more | Save $200 annually',
         price: 2000,
         installment: 1690,
@@ -209,6 +212,7 @@ const SubscriptionPage: React.FC = () => {
             setBasePerPerson(0);
             setPerPerson(169);
             setStepPerPerson(50);
+            setSelectedBudget('');
         }
     }
     const handleYearlyClicked = (option: any) => {
@@ -418,53 +422,53 @@ const SubscriptionPage: React.FC = () => {
                                     </div>
                                 )}
                             </div>
-                            <div className='mt-4 flex items-center justify-between'>
+                            <div className='mt-4 flex cursor-pointer items-center justify-between' >
                                 <div className='flex flex-col gap-2'>
                                     <p className="text-sm text-[#595959]">
-                                        {
-                                            selectedBudget !== '' ? billingOptions.find(option => option.id === selectedBudget)?.title : 'Get up to three months FREE with yearly'
-                                        }
+                                        {selectedBudget !== ''
+                                            ? billingOptions.find(option => option.id === selectedBudget)?.title
+                                            : 'Get up to three months FREE with yearly'}
                                     </p>
                                     <p className='text-sm text-[#6F6F6F]' onClick={() => setShowNotificationModal(true)}>
-                                        {
-                                            selectedBudget !== '' ? billingOptions.find(option => option.id === selectedBudget)?.description : 'Pay in 4 installments with Flex pay'
-                                        }
+                                        {selectedBudget !== ''
+                                            ? billingOptions.find(option => option.id === selectedBudget)?.description
+                                            : 'Pay in 4 installments with Flex pay'}
                                     </p>
                                 </div>
                                 <div className='flex items-center gap-2'>
                                     <Switch checked={isYearly} onChange={handlePlanChange} />
                                 </div>
-                                {isYearlyModalOpen && (
-                                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
-                                        <div className="w-full max-w-xl rounded-lg bg-white px-6 py-4 shadow-xl">
-                                            <div className='flex items-center justify-between py-2'>
-                                                <p className='my-2 font-walsheimRegular text-sm'>Choose the plan that fits your budget</p>
-                                                <IoMdClose size={24} onClick={handleYearlyClose} className="cursor-pointer rounded-full border text-gray-400 shadow-sm hover:text-[#595959]" />
-                                            </div>
-                                            <div className='flex flex-col gap-2'>
-                                                {billingOptions.map((option) => (
-                                                    <label
-                                                        key={option.id}
-                                                        className={`flex cursor-pointer items-center justify-between gap-2 rounded-lg border px-2 py-4 ${selectedBudget === option.id ? 'border-blue-500' : 'border-gray-200'
-                                                            }`}
-                                                        onClick={() => {
-                                                            handleYearlyClicked(option);
-                                                        }}
-                                                    >
-                                                        <div className="flex flex-col">
-                                                            <p className="font-walsheimBold text-xl">{option.title}</p>
-                                                            <p className="font-walsheimRegular text-xs text-[#595959]">{option.description}</p>
-                                                        </div>
-                                                        <div className="flex flex-col items-center gap-2 text-nowrap text-right">
-                                                            <p className="font-walsheimBold text-xl">${option.price} / year</p>
-                                                        </div>
-                                                    </label>
-                                                ))}
-                                            </div>
+                            </div>
+                            {isYearlyModalOpen && (
+                                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
+                                    <div className="w-full max-w-xl rounded-lg bg-white px-6 py-4 shadow-xl">
+                                        <div className='flex items-center  justify-between py-2'>
+                                            <p className='my-2 font-walsheimRegular text-sm'>Choose the plan that fits your budget</p>
+                                            <IoMdClose size={24} onClick={handleYearlyClose} className="cursor-pointer rounded-full border text-gray-400 shadow-sm hover:text-[#595959]" />
+                                        </div>
+                                        <div className='flex flex-col gap-2'>
+                                            {billingOptions.map((option) => (
+                                                <label
+                                                    key={option.id}
+                                                    className={`flex cursor-pointer items-center justify-between gap-2 rounded-lg border px-2 py-4 ${selectedBudget === option.id ? 'border-blue-500' : 'border-gray-200'
+                                                        }`}
+                                                    onClick={() => {
+                                                        handleYearlyClicked(option);
+                                                    }}
+                                                >
+                                                    <div className="flex flex-col">
+                                                        <p className="font-walsheimBold text-xl">{option.title}</p>
+                                                        <p className="font-walsheimRegular text-xs text-[#595959]">{option.description}</p>
+                                                    </div>
+                                                    <div className="flex flex-col items-center gap-2 text-nowrap text-right">
+                                                        <p className="font-walsheimBold text-xl">${option.price} / year</p>
+                                                    </div>
+                                                </label>
+                                            ))}
                                         </div>
                                     </div>
-                                )}
-                            </div>
+                                </div>
+                            )}
 
                             <div className="flex flex-col  gap-2 rounded-lg py-3">
                                 <div className="flex items-center">
@@ -484,9 +488,21 @@ const SubscriptionPage: React.FC = () => {
                             <div className='w-full rounded-md border border-gray-300 px-4'>
                                 <div className="flex flex-col items-center justify-between border-b py-4">
                                     <p className='w-full py-1 font-walsheimMedium text-xl'>Choreless Unlimited+</p>
+
                                     <div className='flex w-full items-center justify-between'>
                                         <div className='flex flex-col gap-2 text-start font-walsheimRegular text-[#595959]'>
-                                            <span className=''>{selectedMembers.members} mbr / mo</span>
+                                            <span className=''>
+                                                {selectedBudget !== ''
+                                                    ? billingOptions.find(option => option.id === selectedBudget)?.typeName
+                                                    : ''
+                                                }
+
+                                                &nbsp;{selectedMembers.members} mbr /
+                                                {selectedBudget == ''
+                                                    ? 'mo'
+                                                    : 'yr'
+                                                }
+                                            </span>
 
                                             <div className="relative flex w-full items-center">
                                                 <span className=''>Unlimited guarantee</span>
@@ -526,7 +542,7 @@ const SubscriptionPage: React.FC = () => {
                                 </div>
                                 <div className="flex items-center justify-between py-4">
                                     <span className='font-walsheimRegular text-[#595959]'>Total due today</span>
-                                    <span className='font-walsheimBold text-black'>${(selectedMembers.members - 1) * 50 + perPerson - 50}</span>
+                                    <span className='font-walsheimBold text-black'>${(selectedMembers.members - 1) * 50 + perPerson + basePerPerson - 50}</span>
                                 </div>
                             </div>
                         </div>
