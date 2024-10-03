@@ -139,7 +139,7 @@ export function UserAuthForm({ className, type, ...props }: UserAuthFormProps) {
               </p>
             </Link>
           </div>
-          <div className="flex w-full justify-between gap-2 text-center text-sm text-gray-600 sm:justify-center">
+          <div className="flex w-full  gap-2 text-center text-sm text-gray-600 justify-center">
             <p className="font-walsheimRegular"> Don&apos;t have an account?</p>
             <Link href="/signup">
               <p className="font-walsheimMedium text-black hover:underline">
