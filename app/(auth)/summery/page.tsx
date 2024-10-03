@@ -470,7 +470,7 @@ const SubscriptionPage: React.FC = () => {
                                 </div>
 
                                 <p className="ml-2 font-walsheimRegular text-xs md:text-base">
-                                    Track your laundry progress in the app. We'll deliver your laundry back to you in 2 business days. Laundry & linens are eligible for next-day delivery!
+                                    Track your laundry progress in the app. We&apos;ll deliver your laundry back to you in 2 business days. Laundry & linens are eligible for next-day delivery!
                                 </p>
                             </div>
                         </div>
