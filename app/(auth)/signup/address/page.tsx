@@ -14,7 +14,7 @@ export default function AddressPage() {
                    
                 </Link>
             </div>
-            <div className="mx-4 flex w-full max-w-lg flex-col gap-3 rounded-3xl bg-white p-8 shadow-xl sm:mx-auto lg:my-16">
+            <div className="z-40 mx-4 flex w-full max-w-lg flex-col gap-3 rounded-3xl bg-white p-8 shadow-xl sm:mx-auto lg:my-16">
                 <div className=" flex flex-col gap-4">
                     <div className="flex flex-col gap-3 py-2">
                         <div className="flex items-center gap-3">

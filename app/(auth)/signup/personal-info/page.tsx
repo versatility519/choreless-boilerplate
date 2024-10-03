@@ -13,12 +13,11 @@ export default function PersonalInfoPage() {
             <div className="absolute left-8 top-8 md:right-8 ">
                 <Link href="/" className="flex items-center space-x-1.5">
                     <Image src={Logo} alt="logo" className='w-40' />
-                 
                 </Link>
             </div>
 
 
-            <div className="mx-4 flex w-full max-w-lg flex-col gap-3 rounded-3xl bg-white p-8 shadow-xl sm:mx-auto lg:my-16">
+            <div className="z-40 mx-4 flex w-full max-w-lg flex-col gap-3 rounded-3xl bg-white p-8 shadow-xl sm:mx-auto lg:my-16">
                 <div className=" flex flex-col gap-4">
                     <div className="flex w-full items-center py-4 text-start">
                         <Link href="/signup" className=""><LuChevronLeft size={40} className="text-black" /></Link>

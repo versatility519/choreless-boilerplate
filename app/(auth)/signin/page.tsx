@@ -23,7 +23,7 @@ export default function LoginPage() {
             </span> */}
         </Link>
       </div>
-      <div className="flex w-full max-w-lg flex-col items-center justify-center gap-3 rounded-3xl bg-white  py-8 shadow-xl md:my-16">
+      <div className="z-40 flex w-full max-w-lg flex-col items-center justify-center gap-3 rounded-3xl bg-white  py-8 shadow-xl md:my-16">
 
         <h1 className="font-walsheimMedium text-3xl text-black">Hello there!</h1>
         <p className="text-center font-walsheimRegular text-base text-gray-500">Enter your email to sign in to your account</p>

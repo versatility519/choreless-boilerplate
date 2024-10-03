@@ -30,7 +30,7 @@ export default function RegisterPage() {
 
   return (
     <div className=" flex  w-full flex-col justify-center lg:flex-row">
-      <div className="flex h-screen w-full flex-col items-center justify-center lg:w-1/2 lg:items-start">
+      <div className="flex h-screen w-full flex-col items-center justify-center px-4 lg:w-1/2 lg:items-start  ">
 
         <div className="absolute left-8 top-8 md:right-8 ">
           <Link href="/" className="flex items-center space-x-1.5">
@@ -38,7 +38,7 @@ export default function RegisterPage() {
           </Link>
         </div>
 
-        <div className=" mb-8 flex max-w-lg flex-col items-center justify-center gap-3 rounded-3xl bg-white   pt-16 shadow-xl lg:mx-auto lg:my-16">
+        <div className="z-40 mb-8 flex max-w-lg flex-col items-center justify-center gap-3 rounded-3xl bg-white  pt-16 shadow-xl lg:mx-auto lg:my-16 ">
           <p className="mb-4 px-2 text-center font-walsheimMedium text-3xl text-black sm:px-4 md:px-16">Ready to save 5+ hours every week?</p>
 
           <div className="flex w-full flex-col items-center justify-center gap-4 px-8">
