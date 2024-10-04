@@ -230,7 +230,7 @@ const SubscriptionPage: React.FC = () => {
     }
 
     return (
-        <div className="max-h-screen bg-gray-100">
+        <div className="h-screen bg-gray-100">
             {showNotificationModal && (
                 <div className="fixed inset-0 z-40 flex items-center justify-center bg-black bg-opacity-50 p-4" onClick={() => setShowNotificationModal(false)}>
                     <div className="w-full max-w-xl rounded-lg bg-white shadow-xl" onClick={(e) => e.stopPropagation()}>
@@ -332,7 +332,7 @@ const SubscriptionPage: React.FC = () => {
                     </div>
                 </div>
 
-                <div className='flex max-h-max w-full flex-col gap-8 overflow-y-auto bg-gray-100 shadow-md sm:px-12 md:bg-white md:py-12 lg:justify-start' style={{ maxHeight:'100vh',  overflowY: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                <div className='flex max-h-full w-full flex-col gap-8 overflow-y-auto bg-gray-100 shadow-md sm:px-12 md:bg-white md:py-12 lg:justify-start' style={{ maxHeight:'100vh',  overflowY: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                     <div className="w-full flex-col px-4 py-12 md:min-h-screen lg:max-w-[580px]  lg:px-4">
                         <div className='border-b pb-8'>
                             <h3 className="mb-4 font-walsheimMedium text-2xl sm:text-3xl">Select your choreless plan</h3>
