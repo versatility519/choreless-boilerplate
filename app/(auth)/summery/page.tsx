@@ -230,7 +230,7 @@ const SubscriptionPage: React.FC = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-100">
+        <div className="max-h-screen bg-gray-100">
             {showNotificationModal && (
                 <div className="fixed inset-0 z-40 flex items-center justify-center bg-black bg-opacity-50 p-4" onClick={() => setShowNotificationModal(false)}>
                     <div className="w-full max-w-xl rounded-lg bg-white shadow-xl" onClick={(e) => e.stopPropagation()}>
