@@ -26,7 +26,7 @@ export default {
     Resend({
       apiKey: env.RESEND_API_KEY,
       from: env.EMAIL_FROM,
-      sendVerificationRequest,
+      // sendVerificationRequest,
     }),
   ],
 } satisfies NextAuthConfig;
