@@ -15,7 +15,6 @@ import SummeryImg from '@/public/_static/summery.png'
 
 import { CiSearch } from "react-icons/ci";
 import { FaInfoCircle } from "react-icons/fa";
-
 import { IoMdInformationCircle, IoMdClose } from "react-icons/io";
 
 interface Plan {
@@ -61,7 +60,11 @@ const plans: Plan[] = [
             '200 lb / month family laundry base',
             'Always covered: Guaranteed weekly service',
             'Free pickup & delivery - we come to you',
-            '15% savings on family care services'
+            'Free $9.95 next day delivery',
+            'Standard 2 day delivery',
+            '15% savings on family care services',
+            '$20 monthly credit',
+            '1 Free comforter cleaning',
         ]
     }
 ]
@@ -85,14 +88,14 @@ const billingOptions: BillingOption[] = [
     {
         id: 'yearly',
         title: '3 FREE Months: Premium Annual',
-        typeName:'Premum Annual',
+        typeName: 'Premum Annual',
         description: 'Pay once, save more | Save $300 annually',
         price: 1750,
     },
     {
         id: 'yearly-flex',
         title: '2 FREE Months: Flex Annual',
-        typeName:'Flex Annual',
+        typeName: 'Flex Annual',
         description: 'Pay once, save more | Save $200 annually',
         price: 2000,
         installment: 1690,
@@ -281,13 +284,18 @@ const SubscriptionPage: React.FC = () => {
             <div className="mx-auto flex flex-col md:flex-row">
                 <div className="sticky top-0 flex w-full items-center justify-center text-center lg:justify-end">
                     <div className=" w-full flex-col p-4 sm:px-16 md:min-h-screen md:p-8 md:py-12 lg:max-w-[580px]">
-                        <div className="sticky left-8  top-8 md:absolute md:right-8 ">
+                        <div className="visible sticky  left-8 top-10 pt-4 md:absolute md:right-8 md:hidden">
                             <Link href="/" className="flex items-center space-x-1.5">
                                 <Image src={Logo} alt="logo" className='w-40' />
                             </Link>
                         </div>
                         <div className="absolute top-44 hidden  max-w-[480px] px-4 md:flex">
                             <main className='w-full text-left'>
+                                <div className=" hidden py-6 md:flex">
+                                    <Link href="/" className="flex items-center space-x-1.5">
+                                        <Image src={Logo} alt="logo" className='w-40' />
+                                    </Link>
+                                </div>
                                 <h2 className="mb-2 font-walsheimMedium text-3xl">Laundry Freedom at Your Fingertips</h2>
                                 <p className="mb-8 text-[#595959]">Choose your time-saving plan below</p>
 
@@ -343,16 +351,32 @@ const SubscriptionPage: React.FC = () => {
                                     </button>
                                 ))}
                             </div>
-                            <ul className="space-y-3">
-                                {selectedPlan.features.map((feature, index) => (
-                                    <li key={index} className="flex items-start">
-                                        <div>
-                                            <Check className="m-1 size-5 rounded-full bg-teal-500 text-white" />
-                                        </div>
-                                        <span className="ml-1 font-walsheimMedium text-[#595959]">{feature}</span>
-                                    </li>
-                                ))}
-                            </ul>
+
+                            {plans.map((plan) => (
+                                <div key={plan.name} className={selectedPlan.name === plan.name ? 'block' : 'hidden'}>
+                                    <ul className="space-y-3">
+                                        {plan.features.map((feature, index) => (
+                                            <li key={index} className="flex items-start">
+                                                <div>
+                                                    {plan.name === 'Choreless Unlimited' && index >= plan.features.length - 2 ? (
+                                                        <IoMdClose className="m-1 size-5 rounded-full bg-orange-600 text-white" />
+                                                    ) : (
+                                                        <Check className="m-1 size-5 rounded-full bg-teal-500 text-white" />
+                                                    )}
+                                                </div>
+                                                <span className={`ml-1 flex w-full items-center justify-between font-walsheimMedium ${plan.name === 'Choreless Unlimited' && index >= plan.features.length - 2 ? 'text-gray-400 line-through' : 'text-[#595959] '}`}>
+                                                    <p>{feature}</p>
+                                                    <p>
+                                                        {index === 1 && (
+                                                            <FaInfoCircle color='#85C6C0' size={18} />
+                                                        )}
+                                                    </p>
+                                                </span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))}
                         </div>
 
                         <div className='border-b py-8'>
