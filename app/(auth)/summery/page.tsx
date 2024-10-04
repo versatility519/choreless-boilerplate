@@ -365,7 +365,12 @@ const SubscriptionPage: React.FC = () => {
                                                     )}
                                                 </div>
                                                 <span className={`ml-1 flex w-full items-center justify-between font-walsheimMedium ${plan.name === 'Choreless Unlimited' && index >= plan.features.length - 2 ? 'text-gray-400 line-through' : 'text-[#595959] '}`}>
-                                                    <p>{feature}</p>
+                                                    <p>{plan.name === 'Choreless Unlimited' && index === 3 ? (
+                                                        <>
+                                                            <span className="text-gray-400 line-through">{feature.slice(0, 4)}</span>
+                                                            {feature.slice(4)}
+                                                        </>
+                                                    ) : feature}</p>
                                                     <p>
                                                         {index === 1 && (
                                                             <FaInfoCircle color='#85C6C0' size={18} />
