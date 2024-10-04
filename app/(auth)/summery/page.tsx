@@ -358,12 +358,12 @@ const SubscriptionPage: React.FC = () => {
                                             <li key={index} className="flex items-start">
                                                 <div>
                                                     {plan.name === 'Choreless Unlimited' && index >= plan.features.length - 2 ? (
-                                                        <IoMdClose className="m-1 size-5 rounded-full bg-orange-600 text-white" />
+                                                        <IoMdClose  size={20} className=" rounded-full bg-orange-600 text-white" />
                                                     ) : (
-                                                        <Check className="m-1 size-5 rounded-full bg-teal-500 text-white" />
+                                                        <Check  size={20} className=" rounded-full bg-teal-500 text-white" />
                                                     )}
                                                 </div>
-                                                <span className={`ml-1 flex w-full items-center justify-between font-walsheimMedium ${plan.name === 'Choreless Unlimited' && index >= plan.features.length - 2 ? 'text-gray-400 line-through' : 'text-[#595959] '}`}>
+                                                <span className={`ml-2 flex w-full items-center justify-between font-walsheimMedium ${plan.name === 'Choreless Unlimited' && index >= plan.features.length - 2 ? 'text-gray-400 line-through' : 'text-[#595959] '}`}>
                                                     <p>{plan.name === 'Choreless Unlimited' && index === 3 ? (
                                                         <>
                                                             <span className="text-gray-400 line-through">{feature.slice(0, 4)}</span>
@@ -372,7 +372,7 @@ const SubscriptionPage: React.FC = () => {
                                                     ) : feature}</p>
                                                     <p>
                                                         {index === 1 && (
-                                                            <FaInfoCircle color='#85C6C0' size={18} />
+                                                            <FaInfoCircle color='#85C6C0' size={20} />
                                                         )}
                                                     </p>
                                                 </span>
