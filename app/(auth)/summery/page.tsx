@@ -15,6 +15,7 @@ import SummeryImg from '@/public/_static/summery.png'
 
 import { CiSearch } from "react-icons/ci";
 import { FaInfoCircle } from "react-icons/fa";
+import { BsTrash3 } from "react-icons/bs";
 import { IoMdInformationCircle, IoMdClose } from "react-icons/io";
 
 interface Plan {
@@ -43,7 +44,7 @@ interface BillingOption {
 
 const plans: Plan[] = [
     {
-        name: 'Choreless Unlimited+',
+        name: 'Choreless Unlimited +',
         features: [
             '250 lb / month family laundry base',
             'No limits: Continuous service after monthly quota',
@@ -231,8 +232,8 @@ const SubscriptionPage: React.FC = () => {
     return (
         <div className="min-h-screen bg-gray-100">
             {showNotificationModal && (
-                <div className="fixed inset-0 z-40 flex items-center justify-center bg-black bg-opacity-50 p-4 ">
-                    <div className="w-full max-w-xl rounded-lg bg-white shadow-xl">
+                <div className="fixed inset-0 z-40 flex items-center justify-center bg-black bg-opacity-50 p-4" onClick={() => setShowNotificationModal(false)}>
+                    <div className="w-full max-w-xl rounded-lg bg-white shadow-xl" onClick={(e) => e.stopPropagation()}>
                         <div className="scrollbar-hide my-4 max-h-[90vh] w-full overflow-y-auto rounded-lg  bg-white p-6" style={{ scrollbarWidth: 'none' }}>
                             <div className="mb-4 flex items-start justify-between">
                                 <h2 className="font-walsheimMedium text-xl ">Flex Pay: Simplify Your Yearly Subscription</h2>
@@ -280,8 +281,8 @@ const SubscriptionPage: React.FC = () => {
             )}
 
             <div className="mx-auto flex flex-col md:flex-row">
-                <div className="sticky top-0 flex w-full items-center justify-center text-center lg:justify-end">
-                    <div className=" w-full flex-col p-4 sm:px-16 md:min-h-screen md:p-8 md:py-12 lg:max-w-[580px]">
+                <div className="sticky  flex  w-full items-center justify-center text-center lg:justify-end">
+                    <div className=" w-full flex-col px-4 sm:px-16 md:py-12 lg:max-w-[580px]">
                         <div className="visible sticky  left-8 top-10 pt-4 md:absolute md:right-8 md:hidden">
                             <Link href="/" className="flex items-center space-x-1.5">
                                 <Image src={Logo} alt="logo" className='w-40' />
@@ -331,12 +332,12 @@ const SubscriptionPage: React.FC = () => {
                     </div>
                 </div>
 
-                <div className='flex w-full flex-col gap-8 overflow-y-auto bg-gray-100 shadow-md sm:px-12 md:bg-white md:py-20 lg:justify-start' style={{ maxHeight: '100vh', overflowY: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                <div className='flex max-h-max w-full flex-col gap-8 overflow-y-auto bg-gray-100 shadow-md sm:px-12 md:bg-white md:py-12 lg:justify-start' style={{ maxHeight:'100vh',  overflowY: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                     <div className="w-full flex-col px-4 py-12 md:min-h-screen lg:max-w-[580px]  lg:px-4">
                         <div className='border-b pb-8'>
                             <h3 className="mb-4 font-walsheimMedium text-2xl sm:text-3xl">Select your choreless plan</h3>
                             <p className="mb-4 font-walsheimMedium text-xl">Choose your plan</p>
-                            <div className="mb-6 flex w-full flex-col gap-4 sm:flex-row xl:w-[70%]">
+                            <div className="mb-6 flex w-full flex-row gap-4 xl:w-[70%]">
                                 {plans.map((plan) => (
                                     <button
                                         key={plan.name}
@@ -415,8 +416,8 @@ const SubscriptionPage: React.FC = () => {
                                     </button>
                                 </div>
                                 {isModalOpen && (
-                                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
-                                        <div className="w-full max-w-xl rounded-lg bg-white p-6 shadow-xl">
+                                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4" onClick={() => handleModalToggle('isModalOpen', false)}>
+                                        <div className="w-full max-w-xl rounded-lg bg-white p-6 shadow-xl" onClick={(e) => e.stopPropagation()}>
                                             <div className='flex w-full items-center justify-between'>
                                                 <p className='font-walsheimMedium text-xl'>Choose Your Family Plan</p>
                                                 <IoMdClose size={24} onClick={() => handleModalToggle('isModalOpen', false)} className="cursor-pointer rounded-full border text-gray-400 shadow-sm hover:text-[#595959]" />
@@ -463,54 +464,63 @@ const SubscriptionPage: React.FC = () => {
                                     </p>
                                 </div>
                                 <div className='flex items-center gap-2'>
-                                    <Switch checked={isYearly} onChange={handlePlanChange} />
-                                </div>
-                            </div>
-                            {isYearlyModalOpen && (
-                                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
-                                    <div className="w-full max-w-xl rounded-lg bg-white px-6 py-4 shadow-xl">
-                                        <div className='flex items-center  justify-between py-2'>
-                                            <p className='my-2 font-walsheimRegular text-sm'>Choose the plan that fits your budget</p>
-                                            <IoMdClose size={24} onClick={() => handleModalToggle('isYearlyModalOpen', false)} className="cursor-pointer rounded-full border text-gray-400 shadow-sm hover:text-[#595959]" />
-                                        </div>
-                                        <div className='flex flex-col gap-2'>
-                                            {billingOptions.map((option) => (
-                                                <label
-                                                    key={option.id}
-                                                    className={`flex cursor-pointer items-center justify-between gap-2 rounded-lg border px-2 py-4 ${selectedBudget === option.id ? 'border-blue-500' : 'border-gray-200'
-                                                        }`}
-                                                    onClick={() => {
-                                                        handleYearlyClicked(option);
-                                                    }}
-                                                >
-                                                    <div className="flex flex-col">
-                                                        <p className="font-walsheimBold text-xl">{option.title}</p>
-                                                        <p className="font-walsheimRegular text-xs text-[#595959]">{option.description}</p>
-                                                    </div>
-                                                    <div className="flex flex-col items-center gap-2 text-nowrap text-right">
-                                                        <p className="font-walsheimBold text-xl">${option.price} / year</p>
-                                                    </div>
-                                                </label>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
-
-                            <div className="flex flex-col  gap-2 rounded-lg py-3">
-                                <div className="flex items-center">
-                                    <div className=' pr-1 '>
-                                        <CiSearch color='#85C6C0' size={30} />
-                                    </div>
-
-                                    <p className="ml-2 font-walsheimRegular text-xs md:text-base">
-                                        Track your laundry progress in the app. We&apos;ll deliver your laundry back to you in 2 business days. Laundry & linens are eligible for next-day delivery!
-                                    </p>
+                                    {!isYearly ? (
+                                        <Switch checked={isYearly} onChange={handlePlanChange} />
+                                    ) : (
+                                        <BsTrash3
+                                            size={18}
+                                            onClick={() => handlePlanChange(false)}
+                                            className="cursor-pointer text-gray-400 hover:text-[#595959]"
+                                        />
+                                    )}
                                 </div>
                             </div>
                         </div>
+                        {isYearlyModalOpen && (
+                            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4" onClick={() => handleModalToggle('isYearlyModalOpen', false)}>
+                                <div className="w-full max-w-xl rounded-lg bg-white px-6 py-4 shadow-xl" onClick={(e) => e.stopPropagation()}>
+                                    <div className='flex items-center  justify-between py-2'>
+                                        <p className='my-2 font-walsheimRegular text-sm'>Choose the plan that fits your budget</p>
+                                        <IoMdClose size={24} onClick={() => handleModalToggle('isYearlyModalOpen', false)} className="cursor-pointer rounded-full border text-gray-400 shadow-sm hover:text-[#595959]" />
+                                    </div>
+                                    <div className='flex flex-col gap-2'>
+                                        {billingOptions.map((option) => (
+                                            <label
+                                                key={option.id}
+                                                className={`flex cursor-pointer items-center justify-between gap-2 rounded-lg border px-2 py-4 ${selectedBudget === option.id ? 'border-blue-500' : 'border-gray-200'
+                                                    }`}
+                                                onClick={() => {
+                                                    handleYearlyClicked(option);
+                                                }}
+                                            >
+                                                <div className="flex flex-col">
+                                                    <p className="font-walsheimBold text-xl">{option.title}</p>
+                                                    <p className="font-walsheimRegular text-xs text-[#595959]">{option.description}</p>
+                                                </div>
+                                                <div className="flex flex-col items-center gap-2 text-nowrap text-right">
+                                                    <p className="font-walsheimBold text-xl">${option.price} / year</p>
+                                                </div>
+                                            </label>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        )}
 
-                        <div className='py-8'>
+                        <div className="flex flex-col  gap-2 rounded-lg py-3">
+                            <div className="flex items-center">
+                                <div className=' pr-1 '>
+                                    <CiSearch color='#85C6C0' size={30} />
+                                </div>
+
+                                <p className="ml-2 font-walsheimRegular text-xs md:text-base">
+                                    Track your laundry progress in the app. We&apos;ll deliver your laundry back to you in 2 business days. Laundry & linens are eligible for next-day delivery!
+                                </p>
+                            </div>
+                        </div>
+
+
+                        <div className=' my-4'>
                             <h3 className="mb-4 font-walsheimMedium text-xl">Payment method</h3>
                             <div className='w-full rounded-md border border-gray-300 px-4'>
                                 <div className="flex flex-col items-center justify-between border-b py-4">
@@ -535,22 +545,16 @@ const SubscriptionPage: React.FC = () => {
                                                 <span className=''>Unlimited guarantee</span>
                                                 <span
                                                     className="relative ml-1 cursor-pointer underline decoration-dotted"
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        setShowTooltip(!showTooltip);
-                                                    }}
+                                                    onMouseEnter={() => setShowTooltip(true)}
+                                                    onMouseLeave={() => setShowTooltip(false)}
                                                 >
                                                     <FaInfoCircle color='#85C6C0' />
                                                     {showTooltip && (
                                                         <div
-                                                            className="absolute bottom-full left-1/2 z-10 mb-2 w-64 -translate-x-1/2 rounded-lg bg-white p-2  text-black shadow-lg"
-                                                            onClick={(e) => {
-                                                                e.stopPropagation();
-                                                                setShowTooltip(false);
-                                                            }}
+                                                            className="absolute bottom-full left-1/2 z-10 mb-2 w-64 -translate-x-1/2 rounded-lg bg-white p-2 text-black shadow-lg"
                                                         >
                                                             <p className='font-walsheimMedium'>Exceed Allotment</p>
-                                                            <p className=" w-full text-justify font-walsheimMedium text-xs">Exceeded 250 lbs? Relax! Enjoy guaranteed multi-bag weekly service. We handle the loads, you focus on what matters most.</p>
+                                                            <p className="w-full text-justify font-walsheimMedium text-xs">Exceeded 250 lbs? Relax! Enjoy guaranteed multi-bag weekly service. We handle the loads, you focus on what matters most.</p>
                                                         </div>
                                                     )}
                                                 </span>
@@ -580,8 +584,8 @@ const SubscriptionPage: React.FC = () => {
                                 Add your payment information
                             </p>
                             {isAddPayment && (
-                                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50  ">
-                                    <Card className="mx-auto w-full max-w-md border-none bg-white text-black shadow-xl">
+                                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 px-4" onClick={handleAddPaymentClose}>
+                                    <Card className="mx-auto w-full max-w-md border-none bg-white text-black shadow-xl" onClick={(e) => e.stopPropagation()}>
                                         <CardHeader>
                                             <div className='flex justify-between'>
                                                 <CardTitle>Add payment information</CardTitle>
@@ -639,6 +643,7 @@ const SubscriptionPage: React.FC = () => {
                                 </div>
                             )}
                         </div>
+
                         <div className="mb-8 flex flex-col gap-4 py-4 text-center font-walsheimMedium">
                             <p className="w-full cursor-pointer rounded-full bg-black py-3 text-white">
                                 Pay and start subscription
@@ -649,8 +654,8 @@ const SubscriptionPage: React.FC = () => {
                         </div>
                     </div>
                 </div >
-            </div>
-        </div >
+            </div >
+        </div>
 
     )
 }

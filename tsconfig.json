@@ -33,6 +33,6 @@
     ".next/types/**/*.ts",
     ".contentlayer/generated",
     "contentlayer.config.ts"
-  ],
+, "app/(auth)/signup/personal-info/page.dtsx"  ],
   "exclude": ["node_modules"]
 }
