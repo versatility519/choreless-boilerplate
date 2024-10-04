@@ -332,7 +332,7 @@ const SubscriptionPage: React.FC = () => {
                     </div>
                 </div>
 
-                <div className='flex h-80 min-h-screen w-full flex-col gap-8 overflow-y-auto bg-gray-100 shadow-md sm:px-12 md:bg-white md:py-12 lg:justify-start' style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                <div className='flex min-h-screen w-full flex-col gap-8 overflow-y-auto bg-gray-100 shadow-md sm:px-12 md:bg-white md:py-12 lg:justify-start' style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                     <div className="top-6 w-full flex-col px-4 pt-4 md:min-h-screen lg:max-w-[580px] lg:px-4">
                         <div className='border-b pb-8'>
                             <h3 className="mb-4 font-walsheimMedium text-2xl sm:text-3xl">Select your choreless plan</h3>
