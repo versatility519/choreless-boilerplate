@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ChevronDown, Check } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -69,8 +69,6 @@ const plans: Plan[] = [
     }
 ]
 
-
-
 const memberOptions: MemberOption[] = [
     { members: 1, description: 'Perfect for individuals' },
     { members: 2, description: 'Perfect for couples' },
@@ -136,10 +134,12 @@ const SubscriptionPage: React.FC = () => {
     const [selectedBudget, setSelectedBudget] = useState<string>('')
     const [showNotificationModal, setShowNotificationModal] = useState(false)
 
-    const [cardNumber, setCardNumber] = useState('')
-    const [expiryMonth, setExpiryMonth] = useState('')
-    const [expiryYear, setExpiryYear] = useState('')
-    const [cvv, setCvv] = useState('')
+    const [cardDetails, setCardDetails] = useState({
+        number: '',
+        expiryMonth: '',
+        expiryYear: '',
+        cvv: ''
+    })
 
     const [showTooltip, setShowTooltip] = useState(false)
 
@@ -160,75 +160,73 @@ const SubscriptionPage: React.FC = () => {
         }
     }
 
-    const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const formattedValue = formatCardNumber(e.target.value)
-        setCardNumber(formattedValue)
+    const handleCardDetailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { id, value } = e.target
+        let formattedValue = value.replace(/[^0-9]/g, '')
+
+        if (id === 'cardNumber') {
+            formattedValue = formatCardNumber(value)
+        } else if (id === 'expiryMonth' || id === 'expiryYear') {
+            formattedValue = formattedValue.slice(0, 2)
+        } else if (id === 'cvv') {
+            formattedValue = formattedValue.slice(0, 3)
+        }
+
+        setCardDetails(prev => ({ ...prev, [id]: formattedValue }))
     }
 
-    const handleExpiryMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value.replace(/[^0-9]/g, '').slice(0, 2)
-        setExpiryMonth(value)
-    }
-
-    const handleExpiryYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value.replace(/[^0-9]/g, '').slice(0, 2)
-        setExpiryYear(value)
-    }
-
-    const handleCvvChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value.replace(/[^0-9]/g, '').slice(0, 3)
-        setCvv(value)
-    }
-
-    const handleClose = () => {
-        setIsModalOpen(false);
-    }
-
-    const handleOpen = () => {
-        setIsModalOpen(true);
-    }
-
-    const handleAddPaymentClose = () => {
-        setIsAddPayment(false);
-        setCardNumber('');
-        setExpiryMonth('');
-        setExpiryYear('');
-        setCvv('');
-    }
-
-    const handleAddPaymentOpen = () => {
-        setIsAddPayment(true);
-    }
-
-    const handleYearlyClose = () => {
-        setIsYearlyModalOpen(false);
-    }
-
-    const handleYearlyOpen = () => {
-        setIsYearlyModalOpen(true);
+    const handleModalToggle = (modalState: string, value: boolean) => {
+        switch (modalState) {
+            case 'isModalOpen':
+                setIsModalOpen(value)
+                break
+            case 'isAddPayment':
+                setIsAddPayment(value)
+                if (!value) {
+                    setCardDetails({ number: '', expiryMonth: '', expiryYear: '', cvv: '' })
+                }
+                break
+            case 'isYearlyModalOpen':
+                setIsYearlyModalOpen(value)
+                break
+            case 'showNotificationModal':
+                setShowNotificationModal(value)
+                break
+            default:
+                break
+        }
     }
 
     const handlePlanChange = (checked: boolean) => {
         setIsYearly(checked)
-        if (checked) handleYearlyOpen()
+        if (checked) handleModalToggle('isYearlyModalOpen', true)
         else {
-            setBasePerPerson(0);
-            setPerPerson(169);
-            setStepPerPerson(50);
-            setSelectedBudget('');
+            setBasePerPerson(0)
+            setPerPerson(169)
+            setStepPerPerson(50)
+            setSelectedBudget('')
         }
     }
-    const handleYearlyClicked = (option: any) => {
-        setBasePerPerson(2028);
-        setPerPerson(0);
-        setStepPerPerson(600);
-        setSelectedBudget(option.id);
-        handleYearlyClose();
+
+    const handleYearlyClicked = (option: BillingOption) => {
+        setBasePerPerson(2028)
+        setPerPerson(0)
+        setStepPerPerson(600)
+        setSelectedBudget(option.id)
+        handleModalToggle('isYearlyModalOpen', false)
     }
 
     useEffect(() => {
         setShowNotificationModal(true)
     }, [])
+
+    const handleAddPaymentClose = () => {
+        handleModalToggle('isAddPayment', false)
+    }
+
+    const handleAddPaymentOpen = () => {
+        handleModalToggle('isAddPayment', true)
+    }
 
     return (
         <div className="min-h-screen bg-gray-100">
@@ -388,7 +386,7 @@ const SubscriptionPage: React.FC = () => {
                             <h3 className="mb-4 font-walsheimMedium text-xl ">Select your family size</h3>
                             <div className=''>
                                 <div className='flex flex-row items-center justify-between gap-1 rounded-xl border border-[#85C6C0] bg-white p-4'
-                                    onClick={handleOpen}>
+                                    onClick={() => handleModalToggle('isModalOpen', true)}>
                                     <button
                                         className="flex w-full flex-col items-center justify-between text-left"
                                     >
@@ -421,7 +419,7 @@ const SubscriptionPage: React.FC = () => {
                                         <div className="w-full max-w-xl rounded-lg bg-white p-6 shadow-xl">
                                             <div className='flex w-full items-center justify-between'>
                                                 <p className='font-walsheimMedium text-xl'>Choose Your Family Plan</p>
-                                                <IoMdClose size={24} onClick={handleClose} className="cursor-pointer rounded-full border text-gray-400 shadow-sm hover:text-[#595959]" />
+                                                <IoMdClose size={24} onClick={() => handleModalToggle('isModalOpen', false)} className="cursor-pointer rounded-full border text-gray-400 shadow-sm hover:text-[#595959]" />
                                             </div>
                                             <p className='mt-2 text-xs'>Unlimited Laundry, Tailored to Your Household</p>
                                             <div className='my-2  max-h-[60vh] overflow-y-auto' style={{ scrollbarWidth: 'none' }}>
@@ -430,7 +428,7 @@ const SubscriptionPage: React.FC = () => {
                                                         key={option.members}
                                                         onClick={() => {
                                                             setSelectedMembers(option)
-                                                            handleClose();
+                                                            handleModalToggle('isModalOpen', false)
                                                         }}
                                                         className="hide-scrollbar my-2 w-full rounded-xl border-2 border-teal-500 p-4 text-left hover:bg-gray-100"
                                                     >
@@ -458,7 +456,7 @@ const SubscriptionPage: React.FC = () => {
                                             ? billingOptions.find(option => option.id === selectedBudget)?.title
                                             : 'Get up to three months FREE with yearly'}
                                     </p>
-                                    <p className='text-sm text-[#6F6F6F]' onClick={() => setShowNotificationModal(true)}>
+                                    <p className='text-sm text-[#6F6F6F]' onClick={() => handleModalToggle('showNotificationModal', true)}>
                                         {selectedBudget !== ''
                                             ? billingOptions.find(option => option.id === selectedBudget)?.description
                                             : 'Pay in 4 installments with Flex pay'}
@@ -473,7 +471,7 @@ const SubscriptionPage: React.FC = () => {
                                     <div className="w-full max-w-xl rounded-lg bg-white px-6 py-4 shadow-xl">
                                         <div className='flex items-center  justify-between py-2'>
                                             <p className='my-2 font-walsheimRegular text-sm'>Choose the plan that fits your budget</p>
-                                            <IoMdClose size={24} onClick={handleYearlyClose} className="cursor-pointer rounded-full border text-gray-400 shadow-sm hover:text-[#595959]" />
+                                            <IoMdClose size={24} onClick={() => handleModalToggle('isYearlyModalOpen', false)} className="cursor-pointer rounded-full border text-gray-400 shadow-sm hover:text-[#595959]" />
                                         </div>
                                         <div className='flex flex-col gap-2'>
                                             {billingOptions.map((option) => (
@@ -598,8 +596,8 @@ const SubscriptionPage: React.FC = () => {
                                                     <Input
                                                         id="cardNumber"
                                                         placeholder="1234 5678 9012 3456"
-                                                        value={cardNumber}
-                                                        onChange={handleCardNumberChange}
+                                                        value={cardDetails.number}
+                                                        onChange={(e) => handleCardDetailChange(e)}
                                                         maxLength={19}
                                                     />
                                                 </div>
@@ -609,8 +607,8 @@ const SubscriptionPage: React.FC = () => {
                                                         <Input
                                                             id="expiryMonth"
                                                             placeholder="MM"
-                                                            value={expiryMonth}
-                                                            onChange={handleExpiryMonthChange}
+                                                            value={cardDetails.expiryMonth}
+                                                            onChange={(e) => handleCardDetailChange(e)}
                                                             maxLength={2}
                                                         />
                                                     </div>
@@ -619,8 +617,8 @@ const SubscriptionPage: React.FC = () => {
                                                         <Input
                                                             id="expiryYear"
                                                             placeholder="YY"
-                                                            value={expiryYear}
-                                                            onChange={handleExpiryYearChange}
+                                                            value={cardDetails.expiryYear}
+                                                            onChange={(e) => handleCardDetailChange(e)}
                                                             maxLength={2}
                                                         />
                                                     </div>
@@ -629,8 +627,8 @@ const SubscriptionPage: React.FC = () => {
                                                         <Input
                                                             id="cvv"
                                                             placeholder="123"
-                                                            value={cvv}
-                                                            onChange={handleCvvChange}
+                                                            value={cardDetails.cvv}
+                                                            onChange={(e) => handleCardDetailChange(e)}
                                                             maxLength={3}
                                                         />
                                                     </div>
