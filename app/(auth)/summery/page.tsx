@@ -162,10 +162,6 @@ const SubscriptionPage: React.FC = () => {
             if (Number(formattedValue) > 12) {
                 formattedValue = '12'
             } else if (Number(formattedValue) < 1) {
-            } else {
-                if (formattedValue.length === 1) {
-                    formattedValue = formattedValue.padStart(2, '0')
-                }
             }
         } else if (id === 'expiryYear') {
             
