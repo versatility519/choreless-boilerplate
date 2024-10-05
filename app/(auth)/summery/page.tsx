@@ -334,9 +334,9 @@ const SubscriptionPage: React.FC = () => {
 
                 <div className='flex max-h-screen w-full flex-col gap-8 overflow-y-auto bg-gray-100 shadow-md sm:px-12 md:bg-white md:py-12 lg:justify-start' style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
                     {/* <div className="visible sticky top-0 z-50 max-h-screen bg-red-800 md:right-8 "> */}
-                        <Link href="/" className="visible sticky top-0 z-30  flex max-h-screen w-full items-center bg-gray-100 p-4 md:right-8 md:hidden">
-                            <Image src={Logo} alt="logo" className='w-40' />
-                        </Link>
+                    <Link href="/" className="visible sticky top-0 z-30  flex max-h-screen w-full items-center bg-gray-100 p-4 md:right-8 md:hidden">
+                        <Image src={Logo} alt="logo" className='w-40' />
+                    </Link>
                     {/* </div> */}
                     <div className=" max-h-screen w-full  flex-col px-4   lg:max-w-[580px] lg:px-4">
                         <div className=' '>
@@ -485,10 +485,11 @@ const SubscriptionPage: React.FC = () => {
                             {isYearlyModalOpen && (
                                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4" onClick={() => handleModalToggle('isYearlyModalOpen', false)}>
                                     <div className="w-full max-w-xl rounded-lg bg-white px-6 py-4 shadow-xl" onClick={(e) => e.stopPropagation()}>
-                                        <div className='flex items-center  justify-between py-2'>
-                                            <p className='my-2 font-walsheimRegular text-sm'>Choose the plan that fits your budget</p>
+                                        <div className='flex items-center  justify-between pt-2'>
+                                            <p className=' font-walsheimMedium text-xl'>Unlock Annual Savings</p>
                                             <IoMdClose size={24} onClick={() => handleModalToggle('isYearlyModalOpen', false)} className="cursor-pointer rounded-full border text-gray-400 shadow-sm hover:text-[#595959]" />
                                         </div>
+                                        <p className='my-1 font-walsheimRegular text-sm'>Choose the plan that fits your budget</p>
                                         <div className='flex flex-col gap-2'>
                                             {billingOptions.map((option) => (
                                                 <label
