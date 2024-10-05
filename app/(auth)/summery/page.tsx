@@ -162,7 +162,6 @@ const SubscriptionPage: React.FC = () => {
             if (Number(formattedValue) > 12) {
                 formattedValue = '12'
             } else if (Number(formattedValue) < 1) {
-                formattedValue = '01'
             } else {
                 formattedValue = formattedValue.padStart(2, '0')
             }
