@@ -145,20 +145,11 @@ const SubscriptionPage: React.FC = () => {
     const [showTooltip, setShowTooltip] = useState(false)
 
     const formatCardNumber = (value: string) => {
-        const v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '')
-        const matches = v.match(/\d{4,16}/g)
-        const match = matches && matches[0] || ''
-        const parts: string[] = []
-
-        for (let i = 0, len = match.length; i < len; i += 4) {
-            parts.push(match.substring(i, i + 4))
-        }
-
-        if (parts.length) {
-            return parts.join(' ')
-        } else {
-            return value
-        }
+            // Remove all non-digit characters
+            value = value.replace(/\D/g, '');
+            // Format the value by adding spaces every 4 digits
+            const formattedValue = value.replace(/(.{4})/g, '$1 ').trim();
+            return formattedValue;
     }
 
     const handleCardDetailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -167,10 +158,15 @@ const SubscriptionPage: React.FC = () => {
 
         if (id === 'cardNumber') {
             formattedValue = formatCardNumber(value)
-        } else if (id === 'expiryMonth' || id === 'expiryYear') {
-            formattedValue = formattedValue.slice(0, 2)
+        } else if (id === 'expiryMonth') {
+            if (Number(formattedValue) > 12) {
+                formattedValue = '12'
+            } else if (Number(formattedValue) < 1) {
+                formattedValue = '01'
+            }
+        } else if (id === 'expiryYear') {
+            
         } else if (id === 'cvv') {
-            formattedValue = formattedValue.slice(0, 3)
         }
 
         setCardDetails(prev => ({ ...prev, [id]: formattedValue }))
