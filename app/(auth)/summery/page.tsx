@@ -626,7 +626,7 @@ const SubscriptionPage: React.FC = () => {
                                                                 placeholder="YY"
                                                                 value={cardDetails.expiryYear}
                                                                 onChange={(e) => handleCardDetailChange(e)}
-                                                                maxLength={2}
+                                                                maxLength={4}
                                                             />
                                                         </div>
                                                         <div className="space-y-2">
