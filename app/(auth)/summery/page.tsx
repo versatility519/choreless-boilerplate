@@ -280,9 +280,9 @@ const SubscriptionPage: React.FC = () => {
                 </div>
             )}
 
-            <div className="mx-auto flex min-h-screen flex-col overflow-y-auto md:flex-row">
-                <div className="sticky top-0 flex w-full items-center justify-center text-center md:h-screen lg:justify-end">
-                    <div className="w-full flex-col px-4 sm:px-16 md:py-12 lg:max-w-[580px]">
+            <div className="mx-auto flex flex-col overflow-y-auto  md:flex-row">
+                <div className="sticky flex w-full items-center justify-center text-center md:h-screen lg:justify-end">
+                    <div className="absolute  w-full flex-col px-4 sm:px-16 md:py-12 lg:max-w-[580px]">
                         {/* <div className="visible sticky left-8 top-10 pt-4 md:absolute md:right-8 md:hidden">
                             <Link href="/" className="flex items-center space-x-1.5">
                                 <Image src={Logo} alt="logo" className='w-40' />
@@ -332,13 +332,13 @@ const SubscriptionPage: React.FC = () => {
                     </div>
                 </div>
 
-                <div className='flex max-h-screen w-full flex-col gap-8 overflow-y-auto bg-gray-100 shadow-md sm:px-12 md:bg-white md:py-12 lg:justify-start' style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-                    {/* <div className="visible sticky top-0 z-50 max-h-screen bg-red-800 md:right-8 "> */}
-                    <Link href="/" className="visible sticky top-0 z-30  flex max-h-screen w-full items-center bg-gray-100 p-4 md:right-8 md:hidden">
+                <div className='flex w-full flex-col gap-8   bg-gray-100 shadow-md sm:px-12 md:bg-white md:pb-4 md:pt-12 lg:justify-start' style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                    {/* <div className="visible sticky top-0 z-50 bg-red-800 md:right-8 "> */}
+                    <Link href="/" className="visible  z-30  flex w-full items-center bg-gray-100 p-4 md:right-8 md:hidden">
                         <Image src={Logo} alt="logo" className='w-40' />
                     </Link>
                     {/* </div> */}
-                    <div className=" max-h-screen w-full  flex-col px-4   lg:max-w-[580px] lg:px-4">
+                    <div className="  w-full flex-col px-4  lg:max-w-[580px] lg:px-4">
                         <div className=' '>
                             <div className='border-b pb-8'>
                                 <h3 className="mb-4 font-walsheimMedium text-2xl sm:text-3xl">Select your choreless plan</h3>
@@ -652,7 +652,7 @@ const SubscriptionPage: React.FC = () => {
                                 )}
                             </div>
 
-                            <div className="mb-8 flex flex-col gap-4 py-4 text-center font-walsheimMedium">
+                            <div className="flex flex-col gap-4 py-4 text-center font-walsheimMedium">
                                 <p className="w-full cursor-pointer rounded-full bg-black py-3 text-white">
                                     Pay and start subscription
                                 </p>
