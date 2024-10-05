@@ -234,7 +234,7 @@ const SubscriptionPage: React.FC = () => {
             {showNotificationModal && (
                 <div className="fixed inset-0 z-40 flex items-center justify-center bg-black bg-opacity-50 p-4" onClick={() => setShowNotificationModal(false)}>
                     <div className="w-full max-w-xl rounded-lg bg-white shadow-xl" onClick={(e) => e.stopPropagation()}>
-                        <div className="scrollbar-hide my-4 max-h-[90vh] w-full overflow-y-auto rounded-lg  bg-white p-6" style={{ scrollbarWidth: 'none' }}>
+                        <div className="scrollbar-hide my-1 max-h-[92vh] w-full overflow-y-auto rounded-lg  bg-white px-6 py-4" style={{ scrollbarWidth: 'none' }}>
                             <div className="mb-4 flex items-start justify-between">
                                 <h2 className="font-walsheimMedium text-xl ">Flex Pay: Simplify Your Yearly Subscription</h2>
                                 <IoMdClose size={24} onClick={() => setShowNotificationModal(false)} className="cursor-pointer rounded-full border text-gray-400 shadow-sm hover:text-[#595959]" />
@@ -280,7 +280,7 @@ const SubscriptionPage: React.FC = () => {
                 </div>
             )}
 
-            <div className="mx-auto flex min-h-screen  flex-col md:flex-row">
+            <div className="mx-auto flex min-h-screen flex-col overflow-y-auto md:flex-row">
                 <div className="sticky top-0 flex w-full items-center justify-center text-center md:h-screen lg:justify-end">
                     <div className="w-full flex-col px-4 sm:px-16 md:py-12 lg:max-w-[580px]">
                         {/* <div className="visible sticky left-8 top-10 pt-4 md:absolute md:right-8 md:hidden">
@@ -288,7 +288,7 @@ const SubscriptionPage: React.FC = () => {
                                 <Image src={Logo} alt="logo" className='w-40' />
                             </Link>
                         </div> */}
-                        <div className="  top-44 hidden max-w-[480px] px-4 md:flex">
+                        <div className="top-44 hidden max-w-[480px] px-4 md:flex">
                             <main className='w-full text-left'>
                                 <div className="hidden py-6 md:flex">
                                     <Link href="/" className="flex items-center space-x-1.5">
@@ -332,15 +332,14 @@ const SubscriptionPage: React.FC = () => {
                     </div>
                 </div>
 
-                <div className='flex min-h-screen w-full flex-col gap-8 overflow-y-auto bg-gray-100 shadow-md sm:px-12 md:bg-white md:py-12 lg:justify-start' style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-                    <div className=" w-full flex-col px-4 pt-4 md:min-h-screen lg:max-w-[580px] lg:px-4">
-                        <div className="visible sticky  top-6 max-h-screen md:right-8 md:hidden">
-                            <Link href="/" className="flex items-center space-x-1.5">
-                                <Image src={Logo} alt="logo" className='w-40' />
-                            </Link>
-                        </div>
-
-                        <div className='mt-6 overflow-y-auto'>
+                <div className='flex max-h-screen w-full flex-col gap-8 overflow-y-auto bg-gray-100 shadow-md sm:px-12 md:bg-white md:py-12 lg:justify-start' style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                    {/* <div className="visible sticky top-0 z-50 max-h-screen bg-red-800 md:right-8 "> */}
+                        <Link href="/" className="visible sticky top-0 z-30  flex max-h-screen w-full items-center bg-gray-100 p-4 md:right-8 md:hidden">
+                            <Image src={Logo} alt="logo" className='w-40' />
+                        </Link>
+                    {/* </div> */}
+                    <div className=" max-h-screen w-full  flex-col px-4   lg:max-w-[580px] lg:px-4">
+                        <div className=' '>
                             <div className='border-b pb-8'>
                                 <h3 className="mb-4 font-walsheimMedium text-2xl sm:text-3xl">Select your choreless plan</h3>
                                 <p className="mb-4 font-walsheimMedium text-xl">Choose your plan</p>
