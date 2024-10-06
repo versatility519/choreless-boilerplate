@@ -278,11 +278,6 @@ const SubscriptionPage: React.FC = () => {
             <div className="mx-auto flex flex-col overflow-y-auto  md:flex-row">
                 <div className="sticky flex w-full items-center justify-center text-center md:h-screen lg:justify-end">
                     <div className="absolute  w-full flex-col px-4 sm:px-16 md:py-12 lg:max-w-[580px]">
-                        {/* <div className="visible sticky left-8 top-10 pt-4 md:absolute md:right-8 md:hidden">
-                            <Link href="/" className="flex items-center space-x-1.5">
-                                <Image src={Logo} alt="logo" className='w-40' />
-                            </Link>
-                        </div> */}
                         <div className="top-44 hidden max-w-[480px] px-4 md:flex">
                             <main className='w-full text-left'>
                                 <div className="hidden py-6 md:flex">
