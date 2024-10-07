@@ -180,7 +180,7 @@ export default function PersonalInfoPage() {
             try {
                 const token = localStorage.getItem('token');
                 console.log("============================>", personalInfo);
-                const newCustomer = await fetch('https://api.starchup.com/api/v2/qCustomers', {
+                const newCustomer = await fetch('https://api.starchup.com/api/v2/Customers', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
