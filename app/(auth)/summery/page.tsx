@@ -323,11 +323,9 @@ const SubscriptionPage: React.FC = () => {
                 </div>
 
                 <div className='flex w-full flex-col gap-8   bg-gray-100 shadow-md sm:px-12 md:bg-white md:pb-4 md:pt-12 lg:justify-start' style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-                    {/* <div className="visible sticky top-0 z-50 bg-red-800 md:right-8 "> */}
                     <Link href="/" className="visible  z-30  flex w-full items-center bg-gray-100 p-4 md:right-8 md:hidden">
                         <Image src={Logo} alt="logo" className='w-40' />
                     </Link>
-                    {/* </div> */}
                     <div className="  w-full flex-col px-4  lg:max-w-[580px] lg:px-4">
                         <div className=' '>
                             <div className='border-b pb-8'>
@@ -655,7 +653,6 @@ const SubscriptionPage: React.FC = () => {
                 </div >
             </div >
         </div>
-
     )
 }
 
