@@ -12,8 +12,8 @@ import email from "next-auth/providers/email";
 export default {
   providers: [
     GoogleProvider({
-      clientId: env.GOOGLE_CLIENT_ID,
-      clientSecret: env.GOOGLE_CLIENT_SECRET,
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
     FacebookProvider({
       clientId: process.env.FACEBOOK_CLIENT_ID,
@@ -28,5 +28,9 @@ export default {
       from: env.EMAIL_FROM,
       // sendVerificationRequest,
     }),
+
   ],
+  session: {
+    strategy: 'jwt',
+  },
 } satisfies NextAuthConfig;
