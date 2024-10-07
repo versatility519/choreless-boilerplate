@@ -56,20 +56,15 @@ export default function RegisterPage() {
             </Suspense>
           </div>
 
-          {/* <div className="flex gap-2 items-center text-center  text-gray-600"> */}
           <Link href="/signin">
             <p className="py-8 text-center font-walsheimRegular text-sm text-blue-500 hover:underline">
               Already have an account? Log in
             </p>
           </Link>
-          {/* </div> */}
         </div>
       </div>
 
       <div className="relative hidden w-full lg:flex lg:h-screen lg:w-1/2">
-
-        <Image src={Landing} alt="logo" className="h-72 w-full rounded-[2rem] object-cover px-4 lg:h-full lg:rounded-none  lg:px-0  " />
-
         <div className="absolute inset-0 flex justify-center  ">
           <Image src={Landing} alt="logo" className="h-72 w-full rounded-[2rem] object-cover lg:h-full lg:rounded-none lg:px-0" />
           <div className="absolute inset-0 flex items-end justify-center pb-28">
