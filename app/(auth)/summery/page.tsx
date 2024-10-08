@@ -326,7 +326,7 @@ const SubscriptionPage: React.FC = () => {
                     <Link href="/" className="visible  z-30  flex w-full items-center bg-gray-100 p-4 md:right-8 md:hidden">
                         <Image src={Logo} alt="logo" className='w-40' />
                     </Link>
-                    <div className="  w-full flex-col px-4  lg:max-w-[580px] lg:px-4">
+                    <div className=" w-full flex-col px-4  lg:max-w-[580px] lg:px-4">
                         <div className=' '>
                             <div className='border-b border-gray-300 pb-8'>
                                 <h3 className="mb-4 font-walsheimMedium text-2xl sm:text-3xl">Select your choreless plan</h3>
@@ -514,7 +514,7 @@ const SubscriptionPage: React.FC = () => {
                             <div className='py-4'>
                                 <h3 className="my-4 font-walsheimMedium text-xl">Payment method</h3>
                                 <div className='w-full rounded-md border border-gray-300 px-4'>
-                                    <div className="flex flex-col items-center justify-between border-b py-4">
+                                    <div className="flex flex-col items-center justify-between border-b  border-gray-300 py-4">
                                         <p className='w-full py-1 font-walsheimMedium text-xl'>Choreless Unlimited+</p>
 
                                         <div className='flex w-full items-center justify-between'>
@@ -558,7 +558,7 @@ const SubscriptionPage: React.FC = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="flex items-center justify-between border-b py-4">
+                                    <div className="flex items-center justify-between border-b   border-gray-300 py-4">
                                         <span className='font-walsheimRegular text-[#595959]'>Welcome discount</span>
                                         <span className="font-walsheimBold text-teal-500">-$50</span>
                                     </div>
