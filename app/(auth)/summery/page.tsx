@@ -145,11 +145,11 @@ const SubscriptionPage: React.FC = () => {
     const [showTooltip, setShowTooltip] = useState(false)
 
     const formatCardNumber = (value: string) => {
-            // Remove all non-digit characters
-            value = value.replace(/\D/g, '');
-            // Format the value by adding spaces every 4 digits
-            const formattedValue = value.replace(/(.{4})/g, '$1 ').trim();
-            return formattedValue;
+        // Remove all non-digit characters
+        value = value.replace(/\D/g, '');
+        // Format the value by adding spaces every 4 digits
+        const formattedValue = value.replace(/(.{4})/g, '$1 ').trim();
+        return formattedValue;
     }
 
     const handleCardDetailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -164,7 +164,7 @@ const SubscriptionPage: React.FC = () => {
             } else if (Number(formattedValue) < 1) {
             }
         } else if (id === 'expiryYear') {
-            
+
         } else if (id === 'cvv') {
         }
 
@@ -328,7 +328,7 @@ const SubscriptionPage: React.FC = () => {
                     </Link>
                     <div className="  w-full flex-col px-4  lg:max-w-[580px] lg:px-4">
                         <div className=' '>
-                            <div className='border-b pb-8'>
+                            <div className='border-b border-gray-300 pb-8'>
                                 <h3 className="mb-4 font-walsheimMedium text-2xl sm:text-3xl">Select your choreless plan</h3>
                                 <p className="mb-4 font-walsheimMedium text-xl">Choose your plan</p>
                                 <div className="mb-6 flex w-full flex-row gap-4 xl:w-[70%]">
@@ -377,73 +377,71 @@ const SubscriptionPage: React.FC = () => {
                                 ))}
                             </div>
 
-                            <div className='border-b py-8'>
+                            <div className='border-b border-gray-300 py-8'>
                                 <h3 className="mb-4 font-walsheimMedium text-xl ">Select your family size</h3>
-                                <div className=''>
-                                    <div className='flex flex-row items-center justify-between gap-1 rounded-xl border border-[#85C6C0] bg-white p-4'
-                                        onClick={() => handleModalToggle('isModalOpen', true)}>
-                                        <button
-                                            className="flex w-full flex-col items-center justify-between text-left"
-                                        >
-                                            <div className='flex w-full justify-between'>
-                                                <div className='flex flex-col gap-1'>
-                                                    <span className="font-walsheimBold text-xl">{selectedMembers.members} members</span>
-                                                    <p className="text-[#595959]">{selectedMembers.description}</p>
-                                                </div>
-
-                                                <div className='flex items-center'>
-                                                    <div className="flex flex-col gap-1 text-right">
-                                                        <span className="flex font-walsheimBold text-xl">
-                                                            <p className='text-black'>${(selectedMembers.members - 1) * stepPerPerson + perPerson + basePerPerson}</p>
-                                                            <p className='text-[#595959]'>/ mo</p>
-                                                        </span>
-                                                        <p className="text-[#595959]">{(selectedMembers.members - 1) * 40 + lbPerson} lb - ∞</p>
-                                                    </div>
-                                                    <div className='items-center'>
-                                                        <ChevronDown className="size-10 cursor-pointer " />
-                                                    </div>
-                                                </div>
+                                <div className='flex flex-row items-center justify-between gap-1 rounded-xl border border-[#85C6C0] bg-white p-4'
+                                    onClick={() => handleModalToggle('isModalOpen', true)}>
+                                    <button
+                                        className="flex w-full flex-col items-center justify-between text-left"
+                                    >
+                                        <div className='flex w-full justify-between'>
+                                            <div className='flex flex-col gap-1'>
+                                                <span className="font-walsheimBold text-xl">{selectedMembers.members} members</span>
+                                                <p className="text-[#595959]">{selectedMembers.description}</p>
                                             </div>
-                                            <p className="w-full font-walsheimRegular text-sm text-[#595959]">
-                                                Exceeded {(selectedMembers.members - 1) * 40 + lbPerson} lbs? Relax! Enjoy {selectedMembers.members} bags/week guaranteed service.
-                                            </p>
-                                        </button>
-                                    </div>
-                                    {isModalOpen && (
-                                        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4" onClick={() => handleModalToggle('isModalOpen', false)}>
-                                            <div className="w-full max-w-xl rounded-lg bg-white p-6 shadow-xl" onClick={(e) => e.stopPropagation()}>
-                                                <div className='flex w-full items-center justify-between'>
-                                                    <p className='font-walsheimMedium text-xl'>Choose Your Family Plan</p>
-                                                    <IoMdClose size={24} onClick={() => handleModalToggle('isModalOpen', false)} className="cursor-pointer rounded-full border text-gray-400 shadow-sm hover:text-[#595959]" />
+
+                                            <div className='flex items-center'>
+                                                <div className="flex flex-col gap-1 text-right">
+                                                    <span className="flex font-walsheimBold text-xl">
+                                                        <p className='text-black'>${(selectedMembers.members - 1) * stepPerPerson + perPerson + basePerPerson}</p>
+                                                        <p className='text-[#595959]'>/ mo</p>
+                                                    </span>
+                                                    <p className="text-[#595959]">{(selectedMembers.members - 1) * 40 + lbPerson} lb/ mo</p>
                                                 </div>
-                                                <p className='mt-2 text-xs'>Unlimited Laundry, Tailored to Your Household</p>
-                                                <div className='my-2  max-h-[60vh] overflow-y-auto' style={{ scrollbarWidth: 'none' }}>
-                                                    {memberOptions.map((option) => (
-                                                        <button
-                                                            key={option.members}
-                                                            onClick={() => {
-                                                                setSelectedMembers(option)
-                                                                handleModalToggle('isModalOpen', false)
-                                                            }}
-                                                            className="hide-scrollbar my-2 w-full rounded-xl border-2 border-teal-500 p-4 text-left hover:bg-gray-100"
-                                                        >
-                                                            <div className="flex items-center justify-between">
-                                                                <div>
-                                                                    <span className="font-walsheimBold text-xl">{option.members} members</span>
-                                                                    <p className="mt-2 font-walsheimRegular text-base text-[#595959]">{option.description}</p>
-                                                                </div>
-                                                                <div className="text-right ">
-                                                                    <span className=" "><b className='font-walsheimBold text-xl'>${(option.members - 1) * stepPerPerson + perPerson + basePerPerson}</b> / mo</span>
-                                                                    <p className="mt-2 font-walsheimRegular text-base text-[#595959]">{(option.members - 1) * 40 + lbPerson} lb / mo</p>
-                                                                </div>
-                                                            </div>
-                                                        </button>
-                                                    ))}
+                                                <div className='items-center'>
+                                                    <ChevronDown className="size-10 cursor-pointer " />
                                                 </div>
                                             </div>
                                         </div>
-                                    )}
+                                        <p className="w-full font-walsheimRegular text-sm text-[#595959]">
+                                            Exceeded {(selectedMembers.members - 1) * 40 + lbPerson} lbs? Relax! Enjoy {selectedMembers.members} bags/week guaranteed service.
+                                        </p>
+                                    </button>
                                 </div>
+                                {isModalOpen && (
+                                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4" onClick={() => handleModalToggle('isModalOpen', false)}>
+                                        <div className="w-full max-w-xl rounded-lg bg-white p-6 shadow-xl" onClick={(e) => e.stopPropagation()}>
+                                            <div className='flex w-full items-center justify-between'>
+                                                <p className='font-walsheimMedium text-xl'>Choose Your Family Plan</p>
+                                                <IoMdClose size={24} onClick={() => handleModalToggle('isModalOpen', false)} className="cursor-pointer rounded-full border text-gray-400 shadow-sm hover:text-[#595959]" />
+                                            </div>
+                                            <p className='mt-2 text-xs'>Unlimited Laundry, Tailored to Your Household</p>
+                                            <div className='my-2  max-h-[60vh] overflow-y-auto' style={{ scrollbarWidth: 'none' }}>
+                                                {memberOptions.map((option) => (
+                                                    <button
+                                                        key={option.members}
+                                                        onClick={() => {
+                                                            setSelectedMembers(option)
+                                                            handleModalToggle('isModalOpen', false)
+                                                        }}
+                                                        className="hide-scrollbar my-2 w-full rounded-xl border-2 border-teal-500 p-4 text-left hover:bg-gray-100"
+                                                    >
+                                                        <div className="flex items-center justify-between">
+                                                            <div>
+                                                                <span className="font-walsheimBold text-xl">{option.members} members</span>
+                                                                <p className="mt-2 font-walsheimRegular text-base text-[#595959]">{option.description}</p>
+                                                            </div>
+                                                            <div className="text-right ">
+                                                                <span className=" "><b className='font-walsheimBold text-xl'>${(option.members - 1) * stepPerPerson + perPerson + basePerPerson}</b> / mo</span>
+                                                                <p className="mt-2 font-walsheimRegular text-base text-[#595959]">{(option.members - 1) * 40 + lbPerson} lb / mo</p>
+                                                            </div>
+                                                        </div>
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
                                 <div className='mt-4 flex cursor-pointer items-center justify-between' >
                                     <div className='flex flex-col gap-2'>
                                         <p className="text-sm text-[#595959]">
@@ -469,41 +467,40 @@ const SubscriptionPage: React.FC = () => {
                                         )}
                                     </div>
                                 </div>
-                            </div>
-                            {isYearlyModalOpen && (
-                                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4" onClick={() => handleModalToggle('isYearlyModalOpen', false)}>
-                                    <div className="w-full max-w-xl rounded-lg bg-white px-6 py-4 shadow-xl" onClick={(e) => e.stopPropagation()}>
-                                        <div className='flex items-center  justify-between pt-2'>
-                                            <p className=' font-walsheimMedium text-xl'>Unlock Annual Savings</p>
-                                            <IoMdClose size={24} onClick={() => handleModalToggle('isYearlyModalOpen', false)} className="cursor-pointer rounded-full border text-gray-400 shadow-sm hover:text-[#595959]" />
-                                        </div>
-                                        <p className='my-1 font-walsheimRegular text-sm'>Choose the plan that fits your budget</p>
-                                        <div className='flex flex-col gap-2'>
-                                            {billingOptions.map((option) => (
-                                                <label
-                                                    key={option.id}
-                                                    className={`flex cursor-pointer items-center justify-between gap-2 rounded-lg border px-2 py-4 ${selectedBudget === option.id ? 'border-blue-500' : 'border-gray-200'
-                                                        }`}
-                                                    onClick={() => {
-                                                        handleYearlyClicked(option);
-                                                    }}
-                                                >
-                                                    <div className="flex flex-col">
-                                                        <p className="font-walsheimBold text-xl">{option.title}</p>
-                                                        <p className="font-walsheimRegular text-xs text-[#595959]">{option.description}</p>
-                                                    </div>
-                                                    <div className="flex flex-col items-center gap-2 text-nowrap text-right">
-                                                        <p className="font-walsheimBold text-xl">${option.price} / year</p>
-                                                    </div>
-                                                </label>
-                                            ))}
+
+                                {isYearlyModalOpen && (
+                                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4" onClick={() => handleModalToggle('isYearlyModalOpen', false)}>
+                                        <div className="w-full max-w-xl rounded-lg bg-white px-6 py-4 shadow-xl" onClick={(e) => e.stopPropagation()}>
+                                            <div className='flex items-center  justify-between pt-2'>
+                                                <p className=' font-walsheimMedium text-xl'>Unlock Annual Savings</p>
+                                                <IoMdClose size={24} onClick={() => handleModalToggle('isYearlyModalOpen', false)} className="cursor-pointer rounded-full border text-gray-400 shadow-sm hover:text-[#595959]" />
+                                            </div>
+                                            <p className='my-1 font-walsheimRegular text-sm'>Choose the plan that fits your budget</p>
+                                            <div className='flex flex-col gap-2'>
+                                                {billingOptions.map((option) => (
+                                                    <label
+                                                        key={option.id}
+                                                        className={`flex cursor-pointer items-center justify-between gap-2 rounded-lg border px-2 py-4 ${selectedBudget === option.id ? 'border-blue-500' : 'border-gray-200'
+                                                            }`}
+                                                        onClick={() => {
+                                                            handleYearlyClicked(option);
+                                                        }}
+                                                    >
+                                                        <div className="flex flex-col">
+                                                            <p className="font-walsheimBold text-xl">{option.title}</p>
+                                                            <p className="font-walsheimRegular text-xs text-[#595959]">{option.description}</p>
+                                                        </div>
+                                                        <div className="flex flex-col items-center gap-2 text-nowrap text-right">
+                                                            <p className="font-walsheimBold text-xl">${option.price} / year</p>
+                                                        </div>
+                                                    </label>
+                                                ))}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            )}
+                                )}
 
-                            <div className="flex flex-col  gap-2 rounded-lg py-3">
-                                <div className="flex items-center">
+                                <div className="flex items-center gap-2 rounded-lg py-3">
                                     <div className=' pr-1 '>
                                         <CiSearch color='#85C6C0' size={30} />
                                     </div>
@@ -514,9 +511,8 @@ const SubscriptionPage: React.FC = () => {
                                 </div>
                             </div>
 
-
-                            <div className=' my-4'>
-                                <h3 className="mb-4 font-walsheimMedium text-xl">Payment method</h3>
+                            <div className='py-4'>
+                                <h3 className="my-4 font-walsheimMedium text-xl">Payment method</h3>
                                 <div className='w-full rounded-md border border-gray-300 px-4'>
                                     <div className="flex flex-col items-center justify-between border-b py-4">
                                         <p className='w-full py-1 font-walsheimMedium text-xl'>Choreless Unlimited+</p>
