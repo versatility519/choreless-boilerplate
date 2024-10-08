@@ -570,7 +570,7 @@ const SubscriptionPage: React.FC = () => {
                             </div>
 
                             <div className=''>
-                                <p className='w-full cursor-pointer rounded-lg border p-4 font-walsheimMedium text-xl text-black'
+                                <p className='w-full cursor-pointer rounded-lg border border-gray-300 p-4 font-walsheimMedium text-xl text-black'
                                     onClick={handleAddPaymentOpen}>
                                     Add your payment information
                                 </p>
