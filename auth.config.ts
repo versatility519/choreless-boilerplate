@@ -30,7 +30,5 @@ export default {
     }),
 
   ],
-  session: {
-    strategy: 'jwt',
-  },
+
 } satisfies NextAuthConfig;
