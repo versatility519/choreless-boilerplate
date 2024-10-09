@@ -26,8 +26,8 @@ export async function generateUserStripe(priceId: string) {
           quantity: 1
         }
       ],
-      success_url: "http://localhost:3000",
-      cancel_url: "http://localhost:3000",
+      success_url: "https://choreless-laundry.vercel.app/summery",
+      cancel_url: "https://choreless-laundry.vercel.app/summery",
       mode: "subscription",
       customer_email: "assassin.william519@gmail.com",
     });
