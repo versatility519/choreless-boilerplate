@@ -44,5 +44,15 @@ export const env = createEnv({
       process.env.NEXT_PUBLIC_STRIPE_BUSINESS_MONTHLY_PLAN_ID,
     NEXT_PUBLIC_STRIPE_BUSINESS_YEARLY_PLAN_ID:
       process.env.NEXT_PUBLIC_STRIPE_BUSINESS_YEARLY_PLAN_ID,
+      plan1: process.env.NEXT_PUBLIC_PLAN1,
+      plan2: process.env.NEXT_PUBLIC_PLAN2,
+      plan3: process.env.NEXT_PUBLIC_PLAN3,
+      plan4: process.env.NEXT_PUBLIC_PLAN4,
+      plan5: process.env.NEXT_PUBLIC_PLAN5,
+      plan6: process.env.NEXT_PUBLIC_PLAN6,
+      plan7: process.env.NEXT_PUBLIC_PLAN7,
+      plan8: process.env.NEXT_PUBLIC_PLAN8,
+      plan9: process.env.NEXT_PUBLIC_PLAN9,
+      plan10: process.env.NEXT_PUBLIC_PLAN10,
   },
 });

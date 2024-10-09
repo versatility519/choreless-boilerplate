@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useTransition } from 'react'
 import { ChevronDown, Check } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -17,6 +17,9 @@ import { CiSearch } from "react-icons/ci";
 import { FaInfoCircle } from "react-icons/fa";
 import { BsTrash3 } from "react-icons/bs";
 import { IoMdInformationCircle, IoMdClose } from "react-icons/io";
+
+import { generateUserStripe } from '@/actions/generate-stripe';
+// import { generateUserStripe } from '@/actions/generate-user-stripe';
 
 interface Plan {
     name: string
@@ -134,6 +137,8 @@ const SubscriptionPage: React.FC = () => {
     const [isAddPayment, setIsAddPayment] = useState(false)
     const [selectedBudget, setSelectedBudget] = useState<string>('')
     const [showNotificationModal, setShowNotificationModal] = useState(false)
+    const [isLoading, setIsLoading] = useState(false);
+    const [planIdObj, setPlanIdObj] = useState<{ [key: string]: string }>({})
 
     const [cardDetails, setCardDetails] = useState({
         cardNumber: '',
@@ -214,7 +219,22 @@ const SubscriptionPage: React.FC = () => {
 
     useEffect(() => {
         setShowNotificationModal(true)
-    }, [])
+        setPlanIdObj({
+            'plan1': process.env.NEXT_PUBLIC_PLAN1 || '',
+            'plan2': process.env.NEXT_PUBLIC_PLAN2 || '',
+            'plan3': process.env.NEXT_PUBLIC_PLAN3 || '',
+            'plan4': process.env.NEXT_PUBLIC_PLAN4 || '',
+            'plan5': process.env.NEXT_PUBLIC_PLAN5 || '',
+            'plan6': process.env.NEXT_PUBLIC_PLAN6 || '',
+            'plan7': process.env.NEXT_PUBLIC_PLAN7 || '',
+            'plan8': process.env.NEXT_PUBLIC_PLAN8 || '',
+            'plan9': process.env.NEXT_PUBLIC_PLAN9 || '',
+            'plan10': process.env.NEXT_PUBLIC_PLAN10 || '',
+        })
+    }, []);
+    useEffect(() => {
+        console.log("Loaded", planIdObj)
+    }, [planIdObj])
 
     const handleAddPaymentClose = () => {
         handleModalToggle('isAddPayment', false)
@@ -223,6 +243,29 @@ const SubscriptionPage: React.FC = () => {
     const handleAddPaymentOpen = () => {
         handleModalToggle('isAddPayment', true)
     }
+
+    const handlePayAndStartSubscription = async () => {
+        setIsLoading(true);
+        try {
+            const planId = `plan${selectedMembers.members}`;
+            console.log("PlanIdObj", planIdObj);
+            const priceId = planIdObj[planId];
+            console.log("PlanId", priceId);
+
+            const result = await generateUserStripe(priceId);
+
+            // if (result.status === 'success' && result.stripeUrl) {
+            //     window.location.href = result.stripeUrl;
+            // } else {
+            //     throw new Error('Failed to generate Stripe URL');
+            // }
+        } catch (error) {
+            console.error('Error generating Stripe session:', error);
+            setError('Failed to generate Stripe session. Please try again.');
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     return (
         <div className="min-h-screen bg-gray-100">
@@ -637,9 +680,13 @@ const SubscriptionPage: React.FC = () => {
                             </div>
 
                             <div className="flex flex-col gap-4 py-4 text-center font-walsheimMedium">
-                                <p className="w-full cursor-pointer rounded-full bg-black py-3 text-white">
-                                    Pay and start subscription
-                                </p>
+                                <button
+                                    className={`w-full cursor-pointer rounded-full bg-black py-3 text-white ${isLoading ? 'opacity-50' : ''}`}
+                                    onClick={handlePayAndStartSubscription}
+                                    disabled={isLoading}
+                                >
+                                    {isLoading ? 'Processing...' : 'Pay and start subscription'}
+                                </button>
                                 <p className="mt-2 text-center text-xs text-[#595959]">
                                     Change, pause or cancel anytime
                                 </p>
@@ -653,3 +700,7 @@ const SubscriptionPage: React.FC = () => {
 }
 
 export default SubscriptionPage
+
+function setError(arg0: string) {
+    throw new Error('Function not implemented.');
+}

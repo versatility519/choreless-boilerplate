@@ -45,7 +45,7 @@ export function UserAuthForm({ className, type, ...props }: UserAuthFormProps) {
 
   async function onSubmit(data: FormData) {
     setIsLoading(true);
-
+    console.log('SignIn Data==>', data)
     // This code attempts to sign in the user using the "resend" provider
     // It sends a sign-in link to the user's email
     const signInResult = await signIn("resend", {

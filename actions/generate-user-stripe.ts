@@ -12,14 +12,18 @@ export type responseAction = {
 }
 
 // const billingUrl = absoluteUrl("/dashboard/billing")
-const billingUrl = absoluteUrl("/pricing")
+const billingUrl = absoluteUrl("/summery")
 
-export async function generateUserStripe(priceId: string): Promise<responseAction> {
+// export async function generateUserStripe(priceId: string): Promise<responseAction> {
+export async function generateUserStripe(priceId: string) {
+
   let redirectUrl: string = "";
 
   try {
     const session = await auth()
     const user = session?.user;
+    console.log("Pricing ID" ,priceId)
+    console.log("Session" ,session)
 
     if (!user || !user.email || !user.id) {
       throw new Error("Unauthorized");
@@ -43,16 +47,17 @@ export async function generateUserStripe(priceId: string): Promise<responseActio
         payment_method_types: ["card"],
         mode: "subscription",
         billing_address_collection: "auto",
-        customer_email: user.email,
+        customer_email: "assassin.william519@gmail.com",
+        // customer_email: user.email,
         line_items: [
           {
             price: priceId,
             quantity: 1,
           },
         ],
-        metadata: {
-          userId: user.id,
-        },
+        // metadata: {
+        //   userId: user.id,
+        // },
       })
 
       redirectUrl = stripeSession.url as string
@@ -61,6 +66,5 @@ export async function generateUserStripe(priceId: string): Promise<responseActio
     throw new Error("Failed to generate user stripe session");
   }
 
-  // no revalidatePath because redirect
   redirect(redirectUrl)
 }
